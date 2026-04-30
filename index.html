@@ -84,7 +84,7 @@
             margin-bottom: 32px;
             line-height: 1.2;
             position: relative;
-            left: 0; /* без смещения, ровно по центру */
+            left: 0;
         }
         .lock-circle {
             display: flex;
@@ -136,45 +136,46 @@
             opacity: 1;
         }
 
-        /* --- Стили для широких экранов (десктоп, планшет) --- */
+        /* --- Базовые стили колонок (для всех экранов) --- */
+        .left-column {
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 10px 0 20px rgba(0,0,0,0.05);
+        }
+        .right-column {
+            background: white;
+            box-shadow: -10px 0 20px rgba(0,0,0,0.05);
+        }
+
+        /* --- Десктоп (>768px) --- */
         @media (min-width: 769px) {
             .left-column {
                 width: 40%;
-                background: white;
                 padding: 40px 40px 40px 60px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                box-shadow: 10px 0 20px rgba(0,0,0,0.05);
-                border-radius: 0;
             }
-
             .right-column {
                 width: 60%;
-                background: white;
                 padding: 60px 60px 60px 40px;
                 margin-left: auto;
-                box-shadow: -10px 0 20px rgba(0,0,0,0.05);
-                border-radius: 0;
             }
         }
 
-        /* --- Стили для телефонов (узкие экраны) : колонки вертикально, фон виден вокруг --- */
+        /* --- Мобильная версия (≤768px) : колонки прижаты к краям, касаются --- */
         @media (max-width: 768px) {
-            .left-column, .right-column {
-                width: 90%;
-                margin: 20px auto;
-                background: white;
-                border-radius: 32px;
+            .left-column {
+                width: 40%;
                 padding: 30px 20px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                margin: 0;
             }
-
             .right-column {
-                margin-bottom: 40px;
+                width: 60%;
+                padding: 30px 20px;
+                margin: 0 0 0 auto;  /* прижимаем к правому краю */
+                margin-top: 0;        /* касается левой колонки */
             }
-
-            /* Уменьшаем шрифты для мобильных */
+            /* уменьшаем шрифты */
             .initial-large {
                 font-size: 80px;
             }
@@ -188,7 +189,7 @@
                 width: 80px;
             }
             .greeting-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             .greeting-sub {
                 font-size: 0.9rem;
@@ -225,13 +226,14 @@
             }
             .rsvp-footer {
                 padding: 0 16px;
+                width: 100%;
             }
             .rsvp-form {
                 padding: 20px;
             }
         }
 
-        /* Общие стили (не зависят от ширины) */
+        /* --- Общие стили для содержимого --- */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 150px;
@@ -258,7 +260,7 @@
             margin: 5px 0;
         }
 
-        /* Правый блок — календарь и таймлайн */
+        /* Правый блок */
         .right-column .calendar-card,
         .right-column .timeline {
             max-width: 550px;
@@ -509,7 +511,7 @@
 </div>
 
 <div class="invitation-container">
-    <!-- Левый столбец (имена) -->
+    <!-- Левая колонка (имена) -->
     <div class="left-column">
         <div class="initial-large">М</div>
         <div class="dotted-line"></div>
@@ -520,7 +522,7 @@
         <div class="initial-large">П</div>
     </div>
 
-    <!-- Правый столбец (календарь, программа) -->
+    <!-- Правая колонка (календарь, программа) -->
     <div class="right-column">
         <div class="greeting-block">
             <div class="greeting-dotted"></div>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Михаил & Полина | Свадебное приглашение</title>
+    <style>
+        @font-face {
+            font-family: 'Flores del Sol';
+            src: url('fonts/Flores del Sol.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Better Land RUS';
+            src: url('fonts/Better Land RUS.otf') format('opentype');
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            scroll-behavior: smooth;
+        }
+
+        /* ----- ЭКРАН С ЗАМКОМ ----- */
+        .lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/fon2.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: transform 0.8s ease, opacity 0.5s ease;
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .lock-screen::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 0;
+        }
+        .lock-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 20px;
+            max-width: 360px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .lock-text-top {
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+            color: white;
+            font-weight: 300;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .lock-text-highlight {
+            font-size: clamp(32px, 8vw, 54px);
+            font-weight: 500;
+            color: white;
+            margin-bottom: 32px;
+            line-height: 1.2;
+        }
+        .lock-circle { display: flex; justify-content: center; margin: 20px 0; }
+        .lock-white {
+            width: 100px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+        }
+        .lock-white:active { transform: scale(0.96); }
+        .unlock-box {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 12px;
+            padding: 12px 24px;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: white;
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+        }
+        body.unlocked .lock-screen {
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* ----- ДВА ЭКРАНА (50% / 50%) ----- */
+        .invitation-container {
+            opacity: 0;
+            transition: opacity 0.9s ease 0.2s;
+            min-height: 100vh;
+        }
+        body.unlocked .invitation-container { opacity: 1; }
+
+        /* Каждый экран = 100vh, flex для разделения на две половины */
+        .screen {
+            min-height: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .half {
+            flex: 1;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+        }
+
+        /* ----- ПЕРВЫЙ ЭКРАН (имена + фото fon3) ----- */
+        .first-screen .left-half {
+            background: white;
+        }
+        .first-screen .right-half {
+            background-image: url('images/fon3.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Имена (левый блок) */
+        .initial-large {
+            font-family: 'Flores del Sol', 'Georgia', serif;
+            font-size: 180px;
+            line-height: 1;
+            color: #000;
+            margin: 10px 0;
+        }
+        .dotted-line {
+            border-top: 3px dashed #000;
+            width: 140px;
+            margin: 15px 0;
+        }
+        .names-elegant {
+            font-family: 'Flores del Sol', 'Georgia', serif;
+            font-size: 3.8rem;
+            margin: 10px 0;
+            color: #000;
+        }
+        .ampersand {
+            font-family: 'Flores del Sol', 'Georgia', serif;
+            font-size: 2.8rem;
+            margin: 5px 0;
+            color: #000;
+        }
+
+        /* ----- ВТОРОЙ ЭКРАН (таймлайн поверх fon4 + календарь) ----- */
+        .second-screen {
+            overflow: hidden;
+        }
+        .second-screen .left-half {
+            background-image: url('images/fon4.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+        }
+        /* Полупрозрачный слой для лучшей читаемости текста на таймлайне */
+        .second-screen .left-half::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 0;
+        }
+        .timeline-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            border-left: 3px solid white;
+            margin-left: 20px;
+        }
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -48px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            background: white;
+            border-radius: 50%;
+        }
+        .timeline-time {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+        }
+        .timeline-desc {
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+
+        /* Правая половина второго экрана – календарь + приглашение */
+        .second-screen .right-half {
+            background: white;
+        }
+        .greeting-block {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .greeting-dotted {
+            border-top: 2px dashed #999;
+            width: 70%;
+            margin: 0 auto 20px auto;
+        }
+        .greeting-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 2.6rem;
+            line-height: 1.2;
+            color: #000;
+            font-weight: 600;
+        }
+        .greeting-sub {
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            color: #000;
+            margin: 15px 0 0;
+            line-height: 1.3;
+        }
+        .calendar-card {
+            background: rgba(245, 242, 239, 0.9);
+            border-radius: 32px;
+            padding: 24px 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .month-year {
+            font-size: 1.6rem;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7,1fr);
+            gap: 6px;
+            text-align: center;
+        }
+        .weekday { font-size: 0.7rem; color: #7a6a5c; text-transform: uppercase; }
+        .calendar-day {
+            background: white;
+            border-radius: 20px;
+            padding: 8px 4px;
+            font-size: 0.9rem;
+        }
+        .calendar-day.highlight {
+            background: #b0a69b;
+            color: white;
+            font-weight: 600;
+            position: relative;
+        }
+        .calendar-day.highlight::after {
+            content: "❤️";
+            font-size: 10px;
+            position: absolute;
+            bottom: -4px;
+            right: 2px;
+            filter: grayscale(1);
+        }
+        .wedding-date {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Адаптация для телефонов (вертикальное расположение блоков) */
+        @media (max-width: 768px) {
+            .screen {
+                flex-direction: column;
+            }
+            .half {
+                width: 100%;
+                min-height: 50vh;
+                padding: 40px 20px;
+            }
+            .first-screen .left-half,
+            .first-screen .right-half {
+                min-height: 50vh;
+            }
+            .initial-large { font-size: 100px; }
+            .names-elegant { font-size: 2.2rem; }
+            .ampersand { font-size: 1.8rem; }
+            .dotted-line { width: 80px; }
+            .greeting-title { font-size: 2rem; }
+            .timeline { padding-left: 30px; margin-left: 10px; }
+            .timeline-dot { left: -38px; }
+            .calendar-card { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ЗАМОЧЕК -->
+<div class="lock-screen" id="lockScreen">
+    <div class="lock-content">
+        <div class="lock-text-top">ВАМ ПРИШЛО</div>
+        <div class="lock-text-highlight">ПРИГЛАШЕНИЕ</div>
+        <div class="lock-circle">
+            <svg class="lock-white" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="36" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+                <rect x="28" y="32" width="24" height="20" rx="4" fill="#FFFFFF" stroke="#C0C0C0" stroke-width="1.2"/>
+                <path d="M34 32V28C34 24 36 22 40 22C44 22 46 24 46 28V32" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+                <circle cx="40" cy="42" r="3" fill="#A0A0A0"/>
+                <rect x="39" y="42" width="2" height="5" fill="#A0A0A0"/>
+            </svg>
+        </div>
+        <div class="unlock-box" id="hintText">нажми на замок</div>
+    </div>
+</div>
+
+<div class="invitation-container">
+    <!-- ПЕРВЫЙ ЭКРАН (имена + fon3) -->
+    <div class="screen first-screen">
+        <div class="half left-half">
+            <div class="initial-large">М</div>
+            <div class="dotted-line"></div>
+            <div class="names-elegant">Михаил</div>
+            <div class="ampersand">&</div>
+            <div class="names-elegant">Полина</div>
+            <div class="dotted-line"></div>
+            <div class="initial-large">П</div>
+        </div>
+        <div class="half right-half"></div>
+    </div>
+
+    <!-- ВТОРОЙ ЭКРАН (таймлайн поверх fon4 + календарь) -->
+    <div class="screen second-screen" id="secondScreen">
+        <div class="half left-half">
+            <div class="timeline-wrapper">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">17:00</div>
+                        <div class="timeline-desc">Сбор гостей, фуршет</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">17:30</div>
+                        <div class="timeline-desc">Начало вечера</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">19:00</div>
+                        <div class="timeline-desc">Танцы, артисты</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">21:30</div>
+                        <div class="timeline-desc">Разрезание торта</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">22:30</div>
+                        <div class="timeline-desc">DJ, вечеринка</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">00:00</div>
+                        <div class="timeline-desc">Завершение</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="half right-half">
+            <div class="greeting-block">
+                <div class="greeting-dotted"></div>
+                <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
+                <div class="greeting-sub">Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.</div>
+            </div>
+            <div class="calendar-card">
+                <div class="month-year">АВГУСТ 2026</div>
+                <div class="calendar-grid">
+                    <div class="weekday">ПН</div><div class="weekday">ВТ</div><div class="weekday">СР</div><div class="weekday">ЧТ</div><div class="weekday">ПТ</div><div class="weekday">СБ</div><div class="weekday">ВС</div>
+                    <div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
+                    <div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day highlight">9</div>
+                    <div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div>
+                    <div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div><div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div>
+                    <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div>
+                    <div class="calendar-day">31</div>
+                </div>
+                <div class="wedding-date">💒 9 августа 2026</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Форма RSVP и футер (можно убрать или оставить) – временно добавим внизу -->
+    <div style="max-width: 700px; margin: 40px auto; padding: 0 20px;">
+        <div class="rsvp-form" style="background: white; border-radius: 48px; padding: 28px 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+            <h3 style="text-align: center; margin-bottom: 24px;">Пожалуйста, подтвердите присутствие</h3>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label>Ваше имя *</label>
+                <input type="text" id="guestName" placeholder="Например, Анастасия" style="width:100%; padding:12px; border-radius:60px; border:1px solid #ccc;">
+            </div>
+            <div class="form-group">
+                <label>Сможете присутствовать?</label>
+                <select id="attending" style="width:100%; padding:12px; border-radius:60px;">
+                    <option>Да, с радостью</option>
+                    <option>К сожалению, не смогу</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Что предпочитаете из напитков?</label>
+                <select id="drinkPref" style="width:100%; padding:12px; border-radius:60px;">
+                    <option>Игристое / шампанское</option>
+                    <option>Белое вино</option>
+                    <option>Красное вино</option>
+                    <option>Безалкогольные напитки</option>
+                    <option>Коктейль</option>
+                </select>
+            </div>
+            <button class="rsvp-btn" id="rsvpSubmitBtn" style="background:#b8826d; color:white; border:none; padding:14px; border-radius:60px; width:100%; cursor:pointer;">Отправить ответ</button>
+            <div id="notification" style="text-align:center; margin-top:20px; display:none;"></div>
+        </div>
+        <footer style="text-align:center; padding:20px; margin-top:20px;">С любовью, Михаил и Полина ❤️</footer>
+    </div>
+</div>
+
+<script>
+    const lockScreen = document.getElementById('lockScreen');
+    const lockBtn = document.querySelector('.lock-white');
+    const unlockBox = document.querySelector('.unlock-box');
+    function unlock() { document.body.classList.add('unlocked'); }
+    if(lockBtn) lockBtn.addEventListener('click', unlock);
+    if(unlockBox) unlockBox.addEventListener('click', unlock);
+    lockScreen.addEventListener('click', unlock);
+
+    // Простая анимация появления второго экрана при скролле (добавим класс при попадании в зону видимости)
+    const secondScreen = document.getElementById('secondScreen');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                secondScreen.style.opacity = '1';
+                secondScreen.style.transform = 'translateY(0)';
+                observer.unobserve(secondScreen);
+            }
+        });
+    }, { threshold: 0.2 });
+    secondScreen.style.opacity = '0';
+    secondScreen.style.transform = 'translateY(50px)';
+    secondScreen.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    observer.observe(secondScreen);
+
+    // Форма RSVP
+    const rsvpBtn = document.getElementById('rsvpSubmitBtn');
+    const nameInput = document.getElementById('guestName');
+    const attendingSelect = document.getElementById('attending');
+    const drinkSelect = document.getElementById('drinkPref');
+    const notif = document.getElementById('notification');
+
+    rsvpBtn.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        if (!name) {
+            notif.textContent = 'Пожалуйста, укажите ваше имя 💌';
+            notif.style.display = 'block';
+            setTimeout(() => notif.style.display = 'none', 3000);
+            return;
+        }
+        const attending = attendingSelect.value;
+        const drink = drinkSelect.value;
+        notif.innerHTML = `✨ Спасибо, ${name}! Вы ответили: «${attending}», предпочтение: ${drink}. Ждём вас! ✨`;
+        notif.style.display = 'block';
+        setTimeout(() => notif.style.display = 'none', 5000);
+    });
+</script>
+</body>
+</html>

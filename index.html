@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Михаил & Полина | Свадебное приглашение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #fff;
+        }
+        /* Замочек (упрощённо) */
+        .lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: opacity 0.6s;
+            opacity: 1;
+            visibility: visible;
+        }
+        .lock-content {
+            text-align: center;
+            color: white;
+        }
+        .lock-icon {
+            width: 80px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .lock-text-top {
+            font-size: 18px;
+            letter-spacing: 4px;
+        }
+        .lock-text-highlight {
+            font-size: 34px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .unlock-box {
+            background: rgba(255,255,255,0.2);
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        body.unlocked .lock-screen {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .invitation-container {
+            opacity: 0;
+            transition: opacity 0.8s;
+        }
+        body.unlocked .invitation-container {
+            opacity: 1;
+        }
+
+        /* Основные блоки */
+        .left-block {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+        .left-column {
+            width: 40%;
+            background: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+        }
+        .left-column .initial {
+            font-size: 120px;
+            font-weight: bold;
+        }
+        .left-column .dotted {
+            border-top: 2px dashed #333;
+            width: 100px;
+            margin: 15px 0;
+        }
+        .left-column .name {
+            font-size: 36px;
+            font-weight: 500;
+        }
+        .left-column .amp {
+            font-size: 28px;
+            margin: 5px 0;
+        }
+        .left-bg {
+            width: 60%;
+            background-image: url('images/fon3.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .right-block {
+            display: flex;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        .right-block.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .right-column {
+            width: 60%;
+            background: white;
+            padding: 60px 40px;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+        }
+        .right-bg {
+            width: 40%;
+            background-image: url('images/fon4.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Стили для контента правой колонки */
+        .greeting {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .greeting h2 {
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+        .greeting p {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #555;
+        }
+        .calendar {
+            background: #f9f3ef;
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .calendar h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7,1fr);
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7,1fr);
+            gap: 5px;
+        }
+        .day {
+            background: white;
+            border-radius: 20px;
+            padding: 8px;
+            text-align: center;
+        }
+        .day.highlight {
+            background: #e0cbc0;
+            position: relative;
+        }
+        .day.highlight::after {
+            content: "❤️";
+            font-size: 10px;
+            position: absolute;
+            bottom: 0;
+            right: 4px;
+        }
+        .timeline {
+            border-left: 2px solid #ccc;
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        .timeline-item {
+            margin-bottom: 25px;
+        }
+        .time {
+            font-weight: bold;
+            color: #b46b5c;
+        }
+        .rsvp-form {
+            background: #f9f3ef;
+            border-radius: 30px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .rsvp-form input, .rsvp-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 30px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            background: #b46b5c;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            width: 100%;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f9f3ef;
+            border-radius: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .left-block, .right-block {
+                flex-direction: column;
+            }
+            .left-column, .right-column, .left-bg, .right-bg {
+                width: 100% !important;
+                min-height: auto;
+            }
+            .left-bg, .right-bg {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="lock-screen" id="lockScreen">
+    <div class="lock-content">
+        <div class="lock-icon" id="unlockButton">
+            <svg viewBox="0 0 80 80" width="80" height="80">
+                <circle cx="40" cy="40" r="30" fill="none" stroke="white" stroke-width="2"/>
+                <rect x="30" y="35" width="20" height="18" rx="3" fill="white"/>
+                <path d="M36 35v-6c0-4 2-6 4-6s4 2 4 6v6" stroke="white" fill="none" stroke-width="2"/>
+                <circle cx="40" cy="45" r="2" fill="#333"/>
+                <rect x="39" y="45" width="2" height="5" fill="#333"/>
+            </svg>
+        </div>
+        <div class="lock-text-top">ВАМ ПРИШЛО</div>
+        <div class="lock-text-highlight">ПРИГЛАШЕНИЕ</div>
+        <div class="unlock-box" id="unlockText">нажми на замок</div>
+    </div>
+</div>
+
+<div class="invitation-container">
+    <!-- Верхняя часть: левая колонка (40%) + фон справа (60%) -->
+    <div class="left-block">
+        <div class="left-column">
+            <div class="initial">М</div>
+            <div class="dotted"></div>
+            <div class="name">Михаил</div>
+            <div class="amp">&</div>
+            <div class="name">Полина</div>
+            <div class="dotted"></div>
+            <div class="initial">П</div>
+        </div>
+        <div class="left-bg"></div>
+    </div>
+
+    <!-- Нижняя часть: правая колонка (60%) + фон справа (40%) -->
+    <div class="right-block" id="rightBlock">
+        <div class="right-column">
+            <div class="greeting">
+                <div class="dotted" style="margin: 0 auto 20px;"></div>
+                <h2>ДОРОГИЕ ГОСТИ!</h2>
+                <p>Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.</p>
+            </div>
+            <div class="calendar">
+                <h3>АВГУСТ 2026</h3>
+                <div class="weekdays">
+                    <span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span>
+                </div>
+                <div class="days">
+                    <span class="day"></span><span class="day"></span><span class="day"></span><span class="day"></span><span class="day"></span><span class="day">1</span><span class="day">2</span>
+                    <span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day">7</span><span class="day">8</span><span class="day highlight">9</span>
+                    <span class="day">10</span><span class="day">11</span><span class="day">12</span><span class="day">13</span><span class="day">14</span><span class="day">15</span><span class="day">16</span>
+                    <span class="day">17</span><span class="day">18</span><span class="day">19</span><span class="day">20</span><span class="day">21</span><span class="day">22</span><span class="day">23</span>
+                    <span class="day">24</span><span class="day">25</span><span class="day">26</span><span class="day">27</span><span class="day">28</span><span class="day">29</span><span class="day">30</span>
+                    <span class="day">31</span>
+                </div>
+                <p style="text-align:center; margin-top:15px;">💒 9 августа 2026</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item"><div class="time">17:00</div><div>Сбор гостей, фуршет</div></div>
+                <div class="timeline-item"><div class="time">17:30</div><div>Начало вечера</div></div>
+                <div class="timeline-item"><div class="time">19:00</div><div>Танцы, артисты</div></div>
+                <div class="timeline-item"><div class="time">21:30</div><div>Разрезание торта</div></div>
+                <div class="timeline-item"><div class="time">22:30</div><div>DJ, вечеринка</div></div>
+                <div class="timeline-item"><div class="time">00:00</div><div>Завершение</div></div>
+            </div>
+            <div class="rsvp-form">
+                <h3 style="text-align:center;">Пожалуйста, подтвердите присутствие</h3>
+                <input type="text" placeholder="Ваше имя" id="name">
+                <select id="attend">
+                    <option>Да, с радостью</option>
+                    <option>К сожалению, не смогу</option>
+                </select>
+                <select id="drink">
+                    <option>Игристое / шампанское</option>
+                    <option>Белое вино</option>
+                    <option>Красное вино</option>
+                    <option>Безалкогольные напитки</option>
+                </select>
+                <button class="btn" id="rsvpBtn">Отправить ответ</button>
+                <div id="msg" style="text-align:center; margin-top:10px;"></div>
+            </div>
+            <footer>С любовью, Михаил и Полина ❤️</footer>
+        </div>
+        <div class="right-bg"></div>
+    </div>
+</div>
+
+<script>
+    // Замок
+    const lock = document.getElementById('lockScreen');
+    const unlock = () => document.body.classList.add('unlocked');
+    document.getElementById('unlockButton').addEventListener('click', unlock);
+    document.getElementById('unlockText').addEventListener('click', unlock);
+    lock.addEventListener('click', unlock);
+
+    // Анимация появления правого блока при скролле
+    const rightBlock = document.getElementById('rightBlock');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                rightBlock.classList.add('visible');
+                observer.unobserve(rightBlock);
+            }
+        });
+    }, { threshold: 0.2 });
+    observer.observe(rightBlock);
+
+    // Форма
+    document.getElementById('rsvpBtn').addEventListener('click', () => {
+        const name = document.getElementById('name').value.trim();
+        if (!name) {
+            document.getElementById('msg').innerText = 'Укажите имя';
+            return;
+        }
+        const attend = document.getElementById('attend').value;
+        const drink = document.getElementById('drink').value;
+        document.getElementById('msg').innerHTML = `✨ Спасибо, ${name}! Вы ответили: «${attend}», предпочтение: ${drink}. Ждём вас! ✨`;
+    });
+</script>
+</body>
+</html>

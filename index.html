@@ -141,38 +141,28 @@
             background-color: rgba(255, 255, 255, 0.96);
         }
 
-        /* Ширина колонок на десктопе (ширина > 768px) */
-        @media (min-width: 769px) {
-            .screen-first .left-column { width: 40%; }
-            .screen-first .empty { flex: 1; }
+        /* Ширина колонок – одинаковая на всех устройствах */
+        .screen-first .left-column { width: 40%; }
+        .screen-first .empty { flex: 1; }
 
-            .screen-second .right-column { width: 60%; margin-left: auto; }
-            .screen-second .empty { flex: 1; }
+        .screen-second .right-column { width: 60%; margin-left: auto; }
+        .screen-second .empty { flex: 1; }
 
-            .screen-third .program-column { width: 60%; }
-        }
+        .screen-third .program-column { width: 60%; }
+        /* правой колонки нет, пустое пространство — фон */
 
-        /* На телефонах (ширина <= 768px) всё вертикально и 100% */
+        /* Адаптация только для изменения порядка и отступов, но НЕ ширины колонок */
         @media (max-width: 768px) {
-            .screen {
-                flex-direction: column;
+            /* На телефоне колонки по-прежнему имеют 40% и 60%, но они могут быть узкими.
+               Чтобы не было слишком узко, можно немного уменьшить padding */
+            .left-column, .right-column, .program-column {
+                padding: 30px 20px;
             }
-            .screen-first .left-column,
-            .screen-second .right-column,
+            /* При необходимости можно изменить порядок (напр., на третьем экране карта может быть сверху или снизу) */
             .screen-third .program-column {
-                width: 100%;
-                min-height: auto;
-                padding: 40px 20px;
+                /* ничего не меняем – порядок такой же */
             }
-            /* Скрываем пустые блоки, чтобы они не занимали место */
-            .screen-first .empty,
-            .screen-second .empty {
-                display: none;
-            }
-            /* Третий экран: пустой правой части нет, поэтому ничего скрывать не нужно */
-            .map-iframe {
-                height: 300px;
-            }
+            /* Для удобства чтения можно сделать фон колонок чуть более прозрачным? Не трогаем. */
         }
 
         /* Стили для левой колонки (имена) */
@@ -319,7 +309,7 @@
             opacity: 0.7;
         }
 
-        /* Мелкая адаптация для очень узких экранов (<=550px) */
+        /* Очень маленькие экраны (<=550px) – только уменьшение шрифтов */
         @media (max-width: 550px) {
             .initial-large { font-size: 80px; }
             .names-elegant { font-size: 1.8rem; }
@@ -333,7 +323,7 @@
             .place-title { font-size: 1.4rem; }
             .place-name { font-size: 1.2rem; }
             .map-iframe { height: 250px; }
-            .left-column, .right-column, .program-column { padding: 30px 15px; }
+            .left-column, .right-column, .program-column { padding: 20px 15px; }
         }
     </style>
 </head>
@@ -358,7 +348,7 @@
     </div>
 
     <div class="main-content">
-        <!-- ЭКРАН 1: левая колонка 40% (на десктопе) -->
+        <!-- ЭКРАН 1: левая колонка 40% -->
         <div class="screen screen-first">
             <div class="left-column">
                 <div class="initial-large">М</div>
@@ -369,10 +359,10 @@
                 <div class="dotted-line"></div>
                 <div class="initial-large">П</div>
             </div>
-            <div class="empty"></div> <!-- на телефоне скрыт -->
+            <div class="empty"></div> <!-- 60% пустоты, виден фон -->
         </div>
 
-        <!-- ЭКРАН 2: правая колонка 60% (на десктопе) -->
+        <!-- ЭКРАН 2: правая колонка 60% -->
         <div class="screen screen-second">
             <div class="empty"></div>
             <div class="right-column">
@@ -395,7 +385,7 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3: левая колонка 60% (на десктопе) c программой, местом и картой -->
+        <!-- ЭКРАН 3: левая колонка 60% (программа, место, карта) -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="program-title">ПРОГРАММА ДНЯ</div>
@@ -417,7 +407,7 @@
                 </iframe>
                 <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
             </div>
-            <!-- Правой колонки нет -->
+            <!-- Нет правой колонки, оставшиеся 40% — пустота с фоном -->
         </div>
     </div>
 

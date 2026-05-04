@@ -108,7 +108,7 @@
             pointer-events: none;
         }
 
-        /* ----- ОСНОВНОЙ КОНТЕЙНЕР ----- */
+        /* ----- ОСНОВНОЙ КОНТЕНТ ----- */
         .main-content {
             opacity: 0;
             transition: opacity 0.9s ease 0.2s;
@@ -122,55 +122,43 @@
             min-height: 100vh;
             width: 100%;
             display: flex;
-            flex-wrap: wrap; /* чтобы на телефоне переворачивалось */
             background-size: cover;
             background-position: center;
         }
+
+        /* Фоны для экранов */
         .screen-first { background-image: url('images/fon3.jpg'); }
         .screen-second { background-image: url('images/fon4.jpg'); }
         .screen-third { background-image: url('images/fon5.jpg'); }
 
-        /* Базовые стили колонок */
-        .left-column, .right-column, .program-column, .map-column {
+        /* Стили для колонок */
+        .left-column, .right-column, .program-column {
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 40px 30px;
-            background-color: rgba(255, 255, 255, 0.96);
             min-height: 100vh;
+            background-color: rgba(255, 255, 255, 0.96);
         }
 
-        /* ДЕСКТОПНЫЕ ПРОПОРЦИИ (ширина > 768px) */
-        @media (min-width: 769px) {
-            .screen-first .left-column { width: 40%; }
-            .screen-first .right-empty { width: 60%; } /* пустая колонка, только фон */
-            .screen-second .left-empty { width: 40%; }
-            .screen-second .right-column { width: 60%; }
-            .screen-third .program-column { width: 60%; }
-            .screen-third .map-column { width: 40%; }
-        }
+        /* Ширина колонок (прижаты к левому краю) */
+        .screen-first .left-column { width: 40%; }
+        .screen-first .empty { flex: 1; }
 
-        /* МОБИЛЬНАЯ ВЕРСИЯ (ширина ≤ 768px) */
-        @media (max-width: 768px) {
-            .screen {
-                flex-direction: column;
-            }
-            .left-column, .right-column, .program-column, .map-column,
-            .screen-first .left-column, .screen-second .right-column,
-            .screen-third .program-column, .screen-third .map-column {
-                width: 100% !important;
-                min-height: auto;
-            }
-            .screen-first .right-empty, .screen-second .left-empty {
-                display: none; /* пустые блоки не нужны на телефоне */
-            }
-            /* порядок: для третьего экрана карта должна быть внизу */
-            .screen-third .map-column {
-                order: 2;
-            }
-        }
+        .screen-second .right-column { width: 60%; margin-left: auto; } /* прижата к правому краю */
+        .screen-second .empty { flex: 1; }
 
-        /* Стили для первой колонки (имена) */
+        /* Третий экран: только левая колонка 60%, правой нет */
+        .screen-third {
+            justify-content: flex-start; /* колонка слева */
+        }
+        .screen-third .program-column {
+            width: 60%;
+            background-color: rgba(255, 255, 255, 0.96);
+        }
+        /* Оставшиеся 40% пустые – виден фон */
+
+        /* Стили для левой колонки (имена, большие буквы, пунктиры) */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 150px;
@@ -201,7 +189,7 @@
             text-align: center;
         }
 
-        /* Стили для второго экрана */
+        /* Стили для второго экрана (приветствие и календарь) */
         .greeting-title {
             font-size: 2.2rem;
             font-weight: bold;
@@ -253,7 +241,7 @@
             color: white;
         }
 
-        /* Стили для третьего экрана */
+        /* Стили для третьего экрана (программа, место, карта) */
         .program-title {
             font-size: 2rem;
             font-weight: bold;
@@ -291,35 +279,56 @@
             font-size: 1.4rem;
             text-align: center;
             font-weight: 500;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             color: #5d3a2c;
+        }
+        .map-iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 24px;
+            margin-top: 10px;
         }
         .map-link {
             display: block;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             font-size: 1rem;
             color: #b0a69b;
             text-decoration: none;
             font-weight: 500;
-            transition: opacity 0.2s;
         }
         .map-link:hover {
             opacity: 0.7;
         }
-        .map-iframe {
-            width: 100%;
-            height: 100%;
-            min-height: 450px;
-            border: none;
-            border-radius: 24px;
+
+        /* Адаптация для телефонов (меняем порядок и ширину колонок) */
+        @media (max-width: 768px) {
+            .screen-first, .screen-second, .screen-third {
+                flex-direction: column;
+            }
+            /* На телефоне левая колонка занимает 100% */
+            .screen-first .left-column,
+            .screen-second .right-column,
+            .screen-third .program-column {
+                width: 100%;
+                min-height: auto;
+            }
+            .screen-first .empty, .screen-second .empty {
+                display: none;
+            }
+            .map-iframe {
+                height: 300px;
+            }
+            .left-column, .right-column, .program-column {
+                padding: 30px 20px;
+            }
         }
 
-        /* Адаптация для очень маленьких экранов (шрифты) */
         @media (max-width: 550px) {
-            .initial-large { font-size: 100px; }
-            .names-elegant { font-size: 2rem; }
-            .ampersand { font-size: 1.8rem; }
+            .initial-large { font-size: 80px; }
+            .names-elegant { font-size: 1.8rem; }
+            .ampersand { font-size: 1.6rem; }
             .greeting-title { font-size: 1.6rem; }
             .invite-text { font-size: 0.85rem; }
             .calendar-day { font-size: 0.7rem; padding: 4px 0; }
@@ -328,18 +337,13 @@
             .timeline-desc { font-size: 0.85rem; }
             .place-title { font-size: 1.4rem; }
             .place-name { font-size: 1.2rem; }
-            .left-column, .right-column, .program-column, .map-column {
-                padding: 30px 20px;
-            }
-            .map-iframe {
-                min-height: 300px;
-            }
+            .map-iframe { height: 250px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ЗАМОК -->
+    <!-- ЭКРАН С ЗАМКОМ -->
     <div class="lock-screen" id="lockScreen">
         <div class="lock-content">
             <div class="lock-text-top">ВАМ ПРИШЛО</div>
@@ -359,7 +363,7 @@
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div class="main-content">
-        <!-- ЭКРАН 1: Имена -->
+        <!-- ПЕРВЫЙ ЭКРАН: имена слева (40%) + фон справа -->
         <div class="screen screen-first">
             <div class="left-column">
                 <div class="initial-large">М</div>
@@ -370,12 +374,12 @@
                 <div class="dotted-line"></div>
                 <div class="initial-large">П</div>
             </div>
-            <div class="right-empty"></div> <!-- пустая колонка для фона -->
+            <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 2: Гости и календарь -->
+        <!-- ВТОРОЙ ЭКРАН: пусто слева, календарь справа (60%) -->
         <div class="screen screen-second">
-            <div class="left-empty"></div> <!-- пустая колонка -->
+            <div class="empty"></div>
             <div class="right-column">
                 <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
                 <div class="invite-text">
@@ -396,7 +400,7 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3: Программа, место и карта -->
+        <!-- ТРЕТИЙ ЭКРАН: левая колонка 60% (программа + место + карта), правая часть пустая -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="program-title">ПРОГРАММА ДНЯ</div>
@@ -410,21 +414,20 @@
                 </div>
                 <div class="place-title">МЕСТО ТОРЖЕСТВА</div>
                 <div class="place-name">SUNSET SMOLINOPARK</div>
-                <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link">ОТКРЫТЬ КАРТУ →</a>
-            </div>
-            <div class="map-column">
+                <!-- Карта Яндекс (iframe) -->
                 <iframe class="map-iframe" 
                         src="https://yandex.ru/map-widget/v1/?ll=61.405733%2C55.076458&z=17.42" 
                         title="SUNSET SMOLINOPARK на карте" 
                         allowfullscreen=""
                         loading="lazy">
                 </iframe>
+                <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
             </div>
+            <!-- Нет правой колонки – пустое пространство, виден фон -->
         </div>
     </div>
 
     <script>
-        // Разблокировка
         const lockScreen = document.getElementById('lockScreen');
         const unlockBtn = document.getElementById('unlockButton');
         const hintBox = document.getElementById('hintText');

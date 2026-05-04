@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* ЗАМОК */
+        /* ----- ЭКРАН С ЗАМКОМ ----- */
         .lock-screen {
             position: fixed;
             top: 0;
@@ -108,7 +108,7 @@
             pointer-events: none;
         }
 
-        /* ОСНОВНОЙ КОНТЕНТ */
+        /* ----- ОСНОВНОЙ КОНТЕЙНЕР ----- */
         .main-content {
             opacity: 0;
             transition: opacity 0.9s ease 0.2s;
@@ -117,48 +117,60 @@
             opacity: 1;
         }
 
-        /* ОБЩИЕ СТИЛИ ДЛЯ ЭКРАНОВ */
+        /* ----- ОБЩИЕ СТИЛИ ДЛЯ ЭКРАНОВ ----- */
         .screen {
             min-height: 100vh;
             width: 100%;
             display: flex;
+            flex-wrap: wrap; /* чтобы на телефоне переворачивалось */
             background-size: cover;
             background-position: center;
         }
-
-        /* ФОНЫ ДЛЯ ЭКРАНОВ */
         .screen-first { background-image: url('images/fon3.jpg'); }
         .screen-second { background-image: url('images/fon4.jpg'); }
         .screen-third { background-image: url('images/fon5.jpg'); }
 
-        /* КОЛОНКИ — ОСНОВНЫЕ ПРАВИЛА */
+        /* Базовые стили колонок */
         .left-column, .right-column, .program-column, .map-column {
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 40px 30px;
-            min-height: 100vh;
             background-color: rgba(255, 255, 255, 0.96);
+            min-height: 100vh;
         }
 
-        /* ШИРИНА КОЛОНОК */
-        .screen-first .left-column { width: 40%; }
-        .screen-first .empty { flex: 1; }
-
-        .screen-second .right-column { width: 60%; margin-left: auto; }
-        .screen-second .empty { flex: 1; }
-
-        /* Исправлено: левая колонка 60% (программа), правая 40% (карта) */
-        .screen-third .program-column { 
-            width: 60%; 
-            flex-shrink: 0; 
-        }
-        .screen-third .map-column { 
-            width: 40%; 
-            flex-shrink: 0; 
+        /* ДЕСКТОПНЫЕ ПРОПОРЦИИ (ширина > 768px) */
+        @media (min-width: 769px) {
+            .screen-first .left-column { width: 40%; }
+            .screen-first .right-empty { width: 60%; } /* пустая колонка, только фон */
+            .screen-second .left-empty { width: 40%; }
+            .screen-second .right-column { width: 60%; }
+            .screen-third .program-column { width: 60%; }
+            .screen-third .map-column { width: 40%; }
         }
 
-        /* СТИЛИ ДЛЯ ПЕРВОГО ЭКРАНА (ИМЕНА) */
+        /* МОБИЛЬНАЯ ВЕРСИЯ (ширина ≤ 768px) */
+        @media (max-width: 768px) {
+            .screen {
+                flex-direction: column;
+            }
+            .left-column, .right-column, .program-column, .map-column,
+            .screen-first .left-column, .screen-second .right-column,
+            .screen-third .program-column, .screen-third .map-column {
+                width: 100% !important;
+                min-height: auto;
+            }
+            .screen-first .right-empty, .screen-second .left-empty {
+                display: none; /* пустые блоки не нужны на телефоне */
+            }
+            /* порядок: для третьего экрана карта должна быть внизу */
+            .screen-third .map-column {
+                order: 2;
+            }
+        }
+
+        /* Стили для первой колонки (имена) */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 150px;
@@ -189,7 +201,7 @@
             text-align: center;
         }
 
-        /* СТИЛИ ДЛЯ ВТОРОГО ЭКРАНА (ГОСТИ И КАЛЕНДАРЬ) */
+        /* Стили для второго экрана */
         .greeting-title {
             font-size: 2.2rem;
             font-weight: bold;
@@ -241,7 +253,7 @@
             color: white;
         }
 
-        /* СТИЛИ ДЛЯ ТРЕТЬЕГО ЭКРАНА (ПРОГРАММА, МЕСТО, КАРТА) */
+        /* Стили для третьего экрана */
         .program-title {
             font-size: 2rem;
             font-weight: bold;
@@ -303,41 +315,11 @@
             border-radius: 24px;
         }
 
-        /* --- АДАПТАЦИЯ ПОД ТЕЛЕФОН --- */
-        @media (max-width: 768px) {
-            /* Все экраны: переключаем в колонку */
-            .screen-first, .screen-second, .screen-third {
-                flex-direction: column;
-            }
-            /* Для третьего экрана: карта должна быть внизу */
-            .screen-third .map-column {
-                order: 2;
-            }
-            .map-iframe {
-                min-height: 300px;
-            }
-            /* Уменьшаем отступы */
-            .left-column, .right-column, .program-column, .map-column {
-                padding: 30px 20px;
-            }
-            /* Ширина колонок на телефоне: 100% чтобы не было пустот */
-            .screen-first .left-column,
-            .screen-second .right-column,
-            .screen-third .program-column,
-            .screen-third .map-column {
-                width: 100%;
-                min-height: auto;
-            }
-            /* Гарантируем правильную видимость фона на телефоне */
-            .screen-first .empty, .screen-second .empty {
-                display: none;
-            }
-        }
-
+        /* Адаптация для очень маленьких экранов (шрифты) */
         @media (max-width: 550px) {
-            .initial-large { font-size: 80px; }
-            .names-elegant { font-size: 1.8rem; }
-            .ampersand { font-size: 1.6rem; }
+            .initial-large { font-size: 100px; }
+            .names-elegant { font-size: 2rem; }
+            .ampersand { font-size: 1.8rem; }
             .greeting-title { font-size: 1.6rem; }
             .invite-text { font-size: 0.85rem; }
             .calendar-day { font-size: 0.7rem; padding: 4px 0; }
@@ -346,7 +328,12 @@
             .timeline-desc { font-size: 0.85rem; }
             .place-title { font-size: 1.4rem; }
             .place-name { font-size: 1.2rem; }
-            .unlock-box { font-size: 0.9rem; padding: 8px 16px; }
+            .left-column, .right-column, .program-column, .map-column {
+                padding: 30px 20px;
+            }
+            .map-iframe {
+                min-height: 300px;
+            }
         }
     </style>
 </head>
@@ -383,12 +370,12 @@
                 <div class="dotted-line"></div>
                 <div class="initial-large">П</div>
             </div>
-            <div class="empty"></div>
+            <div class="right-empty"></div> <!-- пустая колонка для фона -->
         </div>
 
         <!-- ЭКРАН 2: Гости и календарь -->
         <div class="screen screen-second">
-            <div class="empty"></div>
+            <div class="left-empty"></div> <!-- пустая колонка -->
             <div class="right-column">
                 <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
                 <div class="invite-text">
@@ -398,7 +385,7 @@
                     <div class="month">АВГУСТ 2026</div>
                     <div class="calendar-grid">
                         <div class="weekday">ПН</div><div class="weekday">ВТ</div><div class="weekday">СР</div><div class="weekday">ЧТ</div><div class="weekday">ПТ</div><div class="weekday">СБ</div><div class="weekday">ВС</div>
-                        <div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
+                        <div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
                         <div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day highlight">9</div>
                         <div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div>
                         <div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div><div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div>
@@ -409,7 +396,7 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3: Программа, место и карта (исправлено соотношение 60/40) -->
+        <!-- ЭКРАН 3: Программа, место и карта -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="program-title">ПРОГРАММА ДНЯ</div>
@@ -437,7 +424,7 @@
     </div>
 
     <script>
-        // РАЗБЛОКИРОВКА
+        // Разблокировка
         const lockScreen = document.getElementById('lockScreen');
         const unlockBtn = document.getElementById('unlockButton');
         const hintBox = document.getElementById('hintText');

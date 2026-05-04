@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- ЭКРАН С ЗАМКОМ (фон добавлен) ----- */
+        /* ----- ЭКРАН С ЗАМКОМ (фон fon2.jpg) ----- */
         .lock-screen {
             position: fixed;
             top: 0;
@@ -51,7 +51,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0,0,0,0.4);
             z-index: 0;
         }
         .lock-content {
@@ -61,6 +61,7 @@
             padding: 20px;
             max-width: 360px;
             width: 100%;
+            margin: 0 auto;
         }
         .lock-text-top {
             font-size: 1.2rem;
@@ -147,13 +148,14 @@
             padding: 40px 30px;
             min-height: 100vh;
             text-align: center;
+            /* анимация появления */
             opacity: 0;
-            transform: translateX(-50px);
+            transform: translateY(40px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        .left-column.visible {
+        body.unlocked .left-column {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
         }
 
         /* правая колонка (белая, 60% ширины) для второго экрана */
@@ -165,13 +167,14 @@
             justify-content: center;
             padding: 40px 30px;
             min-height: 100vh;
+            /* анимация появления при скролле (по умолчанию скрыта) */
             opacity: 0;
-            transform: translateX(50px);
+            transform: translateY(50px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
         .right-column.visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
         }
 
         .empty {
@@ -267,14 +270,12 @@
             .invite-text { font-size: 0.85rem; }
             .calendar-day { font-size: 0.7rem; padding: 4px 0; }
             .left-column, .right-column { padding: 30px 20px; }
-            .left-column { transform: translateX(-30px); }
-            .right-column { transform: translateX(30px); }
         }
     </style>
 </head>
 <body>
 
-    <!-- ЭКРАН С ЗАМКОМ -->
+    <!-- ЭКРАН С ЗАМКОМ (фон fon2.jpg) -->
     <div class="lock-screen" id="lockScreen">
         <div class="lock-content">
             <div class="lock-text-top">ВАМ ПРИШЛО</div>
@@ -294,9 +295,9 @@
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div class="main-content">
-        <!-- ПЕРВЫЙ ЭКРАН -->
+        <!-- ПЕРВЫЙ ЭКРАН: фон fon3.jpg, левая колонка с именами (анимация при разблокировке) -->
         <div class="screen screen-first">
-            <div class="left-column" id="leftCol">
+            <div class="left-column" id="leftColumn">
                 <div class="initial-large">М</div>
                 <div class="dotted-line"></div>
                 <div class="names-elegant">Михаил</div>
@@ -308,10 +309,10 @@
             <div class="empty"></div>
         </div>
 
-        <!-- ВТОРОЙ ЭКРАН -->
+        <!-- ВТОРОЙ ЭКРАН: фон fon4.jpg, правая колонка с текстом и календарём (анимация при скролле) -->
         <div class="screen screen-second">
             <div class="empty"></div>
-            <div class="right-column" id="rightCol">
+            <div class="right-column" id="rightColumn">
                 <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
                 <div class="invite-text">
                     Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.
@@ -337,22 +338,26 @@
         const lockScreen = document.getElementById('lockScreen');
         const unlockBtn = document.getElementById('unlockButton');
         const hintBox = document.getElementById('hintText');
+
         function unlock() {
             document.body.classList.add('unlocked');
-            // после разблокировки запускаем анимацию колонок
-            setTimeout(() => {
-                const leftCol = document.getElementById('leftCol');
-                const rightCol = document.getElementById('rightCol');
-                if (leftCol) leftCol.classList.add('visible');
-                if (rightCol) rightCol.classList.add('visible');
-            }, 200);
         }
+
         if (unlockBtn) unlockBtn.addEventListener('click', unlock);
         if (hintBox) hintBox.addEventListener('click', unlock);
         lockScreen.addEventListener('click', unlock);
 
-        // дополнительно: если после разблокировки уже видно, но колонки не получили класс
-        // сделаем на всякий случай наблюдатель, но setTimeout достаточно
+        // Анимация правой колонки при скролле
+        const rightColumn = document.getElementById('rightColumn');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    rightColumn.classList.add('visible');
+                    observer.unobserve(rightColumn);
+                }
+            });
+        }, { threshold: 0.3 });
+        observer.observe(rightColumn);
     </script>
 </body>
 </html>

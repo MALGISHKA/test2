@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- ЭКРАН С ЗАМКОМ ----- */
+        /* ----- ЗАМОК ----- */
         .lock-screen {
             position: fixed;
             top: 0;
@@ -141,24 +141,41 @@
             background-color: rgba(255, 255, 255, 0.96);
         }
 
-        /* Ширина колонок (прижаты к левому краю) */
-        .screen-first .left-column { width: 40%; }
-        .screen-first .empty { flex: 1; }
+        /* Ширина колонок на десктопе (ширина > 768px) */
+        @media (min-width: 769px) {
+            .screen-first .left-column { width: 40%; }
+            .screen-first .empty { flex: 1; }
 
-        .screen-second .right-column { width: 60%; margin-left: auto; } /* прижата к правому краю */
-        .screen-second .empty { flex: 1; }
+            .screen-second .right-column { width: 60%; margin-left: auto; }
+            .screen-second .empty { flex: 1; }
 
-        /* Третий экран: только левая колонка 60%, правой нет */
-        .screen-third {
-            justify-content: flex-start; /* колонка слева */
+            .screen-third .program-column { width: 60%; }
         }
-        .screen-third .program-column {
-            width: 60%;
-            background-color: rgba(255, 255, 255, 0.96);
-        }
-        /* Оставшиеся 40% пустые – виден фон */
 
-        /* Стили для левой колонки (имена, большие буквы, пунктиры) */
+        /* На телефонах (ширина <= 768px) всё вертикально и 100% */
+        @media (max-width: 768px) {
+            .screen {
+                flex-direction: column;
+            }
+            .screen-first .left-column,
+            .screen-second .right-column,
+            .screen-third .program-column {
+                width: 100%;
+                min-height: auto;
+                padding: 40px 20px;
+            }
+            /* Скрываем пустые блоки, чтобы они не занимали место */
+            .screen-first .empty,
+            .screen-second .empty {
+                display: none;
+            }
+            /* Третий экран: пустой правой части нет, поэтому ничего скрывать не нужно */
+            .map-iframe {
+                height: 300px;
+            }
+        }
+
+        /* Стили для левой колонки (имена) */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 150px;
@@ -189,7 +206,7 @@
             text-align: center;
         }
 
-        /* Стили для второго экрана (приветствие и календарь) */
+        /* Стили для второго экрана */
         .greeting-title {
             font-size: 2.2rem;
             font-weight: bold;
@@ -241,7 +258,7 @@
             color: white;
         }
 
-        /* Стили для третьего экрана (программа, место, карта) */
+        /* Стили для третьего экрана */
         .program-title {
             font-size: 2rem;
             font-weight: bold;
@@ -302,29 +319,7 @@
             opacity: 0.7;
         }
 
-        /* Адаптация для телефонов (меняем порядок и ширину колонок) */
-        @media (max-width: 768px) {
-            .screen-first, .screen-second, .screen-third {
-                flex-direction: column;
-            }
-            /* На телефоне левая колонка занимает 100% */
-            .screen-first .left-column,
-            .screen-second .right-column,
-            .screen-third .program-column {
-                width: 100%;
-                min-height: auto;
-            }
-            .screen-first .empty, .screen-second .empty {
-                display: none;
-            }
-            .map-iframe {
-                height: 300px;
-            }
-            .left-column, .right-column, .program-column {
-                padding: 30px 20px;
-            }
-        }
-
+        /* Мелкая адаптация для очень узких экранов (<=550px) */
         @media (max-width: 550px) {
             .initial-large { font-size: 80px; }
             .names-elegant { font-size: 1.8rem; }
@@ -338,12 +333,13 @@
             .place-title { font-size: 1.4rem; }
             .place-name { font-size: 1.2rem; }
             .map-iframe { height: 250px; }
+            .left-column, .right-column, .program-column { padding: 30px 15px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ЭКРАН С ЗАМКОМ -->
+    <!-- ЗАМОК -->
     <div class="lock-screen" id="lockScreen">
         <div class="lock-content">
             <div class="lock-text-top">ВАМ ПРИШЛО</div>
@@ -361,9 +357,8 @@
         </div>
     </div>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div class="main-content">
-        <!-- ПЕРВЫЙ ЭКРАН: имена слева (40%) + фон справа -->
+        <!-- ЭКРАН 1: левая колонка 40% (на десктопе) -->
         <div class="screen screen-first">
             <div class="left-column">
                 <div class="initial-large">М</div>
@@ -374,10 +369,10 @@
                 <div class="dotted-line"></div>
                 <div class="initial-large">П</div>
             </div>
-            <div class="empty"></div>
+            <div class="empty"></div> <!-- на телефоне скрыт -->
         </div>
 
-        <!-- ВТОРОЙ ЭКРАН: пусто слева, календарь справа (60%) -->
+        <!-- ЭКРАН 2: правая колонка 60% (на десктопе) -->
         <div class="screen screen-second">
             <div class="empty"></div>
             <div class="right-column">
@@ -400,7 +395,7 @@
             </div>
         </div>
 
-        <!-- ТРЕТИЙ ЭКРАН: левая колонка 60% (программа + место + карта), правая часть пустая -->
+        <!-- ЭКРАН 3: левая колонка 60% (на десктопе) c программой, местом и картой -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="program-title">ПРОГРАММА ДНЯ</div>
@@ -414,7 +409,6 @@
                 </div>
                 <div class="place-title">МЕСТО ТОРЖЕСТВА</div>
                 <div class="place-name">SUNSET SMOLINOPARK</div>
-                <!-- Карта Яндекс (iframe) -->
                 <iframe class="map-iframe" 
                         src="https://yandex.ru/map-widget/v1/?ll=61.405733%2C55.076458&z=17.42" 
                         title="SUNSET SMOLINOPARK на карте" 
@@ -423,7 +417,7 @@
                 </iframe>
                 <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
             </div>
-            <!-- Нет правой колонки – пустое пространство, виден фон -->
+            <!-- Правой колонки нет -->
         </div>
     </div>
 

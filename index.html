@@ -21,18 +21,20 @@
 
         body {
             font-family: 'Georgia', 'Times New Roman', serif;
-            background-color: #000; /* чёрный фон на время блокировки */
+            background-color: #000;
             overflow-x: hidden;
         }
 
-        /* ----- ЭКРАН С ЗАМКОМ (блокировка) ----- */
+        /* ----- ЭКРАН С ЗАМКОМ (фон добавлен) ----- */
         .lock-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0a;  /* чёрный фон */
+            background-image: url('images/fon2.jpg');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -42,7 +44,19 @@
             opacity: 1;
             visibility: visible;
         }
+        .lock-screen::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
         .lock-content {
+            position: relative;
+            z-index: 1;
             text-align: center;
             padding: 20px;
             max-width: 360px;
@@ -55,7 +69,7 @@
             font-weight: 300;
             margin-bottom: 8px;
             text-transform: uppercase;
-            font-family: 'Georgia', 'Times New Roman', serif; /* обычный шрифт */
+            font-family: 'Georgia', 'Times New Roman', serif;
         }
         .lock-text-highlight {
             font-size: clamp(32px, 8vw, 54px);
@@ -92,7 +106,6 @@
             cursor: pointer;
             font-family: 'Georgia', serif;
         }
-        /* анимация исчезновения замка и появления основного контента */
         body.unlocked .lock-screen {
             transform: translateY(-100%);
             opacity: 0;
@@ -134,6 +147,13 @@
             padding: 40px 30px;
             min-height: 100vh;
             text-align: center;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .left-column.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         /* правая колонка (белая, 60% ширины) для второго экрана */
@@ -145,6 +165,13 @@
             justify-content: center;
             padding: 40px 30px;
             min-height: 100vh;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .right-column.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .empty {
@@ -240,6 +267,8 @@
             .invite-text { font-size: 0.85rem; }
             .calendar-day { font-size: 0.7rem; padding: 4px 0; }
             .left-column, .right-column { padding: 30px 20px; }
+            .left-column { transform: translateX(-30px); }
+            .right-column { transform: translateX(30px); }
         }
     </style>
 </head>
@@ -263,11 +292,11 @@
         </div>
     </div>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ (скрыт изначально) -->
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div class="main-content">
-        <!-- ПЕРВЫЙ ЭКРАН: фон fon3.jpg, левая колонка с именами -->
+        <!-- ПЕРВЫЙ ЭКРАН -->
         <div class="screen screen-first">
-            <div class="left-column">
+            <div class="left-column" id="leftCol">
                 <div class="initial-large">М</div>
                 <div class="dotted-line"></div>
                 <div class="names-elegant">Михаил</div>
@@ -276,13 +305,13 @@
                 <div class="dotted-line"></div>
                 <div class="initial-large">П</div>
             </div>
-            <div class="empty"></div> <!-- 60% пустоты, виден фон -->
+            <div class="empty"></div>
         </div>
 
-        <!-- ВТОРОЙ ЭКРАН: фон fon4.jpg, правая колонка с текстом и календарём -->
+        <!-- ВТОРОЙ ЭКРАН -->
         <div class="screen screen-second">
-            <div class="empty"></div> <!-- 40% пустоты -->
-            <div class="right-column">
+            <div class="empty"></div>
+            <div class="right-column" id="rightCol">
                 <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
                 <div class="invite-text">
                     Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.
@@ -304,19 +333,26 @@
     </div>
 
     <script>
-        // Разблокировка по клику на замок или подсказку
+        // Разблокировка замка
         const lockScreen = document.getElementById('lockScreen');
         const unlockBtn = document.getElementById('unlockButton');
         const hintBox = document.getElementById('hintText');
-
         function unlock() {
             document.body.classList.add('unlocked');
+            // после разблокировки запускаем анимацию колонок
+            setTimeout(() => {
+                const leftCol = document.getElementById('leftCol');
+                const rightCol = document.getElementById('rightCol');
+                if (leftCol) leftCol.classList.add('visible');
+                if (rightCol) rightCol.classList.add('visible');
+            }, 200);
         }
-
         if (unlockBtn) unlockBtn.addEventListener('click', unlock);
         if (hintBox) hintBox.addEventListener('click', unlock);
-        // также по клику на фон
         lockScreen.addEventListener('click', unlock);
+
+        // дополнительно: если после разблокировки уже видно, но колонки не получили класс
+        // сделаем на всякий случай наблюдатель, но setTimeout достаточно
     </script>
 </body>
 </html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Михаил & Полина | Свадебное приглашение</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+        }
+
+        /* Первый экран (фон fon3.jpg) */
+        .screen-first {
+            min-height: 100vh;            /* высота равна высоте окна (695px на вашем телефоне) */
+            background-image: url('images/fon3.jpg');
+            background-size: cover;       /* заполняет весь экран, сохраняя пропорции */
+            background-position: center;
+            display: flex;
+            align-items: center;          /* вертикальное центрирование содержимого */
+            justify-content: flex-start;  /* содержимое прижато к левому краю */
+            padding: 0;                  /* убираем внешние отступы */
+        }
+
+        /* Белая колонка (40% ширины) */
+        .names-column {
+            width: 40%;                   /* 40% от 393px ≈ 157px */
+            background: rgba(255, 255, 255, 0.9); /* полупрозрачный белый фон */
+            border-radius: 0 24px 24px 0; /* скругление только справа (по желанию) */
+            padding: 30px 20px;
+            margin-left: 0;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.05);
+        }
+
+        /* Стили имён */
+        .names-title {
+            font-size: 3rem;              /* подберите под свой вкус */
+            font-weight: bold;
+            line-height: 1.2;
+            color: #2c2c2c;
+        }
+        .subtitle {
+            font-size: 1rem;
+            margin-top: 15px;
+            color: #5a5a5a;
+        }
+
+        /* Нижняя часть (второй экран) пока не трогаем, но вы можете добавить позже */
+        .screen-second {
+            min-height: 100vh;
+            background-image: url('images/fon4.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        /* Для отзывчивости на телефонах (если ширина менее 500px) */
+        @media (max-width: 500px) {
+            .names-title {
+                font-size: 2rem;
+            }
+            .names-column {
+                width: 45%;   /* можно немного увеличить для читаемости */
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ПЕРВЫЙ ЭКРАН: фон fon3.jpg + левая колонка с именами (40% ширины) -->
+    <div class="screen-first">
+        <div class="names-column">
+            <div class="names-title">Михаил<br>&<br>Полина</div>
+            <div class="subtitle">Приглашение на свадьбу</div>
+        </div>
+    </div>
+
+    <!-- ВТОРОЙ ЭКРАН: пока заглушка (фон fon4.jpg) – вы сможете добавить календарь и расписание позже -->
+    <div class="screen-second">
+        <!-- Здесь будет расписание и календарь -->
+    </div>
+
+</body>
+</html>

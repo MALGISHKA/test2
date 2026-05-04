@@ -141,7 +141,7 @@
             background-color: rgba(255, 255, 255, 0.96);
         }
 
-        /* Ширина колонок для разных экранов */
+        /* Ширина колонок для разных экранов (сохраняем пропорции) */
         .screen-first .left-column { width: 40%; }
         .screen-first .empty { flex: 1; }
 
@@ -296,27 +296,21 @@
             border-radius: 24px;
         }
 
-        /* Адаптация для узких экранов */
+        /* Адаптация для телефонов (не меняем ширину колонок, только порядок и отступы) */
         @media (max-width: 768px) {
             .screen-first, .screen-second, .screen-third {
                 flex-direction: column;
             }
-            .screen-first .left-column,
-            .screen-second .right-column,
-            .screen-third .program-column,
-            .screen-third .map-column {
-                width: 100%;
-                min-height: auto;
-            }
-            .screen-first .empty,
-            .screen-second .empty {
-                display: none;
-            }
+            /* Порядок блоков на третьем экране: текст (программа) сверху, карта снизу */
             .screen-third .map-column {
                 order: 2;
             }
             .map-iframe {
                 min-height: 300px;
+            }
+            /* Уменьшаем padding на узких экранах, но ширину не трогаем */
+            .left-column, .right-column, .program-column, .map-column {
+                padding: 30px 20px;
             }
         }
 
@@ -332,7 +326,6 @@
             .timeline-desc { font-size: 0.85rem; }
             .place-title { font-size: 1.4rem; }
             .place-name { font-size: 1.2rem; }
-            .left-column, .right-column, .program-column, .map-column { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -395,7 +388,7 @@
             </div>
         </div>
 
-        <!-- ТРЕТИЙ ЭКРАН: место торжества и карта на фоне fon5.jpg -->
+        <!-- ТРЕТИЙ ЭКРАН: программа дня + место и карта на фоне fon5.jpg -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="program-title">ПРОГРАММА ДНЯ</div>
@@ -433,7 +426,6 @@
 
         if (unlockBtn) unlockBtn.addEventListener('click', unlock);
         if (hintBox) hintBox.addEventListener('click', unlock);
-        // также по клику на фон замка
         lockScreen.addEventListener('click', unlock);
     </script>
 </body>

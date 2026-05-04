@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Михаил & Полина | Свадебное приглашение</title>
+    <title>Михаил & Полина | Свадьба</title>
     <style>
         * {
             margin: 0;
@@ -13,103 +12,119 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: #f9f9f9;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: #f9f4ef;
         }
 
-        /* Каждый экран — на всю высоту окна */
+        /* каждый экран на всю высоту окна */
         .screen {
             min-height: 100vh;
+            width: 100%;
             display: flex;
-            flex-wrap: wrap;
-        }
-
-        /* Левая и правая колонки */
-        .left-col {
-            width: 40%;
-            background: rgba(255, 255, 255, 0.95); /* белая полупрозрачная */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-        .right-col {
-            width: 60%;
             background-size: cover;
             background-position: center;
         }
 
-        /* Первый экран: правая колонка — фон fon3.jpg */
-        .screen1 .right-col {
+        /* первый экран – фон fon3.jpg */
+        .screen-first {
             background-image: url('images/fon3.jpg');
         }
 
-        /* Второй экран: правая колонка — фон fon4.jpg (если нужно) */
-        .screen2 .right-col {
+        /* второй экран – фон fon4.jpg */
+        .screen-second {
             background-image: url('images/fon4.jpg');
         }
 
-        /* Стили для левой колонки первого экрана (имена) */
+        /* левая колонка (белая, 40% ширины) для первого экрана */
+        .left-column {
+            width: 40%;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 30px;
+            min-height: 100vh;
+        }
+
+        /* правая колонка (белая, 60% ширины) для второго экрана */
+        .right-column {
+            width: 60%;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 30px;
+            min-height: 100vh;
+        }
+
+        /* для пустых половин (не белых) они просто занимают место, фон виден */
+        .empty {
+            flex: 1;
+        }
+
+        /* стили для имён */
         .names-title {
             font-size: 3rem;
             font-weight: bold;
             line-height: 1.2;
             color: #2c2c2c;
+            margin-bottom: 1rem;
         }
         .subtitle {
-            font-size: 1rem;
-            margin-top: 20px;
+            font-size: 1.1rem;
             color: #5a5a5a;
         }
 
-        /* Стили для левой колонки второго экрана (текст приглашения) */
-        .invite-text {
-            font-size: 1rem;
-            line-height: 1.4;
-            color: #2c2c2c;
-        }
+        /* заголовок ДОРОГИЕ ГОСТИ */
         .greeting {
             font-size: 2.2rem;
             font-weight: bold;
-            line-height: 1.2;
-            margin-bottom: 20px;
+            line-height: 1.1;
+            color: #2c2c2c;
+            margin-bottom: 1rem;
         }
-        .greeting small {
-            font-size: 1.2rem;
-            display: block;
-            margin-top: 5px;
+        .greeting-sub {
+            font-size: 1rem;
+            color: #3a2a22;
+            margin-bottom: 2rem;
+            line-height: 1.4;
         }
-        .rsvp-text {
-            margin: 25px 0;
+        .invite-text {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: #2c2c2c;
+            margin-bottom: 2rem;
         }
 
-        /* Календарь в правой колонке второго экрана */
+        /* календарь */
         .calendar {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 24px;
-            padding: 20px;
-            margin: 20px;
-            text-align: center;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 15px;
         }
         .month {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: bold;
+            text-align: center;
             margin-bottom: 15px;
+            color: #5d3a2c;
         }
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 6px;
-            margin: 15px 0;
+            text-align: center;
         }
         .weekday {
             font-weight: bold;
+            font-size: 0.7rem;
             color: #b0a69b;
-            font-size: 0.8rem;
+            padding-bottom: 8px;
         }
         .calendar-day {
             background: #f5f0ea;
-            padding: 6px;
+            padding: 6px 0;
             border-radius: 12px;
             font-size: 0.8rem;
         }
@@ -118,52 +133,52 @@
             color: white;
         }
 
-        /* Адаптация под телефон (если нужно, ширина 100%) */
-        @media (max-width: 768px) {
-            .screen {
-                flex-direction: column;
-            }
-            .left-col, .right-col {
-                width: 100%;
-                min-height: 50vh; /* каждая половина по полэкрана */
-            }
-            .right-col {
-                min-height: 50vh;
+        /* адаптация для узких экранов (чтобы не ломалось) */
+        @media (max-width: 550px) {
+            .left-column, .right-column {
+                padding: 30px 20px;
             }
             .names-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            .greeting {
+                font-size: 1.8rem;
+            }
+            .invite-text {
+                font-size: 0.85rem;
+            }
+            .calendar-day {
+                font-size: 0.7rem;
+                padding: 4px 0;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ПЕРВЫЙ ЭКРАН -->
-    <div class="screen screen1">
-        <div class="left-col">
+    <!-- ПЕРВЫЙ ЭКРАН: фон fon3.jpg, слева белая колонка 40%, справа пусто -->
+    <div class="screen screen-first">
+        <div class="left-column">
             <div class="names-title">Михаил<br>&<br>Полина</div>
             <div class="subtitle">Приглашение на свадьбу</div>
         </div>
-        <div class="right-col"></div>
+        <div class="empty"></div> <!-- 60% пустоты, виден фон -->
     </div>
 
-    <!-- ВТОРОЙ ЭКРАН -->
-    <div class="screen screen2">
-        <div class="left-col">
-            <div class="greeting">
-                ДОРОГИЕ<br>
-                ГОСТИ!
-            </div>
+    <!-- ВТОРОЙ ЭКРАН: фон fon4.jpg, справа белая колонка 60%, слева пусто -->
+    <div class="screen screen-second">
+        <div class="empty"></div> <!-- 40% пустоты -->
+        <div class="right-column">
+            <div class="greeting">ДОРОГИЕ<br> ГОСТИ!</div>
             <div class="invite-text">
                 Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.
             </div>
-            <!-- Здесь можно добавить дополнительный текст или кнопку -->
-        </div>
-        <div class="right-col">
+            <!-- Календарь (август 2026, выделено 9 число) -->
             <div class="calendar">
                 <div class="month">АВГУСТ 2026</div>
                 <div class="calendar-grid">
                     <div class="weekday">ПН</div><div class="weekday">ВТ</div><div class="weekday">СР</div><div class="weekday">ЧТ</div><div class="weekday">ПТ</div><div class="weekday">СБ</div><div class="weekday">ВС</div>
+                    <!-- 1 августа 2026 – суббота, поэтому сначала пропуски -->
                     <div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
                     <div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day highlight">9</div>
                     <div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div>
@@ -171,7 +186,6 @@
                     <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div>
                     <div class="calendar-day">31</div>
                 </div>
-                <p>9 августа 2026</p>
             </div>
         </div>
     </div>

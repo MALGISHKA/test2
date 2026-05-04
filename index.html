@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Михаил & Полина | Свадьба</title>
     <style>
+        /* Подключение шрифта Better Land RUS */
+        @font-face {
+            font-family: 'Better Land RUS';
+            src: url('fonts/Better Land RUS.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -57,115 +66,136 @@
             min-height: 100vh;
         }
 
-        /* для пустых половин (не белых) они просто занимают место, фон виден */
+        /* для пустых половин (не белых) */
         .empty {
             flex: 1;
         }
 
-        /* стили для имён */
-        .names-title {
-            font-size: 3rem;
-            font-weight: bold;
-            line-height: 1.2;
-            color: #2c2c2c;
-            margin-bottom: 1rem;
+        /* Стили для левой колонки (имена с большими буквами и пунктирами) */
+        .initial-large {
+            font-family: 'Better Land RUS', 'Georgia', serif;
+            font-size: 4rem;
+            font-weight: normal;
+            line-height: 1;
+            color: #1a1a1a;
+            margin: 10px 0 5px 0;
         }
-        .subtitle {
-            font-size: 1.1rem;
-            color: #5a5a5a;
+        .dotted-line {
+            border-top: 2px dashed #333;
+            width: 80px;
+            margin: 10px 0;
+        }
+        .names-elegant {
+            font-family: 'Better Land RUS', 'Georgia', serif;
+            font-size: 2rem;
+            font-weight: normal;
+            margin: 5px 0;
+            color: #2c2c2c;
+        }
+        .ampersand {
+            font-family: 'Better Land RUS', 'Georgia', serif;
+            font-size: 1.8rem;
+            margin: 5px 0;
+            color: #2c2c2c;
         }
 
-        /* заголовок ДОРОГИЕ ГОСТИ */
+        /* стили для правой колонки (второй экран) */
         .greeting {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: bold;
             line-height: 1.1;
             color: #2c2c2c;
             margin-bottom: 1rem;
         }
-        .greeting-sub {
-            font-size: 1rem;
-            color: #3a2a22;
-            margin-bottom: 2rem;
-            line-height: 1.4;
-        }
         .invite-text {
             font-size: 0.95rem;
             line-height: 1.4;
             color: #2c2c2c;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
-
-        /* календарь */
         .calendar {
             width: 100%;
             background: rgba(255, 255, 255, 0.7);
             border-radius: 20px;
-            padding: 15px;
+            padding: 12px;
         }
         .month {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: #5d3a2c;
         }
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 6px;
+            gap: 5px;
             text-align: center;
         }
         .weekday {
             font-weight: bold;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #b0a69b;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
         }
         .calendar-day {
             background: #f5f0ea;
-            padding: 6px 0;
-            border-radius: 12px;
-            font-size: 0.8rem;
+            padding: 5px 0;
+            border-radius: 10px;
+            font-size: 0.75rem;
         }
         .calendar-day.highlight {
             background: #b0a69b;
             color: white;
         }
 
-        /* адаптация для узких экранов (чтобы не ломалось) */
+        /* адаптация для узких экранов */
         @media (max-width: 550px) {
             .left-column, .right-column {
-                padding: 30px 20px;
+                padding: 20px 15px;
             }
-            .names-title {
-                font-size: 2.2rem;
+            .initial-large {
+                font-size: 2.5rem;
+            }
+            .names-elegant {
+                font-size: 1.5rem;
+            }
+            .ampersand {
+                font-size: 1.3rem;
+            }
+            .dotted-line {
+                width: 60px;
             }
             .greeting {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             .invite-text {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
             .calendar-day {
-                font-size: 0.7rem;
-                padding: 4px 0;
+                font-size: 0.65rem;
+                padding: 3px 0;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ПЕРВЫЙ ЭКРАН: фон fon3.jpg, слева белая колонка 40%, справа пусто -->
+    <!-- ПЕРВЫЙ ЭКРАН: фон fon3.jpg, слева белая колонка 40% с именами, пунктирами, большими буквами -->
     <div class="screen screen-first">
         <div class="left-column">
-            <div class="names-title">Михаил<br>&<br>Полина</div>
-            <div class="subtitle">Приглашение на свадьбу</div>
+            <div class="initial-large">М</div>
+            <div class="dotted-line"></div>
+            <div class="names-elegant">Михаил</div>
+            <div class="ampersand">&</div>
+            <div class="names-elegant">Полина</div>
+            <div class="dotted-line"></div>
+            <div class="initial-large">П</div>
         </div>
         <div class="empty"></div> <!-- 60% пустоты, виден фон -->
     </div>
 
-    <!-- ВТОРОЙ ЭКРАН: фон fon4.jpg, справа белая колонка 60%, слева пусто -->
+    <!-- ВТОРОЙ ЭКРАН: фон fon4.jpg, справа белая колонка 60% с текстом и календарём -->
     <div class="screen screen-second">
         <div class="empty"></div> <!-- 40% пустоты -->
         <div class="right-column">
@@ -178,7 +208,6 @@
                 <div class="month">АВГУСТ 2026</div>
                 <div class="calendar-grid">
                     <div class="weekday">ПН</div><div class="weekday">ВТ</div><div class="weekday">СР</div><div class="weekday">ЧТ</div><div class="weekday">ПТ</div><div class="weekday">СБ</div><div class="weekday">ВС</div>
-                    <!-- 1 августа 2026 – суббота, поэтому сначала пропуски -->
                     <div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
                     <div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day highlight">9</div>
                     <div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div>

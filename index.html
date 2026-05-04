@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Михаил & Полина | Свадебное приглашение</title>
-    <!-- Подключаем шрифт Flores del Sol -->
     <style>
         @font-face {
             font-family: 'Flores del Sol';
@@ -21,48 +20,33 @@
         }
 
         body {
-            font-family: 'Flores del Sol', 'Georgia', serif;
-            scroll-behavior: smooth;
-            background-color: #f9f4ef;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: #000; /* чёрный фон на время блокировки */
+            overflow-x: hidden;
         }
 
-        /* ---------- ЗАМОЧЕК (экран блокировки) ---------- */
+        /* ----- ЭКРАН С ЗАМКОМ (блокировка) ----- */
         .lock-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('images/fon2.jpg');
-            background-size: cover;
-            background-position: center;
+            background: #0a0a0a;  /* чёрный фон */
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
+            z-index: 1000;
             transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.5s ease;
             transform: translateY(0);
             opacity: 1;
             visibility: visible;
         }
-        .lock-screen::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.3);
-            z-index: 0;
-        }
         .lock-content {
-            position: relative;
-            z-index: 1;
             text-align: center;
             padding: 20px;
             max-width: 360px;
             width: 100%;
-            margin: 0 auto;
         }
         .lock-text-top {
             font-size: 1.2rem;
@@ -71,6 +55,7 @@
             font-weight: 300;
             margin-bottom: 8px;
             text-transform: uppercase;
+            font-family: 'Georgia', 'Times New Roman', serif; /* обычный шрифт */
         }
         .lock-text-highlight {
             font-size: clamp(32px, 8vw, 54px);
@@ -78,6 +63,7 @@
             color: white;
             margin-bottom: 32px;
             line-height: 1.2;
+            font-family: 'Georgia', 'Times New Roman', serif;
         }
         .lock-circle {
             display: flex;
@@ -94,8 +80,8 @@
             transform: scale(0.96);
         }
         .unlock-box {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.5);
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 12px;
             padding: 12px 24px;
             display: inline-block;
@@ -104,7 +90,9 @@
             color: white;
             backdrop-filter: blur(4px);
             cursor: pointer;
+            font-family: 'Georgia', serif;
         }
+        /* анимация исчезновения замка и появления основного контента */
         body.unlocked .lock-screen {
             transform: translateY(-100%);
             opacity: 0;
@@ -112,58 +100,46 @@
             pointer-events: none;
         }
 
-        /* ---------- ОСНОВНОЙ КОНТЕЙНЕР (появляется после разблокировки) ---------- */
-        .invitation-container {
+        /* ----- ОСНОВНОЙ КОНТЕЙНЕР (появляется после разблокировки) ----- */
+        .main-content {
             opacity: 0;
             transition: opacity 0.9s ease 0.2s;
         }
-        body.unlocked .invitation-container {
+        body.unlocked .main-content {
             opacity: 1;
         }
 
-        /* Каждый экран (секция) занимает 100vh */
+        /* каждый экран на всю высоту окна */
         .screen {
             min-height: 100vh;
             width: 100%;
             display: flex;
             background-size: cover;
             background-position: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        .screen.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Первый экран – фон fon3.jpg */
         .screen-first {
             background-image: url('images/fon3.jpg');
         }
-
-        /* Второй экран – фон fon4.jpg */
         .screen-second {
             background-image: url('images/fon4.jpg');
         }
 
-        /* Левая колонка (белая, 40% ширины) */
+        /* левая колонка (белая, 40% ширины) для первого экрана */
         .left-column {
             width: 40%;
-            background: rgba(255, 255, 255, 0.94);
+            background-color: rgba(255, 255, 255, 0.96);
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center; /* центрирование по горизонтали */
-            padding: 40px 20px;
+            padding: 40px 30px;
             min-height: 100vh;
             text-align: center;
         }
 
-        /* Правая колонка (белая, 60% ширины) */
+        /* правая колонка (белая, 60% ширины) для второго экрана */
         .right-column {
             width: 60%;
-            background: rgba(255, 255, 255, 0.94);
+            background-color: rgba(255, 255, 255, 0.96);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -171,56 +147,59 @@
             min-height: 100vh;
         }
 
-        /* Пустая половина (без белого фона) */
         .empty {
             flex: 1;
         }
 
-        /* Стили для левой колонки (имена) */
-        .big-letter {
-            font-size: 5rem;
+        /* стили для левой колонки – имена, большие буквы, пунктиры */
+        .initial-large {
+            font-family: 'Flores del Sol', 'Georgia', serif;
+            font-size: 150px;
             font-weight: normal;
             line-height: 1;
-            margin-bottom: 15px;
-            color: #2c2c2c;
+            color: #1a1a1a;
+            margin: 20px 0 10px 0;
         }
         .dotted-line {
-            border-top: 3px dashed #2c2c2c;
-            width: 80px;
-            margin: 15px auto;
+            border-top: 3px dashed #333;
+            width: 100px;
+            margin: 20px auto;
         }
-        .full-name {
-            font-size: 3rem;
+        .names-elegant {
+            font-family: 'Flores del Sol', 'Georgia', serif;
+            font-size: 3.5rem;
             font-weight: normal;
+            margin: 15px 0;
             color: #2c2c2c;
-            margin: 10px 0;
         }
         .ampersand {
+            font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 2.5rem;
-            font-weight: normal;
             margin: 10px 0;
             color: #2c2c2c;
         }
 
-        /* Стили для правой колонки (текст, календарь) */
-        .greeting {
-            font-size: 2rem;
+        /* правый блок – приветствие и календарь */
+        .greeting-title {
+            font-size: 2.2rem;
             font-weight: bold;
-            line-height: 1.2;
+            line-height: 1.1;
             color: #2c2c2c;
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
+            text-align: center;
         }
         .invite-text {
             font-size: 1rem;
             line-height: 1.4;
             color: #2c2c2c;
-            margin-bottom: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
         }
         .calendar {
             width: 100%;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 20px;
-            padding: 15px;
+            background: #f5f0ea;
+            border-radius: 24px;
+            padding: 20px 15px;
         }
         .month {
             font-size: 1.4rem;
@@ -242,9 +221,9 @@
             padding-bottom: 8px;
         }
         .calendar-day {
-            background: #f5f0ea;
-            padding: 6px 0;
-            border-radius: 12px;
+            background: white;
+            padding: 8px 0;
+            border-radius: 20px;
             font-size: 0.8rem;
         }
         .calendar-day.highlight {
@@ -252,132 +231,92 @@
             color: white;
         }
 
-        /* Адаптация для телефонов */
-        @media (max-width: 768px) {
-            .screen {
-                flex-direction: column;
-                min-height: auto;
-            }
-            .left-column, .right-column {
-                width: 100%;
-                min-height: auto;
-                padding: 40px 20px;
-            }
-            .empty {
-                display: none;
-            }
-            .big-letter {
-                font-size: 3.5rem;
-            }
-            .full-name {
-                font-size: 2rem;
-            }
-            .ampersand {
-                font-size: 1.8rem;
-            }
-            .greeting {
-                font-size: 1.8rem;
-            }
-            .invite-text {
-                font-size: 0.9rem;
-            }
+        /* адаптация для узких экранов */
+        @media (max-width: 550px) {
+            .initial-large { font-size: 100px; }
+            .names-elegant { font-size: 2rem; }
+            .ampersand { font-size: 1.8rem; }
+            .greeting-title { font-size: 1.6rem; }
+            .invite-text { font-size: 0.85rem; }
+            .calendar-day { font-size: 0.7rem; padding: 4px 0; }
+            .left-column, .right-column { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
-<!-- ЗАМОЧЕК -->
-<div class="lock-screen" id="lockScreen">
-    <div class="lock-content">
-        <div class="lock-text-top">ВАМ ПРИШЛО</div>
-        <div class="lock-text-highlight">ПРИГЛАШЕНИЕ</div>
-        <div class="lock-circle">
-            <svg class="lock-white" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="40" cy="40" r="36" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                <rect x="28" y="32" width="24" height="20" rx="4" fill="#FFFFFF" stroke="#C0C0C0" stroke-width="1.2"/>
-                <path d="M34 32V28C34 24 36 22 40 22C44 22 46 24 46 28V32" stroke="#FFFFFF" stroke-width="2" fill="none"/>
-                <circle cx="40" cy="42" r="3" fill="#A0A0A0"/>
-                <rect x="39" y="42" width="2" height="5" fill="#A0A0A0"/>
-            </svg>
-        </div>
-        <div class="unlock-box" id="hintText">нажми на замок</div>
-    </div>
-</div>
-
-<!-- ОСНОВНОЙ КОНТЕНТ -->
-<div class="invitation-container">
-    <!-- ПЕРВЫЙ ЭКРАН: слева имена (белая колонка 40%), справа фон fon3 -->
-    <div class="screen screen-first" id="screen1">
-        <div class="left-column">
-            <div class="big-letter">М</div>
-            <div class="dotted-line"></div>
-            <div class="full-name">Михаил</div>
-            <div class="ampersand">&</div>
-            <div class="full-name">Полина</div>
-            <div class="dotted-line"></div>
-            <div class="big-letter">П</div>
-        </div>
-        <div class="empty"></div>
-    </div>
-
-    <!-- ВТОРОЙ ЭКРАН: слева пусто (фон fon4), справа белая колонка с текстом и календарём -->
-    <div class="screen screen-second" id="screen2">
-        <div class="empty"></div>
-        <div class="right-column">
-            <div class="greeting">ДОРОГИЕ<br> ГОСТИ!</div>
-            <div class="invite-text">
-                Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.
+    <!-- ЭКРАН С ЗАМКОМ -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="lock-content">
+            <div class="lock-text-top">ВАМ ПРИШЛО</div>
+            <div class="lock-text-highlight">ПРИГЛАШЕНИЕ</div>
+            <div class="lock-circle">
+                <svg class="lock-white" id="unlockButton" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="40" cy="40" r="36" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+                    <rect x="28" y="32" width="24" height="20" rx="4" fill="#FFFFFF" stroke="#C0C0C0" stroke-width="1.2"/>
+                    <path d="M34 32V28C34 24 36 22 40 22C44 22 46 24 46 28V32" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+                    <circle cx="40" cy="42" r="3" fill="#A0A0A0"/>
+                    <rect x="39" y="42" width="2" height="5" fill="#A0A0A0"/>
+                </svg>
             </div>
-            <!-- Календарь (август 2026, дата 9 выделена) -->
-            <div class="calendar">
-                <div class="month">АВГУСТ 2026</div>
-                <div class="calendar-grid">
-                    <div class="weekday">ПН</div><div class="weekday">ВТ</div><div class="weekday">СР</div><div class="weekday">ЧТ</div><div class="weekday">ПТ</div><div class="weekday">СБ</div><div class="weekday">ВС</div>
-                    <div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
-                    <div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day highlight">9</div>
-                    <div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div>
-                    <div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div><div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div>
-                    <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div>
-                    <div class="calendar-day">31</div>
+            <div class="unlock-box" id="hintText">нажми на замок</div>
+        </div>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ (скрыт изначально) -->
+    <div class="main-content">
+        <!-- ПЕРВЫЙ ЭКРАН: фон fon3.jpg, левая колонка с именами -->
+        <div class="screen screen-first">
+            <div class="left-column">
+                <div class="initial-large">М</div>
+                <div class="dotted-line"></div>
+                <div class="names-elegant">Михаил</div>
+                <div class="ampersand">&</div>
+                <div class="names-elegant">Полина</div>
+                <div class="dotted-line"></div>
+                <div class="initial-large">П</div>
+            </div>
+            <div class="empty"></div> <!-- 60% пустоты, виден фон -->
+        </div>
+
+        <!-- ВТОРОЙ ЭКРАН: фон fon4.jpg, правая колонка с текстом и календарём -->
+        <div class="screen screen-second">
+            <div class="empty"></div> <!-- 40% пустоты -->
+            <div class="right-column">
+                <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
+                <div class="invite-text">
+                    Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.
+                </div>
+                <div class="calendar">
+                    <div class="month">АВГУСТ 2026</div>
+                    <div class="calendar-grid">
+                        <div class="weekday">ПН</div><div class="weekday">ВТ</div><div class="weekday">СР</div><div class="weekday">ЧТ</div><div class="weekday">ПТ</div><div class="weekday">СБ</div><div class="weekday">ВС</div>
+                        <div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
+                        <div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day highlight">9</div>
+                        <div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div>
+                        <div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div><div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div>
+                        <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div>
+                        <div class="calendar-day">31</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    // Разблокировка замка
-    const lockScreen = document.getElementById('lockScreen');
-    const lockBtn = document.querySelector('.lock-white');
-    const unlockBox = document.querySelector('.unlock-box');
-    function unlock() {
-        document.body.classList.add('unlocked');
-        // Запускаем анимацию появления экранов при скролле
-        checkVisibility();
-    }
-    if (lockBtn) lockBtn.addEventListener('click', unlock);
-    if (unlockBox) unlockBox.addEventListener('click', unlock);
-    lockScreen.addEventListener('click', unlock);
+    <script>
+        // Разблокировка по клику на замок или подсказку
+        const lockScreen = document.getElementById('lockScreen');
+        const unlockBtn = document.getElementById('unlockButton');
+        const hintBox = document.getElementById('hintText');
 
-    // Анимация при скролле: добавляем класс .visible, когда экран попадает в область видимости
-    const screens = document.querySelectorAll('.screen');
-    function checkVisibility() {
-        const windowHeight = window.innerHeight;
-        screens.forEach(screen => {
-            const rect = screen.getBoundingClientRect();
-            const isVisible = rect.top < windowHeight - 100 && rect.bottom > 100;
-            if (isVisible) {
-                screen.classList.add('visible');
-            }
-        });
-    }
-    window.addEventListener('scroll', checkVisibility);
-    window.addEventListener('resize', checkVisibility);
-    // Если страница уже разблокирована, проверим сразу
-    if (document.body.classList.contains('unlocked')) {
-        checkVisibility();
-    }
-</script>
+        function unlock() {
+            document.body.classList.add('unlocked');
+        }
 
+        if (unlockBtn) unlockBtn.addEventListener('click', unlock);
+        if (hintBox) hintBox.addEventListener('click', unlock);
+        // также по клику на фон
+        lockScreen.addEventListener('click', unlock);
+    </script>
 </body>
 </html>

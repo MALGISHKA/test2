@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Михаил & Полина | Свадебное приглашение</title>
     <style>
-        /* ----- ШРИФТЫ ----- */
         @font-face {
             font-family: 'Flores del Sol';
             src: url('fonts/Flores del Sol.otf') format('opentype');
@@ -21,12 +20,12 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Flores del Sol', 'Georgia', serif;
             background-color: #000;
             overflow-x: hidden;
         }
 
-        /* ----- ЗАМОК (с кружком) ----- */
+        /* ----- ЗАМОК (шрифт Georgia) ----- */
         .lock-screen {
             position: fixed;
             top: 0;
@@ -125,7 +124,7 @@
             opacity: 1;
         }
 
-        /* ----- ЭКРАНЫ 1-3 (без изменений, стабильная версия) ----- */
+        /* ----- ЭКРАНЫ 1-3 ----- */
         .screen {
             min-height: 100vh;
             width: 100%;
@@ -188,7 +187,7 @@
         .dresscode-sub { transition-delay: 1.8s; }
         .dresscode-images { transition-delay: 2.0s; }
 
-        /* ----- ДЕКОРАТИВНЫЕ ЛИНИИ (сердечки только слева, кроме первого экрана) ----- */
+        /* ----- ДЕКОРАТИВНЫЕ ЛИНИИ ----- */
         .dotted-line {
             border-top: 3px dashed #000;
             width: 100px;
@@ -224,101 +223,75 @@
         }
         .decor-line::after { content: none; }
 
-        /* ----- СТИЛИ ПЕРВЫХ ТРЁХ ЭКРАНОВ (Гарнитура, размеры, как в последней рабочей версии) ----- */
-        .initial-large, .names-elegant, .ampersand {
+        /* ----- ОБЩИЙ ШРИФТ ДЛЯ ВСЕХ ТЕКСТОВ (КРОМЕ ЗАМКА) - Flores del Sol ----- */
+        body, .initial-large, .names-elegant, .ampersand, .greeting-title, .invite-text,
+        .section-title, .place-name, .map-link, .extra-text, .flowers-text, .dresscode-sub,
+        .timeline-time, .timeline-desc, .calendar, .month, .weekday, .calendar-day,
+        .dresscode-label-above, .qr-caption, .rsvp-title, .rsvp-deadline, .rsvp-note,
+        .form-group label, .form-group input, .form-group select, .form-group textarea,
+        .submit-btn, .faq-title, .contact-line, .timer-label, .timer-unit, .final-thanks p,
+        .final-thanks .couple-name {
             font-family: 'Flores del Sol', 'Georgia', serif;
         }
+
+        /* ----- ИМЕНА НА ПЕРВОМ ЭКРАНЕ (уменьшенные на 20%) ----- */
         .initial-large {
-            font-size: 195px;
+            font-size: 156px;  /* 195 * 0.8 = 156 */
             line-height: 1;
             color: #1a1a1a;
             margin: 20px 0 10px;
             text-align: center;
         }
         .names-elegant {
-            font-size: 4.55rem;
+            font-size: 3.64rem;  /* 4.55 * 0.8 = 3.64 */
             margin: 15px 0;
             color: #2c2c2c;
             text-align: center;
         }
         .ampersand {
-            font-size: 3.25rem;
+            font-size: 2.6rem;   /* 3.25 * 0.8 = 2.6 */
             margin: 10px 0;
             color: #2c2c2c;
             text-align: center;
         }
 
-        .georgia-text {
-            font-family: 'Georgia', serif;
-        }
+        /* ----- ЗАГОЛОВКИ И ТЕКСТЫ (уменьшаем для экономии места) ----- */
         .greeting-title {
-            font-size: 2.2rem;
-            font-weight: bold;
-            line-height: 1.1;
-            color: #2c2c2c;
-            margin-bottom: 20px;
-            text-align: center;
+            font-size: 2rem;      /* был 2.2rem */
         }
         .invite-text {
-            font-size: 1.3rem;
-            line-height: 1.4;
-            color: #2c2c2c;
-            margin-bottom: 40px;
-            text-align: center;
+            font-size: 1.1rem;    /* был 1.3rem */
         }
         .section-title {
-            font-size: 2rem;
-            font-weight: bold;
-            text-align: center;
-            margin: 15px 0 20px;
-            color: #2c2c2c;
+            font-size: 1.7rem;    /* был 2rem */
         }
         .place-name {
-            font-size: 1.3rem;
-            text-align: center;
-            font-weight: 500;
-            margin-bottom: 20px;
-            color: #5d3a2c;
-        }
-        .map-link {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            font-size: 1rem;
-            color: #b0a69b;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .extra-text, .flowers-text {
-            font-size: 1.3rem;
-            line-height: 1.5;
-            color: #2c2c2c;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .flowers-text {
-            margin-bottom: 30px;
-        }
-        .dresscode-sub {
-            font-size: 1.3rem;
-            text-align: center;
-            margin-bottom: 25px;
-            color: #5d3a2c;
+            font-size: 1.1rem;    /* был 1.3rem */
         }
         .timeline-time, .timeline-desc {
-            font-family: 'Georgia', serif;
-            font-size: 1.3rem;
+            font-size: 1.1rem;    /* был 1.3rem */
         }
-        .timeline-time {
-            font-weight: bold;
-            min-width: 70px;
-            color: #5d3a2c;
+        .extra-text, .flowers-text {
+            font-size: 1.1rem;    /* был 1.3rem */
         }
-        .timeline-desc {
-            color: #2c2c2c;
+        .dresscode-sub {
+            font-size: 1.1rem;    /* был 1.3rem */
         }
-        .calendar, .weekday, .calendar-day, .month {
-            font-family: 'Georgia', serif;
+        .map-link {
+            font-size: 0.9rem;
+        }
+        .qr-caption {
+            font-size: 0.8rem;
+        }
+        .dresscode-label-above {
+            font-size: 0.9rem;
+        }
+
+        /* ----- КАЛЕНДАРЬ (оставляем прежним) ----- */
+        .calendar {
+            background: #e0dfdc;
+            border-radius: 24px;
+            padding: 20px 15px;
         }
         .month {
             font-size: 1.4rem;
@@ -329,27 +302,11 @@
         .calendar-day {
             font-size: 0.8rem;
         }
-        .dresscode-label-above {
-            font-family: 'Georgia', serif;
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-        .calendar {
-            background: #e0dfdc;
-            border-radius: 24px;
-            padding: 20px 15px;
-        }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 6px;
-            text-align: center;
-        }
         .calendar-day.highlight {
             background: #9e9e9e;
             color: white;
         }
+
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
@@ -402,11 +359,6 @@
             border-radius: 16px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .qr-caption {
-            font-size: 0.85rem;
-            color: #5d3a2c;
-            margin-top: 8px;
-        }
         .dresscode-images {
             display: flex;
             flex-wrap: wrap;
@@ -426,19 +378,16 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        /* ----- 4-й ЭКРАН: АНКЕТА, ТАЙМЕР, ФИНАЛЬНЫЙ ТЕКСТ (без лишних фонов) ----- */
+        /* ----- 4-й ЭКРАН ----- */
         .screen-fourth {
-            background: #fff; /* полностью белый фон экрана */
+            background: #fff;
             width: 100%;
         }
-
         .fourth-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 60px 24px;
         }
-
-        /* секция анкеты (белый блок, центрированный) */
         .rsvp-card {
             background: white;
             border-radius: 48px;
@@ -446,54 +395,42 @@
             box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
             text-align: center;
         }
-
         .rsvp-title {
             font-size: 2.6rem;
             font-weight: bold;
-            margin-bottom: 12px;
-            color: #1a1a1a;
         }
-
         .rsvp-deadline {
             font-size: 1.1rem;
             color: #a0816e;
             margin-bottom: 24px;
         }
-
         .rsvp-note {
             font-size: 1rem;
             color: #4a4a4a;
             margin-bottom: 32px;
             line-height: 1.4;
         }
-
         .form-group {
             margin-bottom: 24px;
             text-align: left;
         }
-
         .form-group label {
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
             color: #2c2c2c;
         }
-
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 14px 18px;
             border-radius: 60px;
             border: 1px solid #ddd;
             background: #fff;
-            font-family: 'Georgia', serif;
             font-size: 1rem;
         }
-
         .form-group textarea {
             border-radius: 24px;
-            resize: vertical;
         }
-
         .submit-btn {
             background: #b8826d;
             color: white;
@@ -503,12 +440,7 @@
             font-size: 1.1rem;
             width: 100%;
             cursor: pointer;
-            transition: background 0.2s;
         }
-        .submit-btn:hover {
-            background: #9e6a58;
-        }
-
         .faq-title {
             font-size: 1.8rem;
             font-weight: bold;
@@ -516,14 +448,10 @@
             margin-bottom: 15px;
             color: #1a1a1a;
         }
-
         .contact-line {
             font-size: 1.2rem;
-            color: #2c2c2c;
             margin-bottom: 30px;
         }
-
-        /* секция таймера (на фоне fon7.jpg) */
         .timer-section {
             background-image: url('images/fon7.jpg');
             background-size: cover;
@@ -560,11 +488,8 @@
         .timer-unit {
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
             margin-top: 8px;
         }
-
-        /* финальный белый блок */
         .final-thanks {
             background: white;
             padding: 70px 24px;
@@ -573,7 +498,6 @@
         .final-thanks p {
             font-size: 1.8rem;
             font-weight: 500;
-            color: #1a1a1a;
             line-height: 1.3;
         }
         .final-thanks .couple-name {
@@ -588,6 +512,14 @@
             .timer-block { min-width: 70px; padding: 10px; }
             .timer-number { font-size: 2rem; }
             .final-thanks p { font-size: 1.4rem; }
+            .initial-large { font-size: 100px; }
+            .names-elegant { font-size: 2rem; }
+            .ampersand { font-size: 1.6rem; }
+            .greeting-title { font-size: 1.6rem; }
+            .invite-text { font-size: 0.95rem; }
+            .section-title { font-size: 1.4rem; }
+            .timeline-time, .timeline-desc { font-size: 0.9rem; }
+            .extra-text, .flowers-text, .dresscode-sub { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -631,8 +563,8 @@
             <div class="empty"></div>
             <div class="right-column fade-up">
                 <div class="decor-line"></div>
-                <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
-                <div class="invite-text georgia-text">
+                <div class="greeting-title">ДОРОГИЕ ГОСТИ!</div>
+                <div class="invite-text">
                     Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.
                 </div>
                 <div class="calendar">
@@ -655,7 +587,7 @@
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="decor-line fade-up program-title-wrap"></div>
-                <div class="section-title georgia-text fade-up program-title-wrap">ПРОГРАММА ДНЯ</div>
+                <div class="section-title fade-up program-title-wrap">ПРОГРАММА ДНЯ</div>
 
                 <div class="timeline-wrapper fade-up" id="timelineWrapper">
                     <div class="timeline-vertical-line"></div>
@@ -671,8 +603,8 @@
                 </div>
 
                 <div class="decor-line fade-up place-title-wrap"></div>
-                <div class="section-title georgia-text fade-up place-title-wrap">МЕСТО ТОРЖЕСТВА</div>
-                <div class="place-name georgia-text fade-up">SUNSET SMOLINOPARK</div>
+                <div class="section-title fade-up place-title-wrap">МЕСТО ТОРЖЕСТВА</div>
+                <div class="place-name fade-up">SUNSET SMOLINOPARK</div>
                 <iframe class="map-iframe fade-up" 
                         src="https://yandex.ru/map-widget/v1/?ll=61.405733%2C55.076458&z=17.42" 
                         title="SUNSET SMOLINOPARK на карте" 
@@ -682,11 +614,11 @@
                 <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link fade-up">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
 
                 <div class="decor-line fade-up details-title-wrap"></div>
-                <div class="section-title georgia-text fade-up details-title-wrap">ДЕТАЛИ</div>
-                <div class="extra-text georgia-text fade-up">
+                <div class="section-title fade-up details-title-wrap">ДЕТАЛИ</div>
+                <div class="extra-text fade-up">
                     Мы не будем оригинальными, но будем практичными. Лучший для нас подарок – это Ваша денежная инвестиция в нашу молодую семью.
                 </div>
-                <div class="flowers-text georgia-text fade-up">
+                <div class="flowers-text fade-up">
                     Если вы планировали порадовать нас цветами, мы хотим предложить небольшую альтернативу. Вместо традиционных букетов, которые так быстро увядают, нам будет приятно получить цветочную подписку. Это позволит нам ещё долго вспоминать этот день.
                 </div>
                 <div class="qr-container fade-up">
@@ -695,8 +627,8 @@
                 </div>
 
                 <div class="decor-line fade-up dresscode-title-wrap"></div>
-                <div class="section-title georgia-text fade-up dresscode-title-wrap">DRESS CODE</div>
-                <div class="dresscode-sub georgia-text fade-up">
+                <div class="section-title fade-up dresscode-title-wrap">DRESS CODE</div>
+                <div class="dresscode-sub fade-up">
                     Мы будем признательны, если вы поддержите в своих нарядах цветовую гамму нашего праздника.
                 </div>
                 <div class="dresscode-images fade-up">
@@ -715,7 +647,6 @@
         <!-- ЭКРАН 4: АНКЕТА, ТАЙМЕР, ФИНАЛ -->
         <div class="screen-fourth">
             <div class="fourth-container">
-                <!-- Блок анкеты (центр, белый) -->
                 <div class="rsvp-card fade-up">
                     <div class="rsvp-title">АНКЕТА</div>
                     <div class="rsvp-deadline">ДО 09.07.26</div>
@@ -723,7 +654,6 @@
                         Если вы планируете прийти со своей парой или семьей, то заполните анкету на каждого гостя отдельно.<br>
                         Обратите внимание, что формат мероприятия не предполагает детских аниматоров.
                     </div>
-
                     <form id="rsvpForm">
                         <div class="form-group">
                             <label>ФИО *</label>
@@ -753,13 +683,11 @@
                         <button type="button" class="submit-btn" id="submitRSVP">Отправить ответ</button>
                         <div id="formMessage" style="margin-top: 20px; font-size: 0.9rem; color: #b8826d;"></div>
                     </form>
-
                     <div class="faq-title">ОСТАЛИСЬ ВОПРОСЫ ?</div>
                     <div class="contact-line">Организатор Мария +7(919)3303751</div>
                 </div>
             </div>
 
-            <!-- Таймер на фоне fon7.jpg -->
             <div class="timer-section" id="timerSection">
                 <div class="timer-label">ДО СВАДЬБЫ ОСТАЛОСЬ</div>
                 <div class="timer-digits" id="timerDigits">
@@ -770,7 +698,6 @@
                 </div>
             </div>
 
-            <!-- Финальный белый блок -->
             <div class="final-thanks">
                 <p>Будем рады видеть вас на нашем празднике!</p>
                 <div class="couple-name">Михаил & Полина</div>
@@ -795,7 +722,7 @@
         if (hintBox) hintBox.addEventListener('click', unlock);
         lockScreen.addEventListener('click', unlock);
 
-        // Анимация при скролле (fade-up)
+        // Анимация fade-up
         const animatedElements = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -807,7 +734,7 @@
         }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
         animatedElements.forEach(el => observer.observe(el));
 
-        // Анимация сердечка на таймлайне (один раз, 5 секунд)
+        // Анимация сердечка на таймлайне
         const timelineWrapper = document.getElementById('timelineWrapper');
         const timelineHeart = document.getElementById('timelineHeart');
         if (timelineWrapper && timelineHeart) {
@@ -837,16 +764,14 @@
             heartObserver.observe(timelineWrapper);
         }
 
-        // ----- ТАЙМЕР до 9 августа 2026, 16:00 -----
+        // Таймер
         function getWeddingDate() {
-            return new Date(2026, 7, 9, 16, 0, 0); // месяц 7 = август
+            return new Date(2026, 7, 9, 16, 0, 0);
         }
-
         function updateTimer() {
             const now = new Date();
             const wedding = getWeddingDate();
             const diff = wedding - now;
-
             if (diff <= 0) {
                 document.getElementById('days').innerText = '00';
                 document.getElementById('hours').innerText = '00';
@@ -854,29 +779,25 @@
                 document.getElementById('seconds').innerText = '00';
                 return;
             }
-
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (86400000)) / (3600000));
             const minutes = Math.floor((diff % 3600000) / 60000);
             const seconds = Math.floor((diff % 60000) / 1000);
-
             document.getElementById('days').innerText = days < 10 ? '0' + days : days;
             document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
             document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
             document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
         }
-
         updateTimer();
         setInterval(updateTimer, 1000);
 
-        // ----- ОБРАБОТКА ФОРМЫ (уведомление) -----
+        // Отправка формы (уведомление)
         const submitBtn = document.getElementById('submitRSVP');
         const fullnameInp = document.getElementById('fullname');
         const attendanceSelect = document.getElementById('attendance');
         const drinkSelect = document.getElementById('drink');
         const commentsArea = document.getElementById('comments');
         const formMessage = document.getElementById('formMessage');
-
         submitBtn.addEventListener('click', () => {
             const name = fullnameInp.value.trim();
             if (!name) {

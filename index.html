@@ -141,7 +141,7 @@
             background-color: rgba(255, 255, 255, 0.96);
         }
 
-        /* Ширина колонок – одинаковая на всех устройствах */
+        /* Ширина колонок – единая для всех устройств */
         .screen-first .left-column { width: 40%; }
         .screen-first .empty { flex: 1; }
 
@@ -151,21 +151,14 @@
         .screen-third .program-column { width: 60%; }
         /* правой колонки нет, пустое пространство — фон */
 
-        /* Адаптация только для изменения порядка и отступов, но НЕ ширины колонок */
+        /* Адаптив: на узких экранах не меняем ширину, только отступы */
         @media (max-width: 768px) {
-            /* На телефоне колонки по-прежнему имеют 40% и 60%, но они могут быть узкими.
-               Чтобы не было слишком узко, можно немного уменьшить padding */
             .left-column, .right-column, .program-column {
                 padding: 30px 20px;
             }
-            /* При необходимости можно изменить порядок (напр., на третьем экране карта может быть сверху или снизу) */
-            .screen-third .program-column {
-                /* ничего не меняем – порядок такой же */
-            }
-            /* Для удобства чтения можно сделать фон колонок чуть более прозрачным? Не трогаем. */
         }
 
-        /* Стили для левой колонки (имена) */
+        /* Стили для первого экрана (имена) */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 150px;
@@ -196,7 +189,7 @@
             text-align: center;
         }
 
-        /* Стили для второго экрана */
+        /* Стили для второго экрана (приветствие + календарь) */
         .greeting-title {
             font-size: 2.2rem;
             font-weight: bold;
@@ -248,7 +241,7 @@
             color: white;
         }
 
-        /* Стили для третьего экрана */
+        /* Стили для третьего экрана (программа, место, карта, цветы, дресс-код) */
         .program-title {
             font-size: 2rem;
             font-weight: bold;
@@ -295,6 +288,7 @@
             border: none;
             border-radius: 24px;
             margin-top: 10px;
+            margin-bottom: 40px;
         }
         .map-link {
             display: block;
@@ -309,7 +303,59 @@
             opacity: 0.7;
         }
 
-        /* Очень маленькие экраны (<=550px) – только уменьшение шрифтов */
+        /* Блок «Детали» (цветы и дресс-код) */
+        .details-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0 20px;
+            color: #2c2c2c;
+        }
+        .flowers-text {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #2c2c2c;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .dresscode-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0 15px;
+            color: #2c2c2c;
+        }
+        .dresscode-sub {
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #5d3a2c;
+        }
+        .dresscode-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .dresscode-item {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+        .dresscode-item img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .dresscode-item p {
+            margin-top: 10px;
+            font-weight: 500;
+            color: #2c2c2c;
+        }
+
+        /* Адаптация для маленьких экранов */
         @media (max-width: 550px) {
             .initial-large { font-size: 80px; }
             .names-elegant { font-size: 1.8rem; }
@@ -322,8 +368,11 @@
             .timeline-desc { font-size: 0.85rem; }
             .place-title { font-size: 1.4rem; }
             .place-name { font-size: 1.2rem; }
+            .details-title { font-size: 1.4rem; }
+            .dresscode-title { font-size: 1.3rem; }
             .map-iframe { height: 250px; }
             .left-column, .right-column, .program-column { padding: 20px 15px; }
+            .dresscode-images { flex-direction: column; align-items: center; gap: 20px; }
         }
     </style>
 </head>
@@ -348,7 +397,7 @@
     </div>
 
     <div class="main-content">
-        <!-- ЭКРАН 1: левая колонка 40% -->
+        <!-- ЭКРАН 1: левая колонка 40% (имена) -->
         <div class="screen screen-first">
             <div class="left-column">
                 <div class="initial-large">М</div>
@@ -359,10 +408,10 @@
                 <div class="dotted-line"></div>
                 <div class="initial-large">П</div>
             </div>
-            <div class="empty"></div> <!-- 60% пустоты, виден фон -->
+            <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 2: правая колонка 60% -->
+        <!-- ЭКРАН 2: правая колонка 60% (приветствие и календарь) -->
         <div class="screen screen-second">
             <div class="empty"></div>
             <div class="right-column">
@@ -385,18 +434,19 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3: левая колонка 60% (программа, место, карта) -->
+        <!-- ЭКРАН 3: левая колонка 60% (программа дня, место, карта, цветы, дресс-код) -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="program-title">ПРОГРАММА ДНЯ</div>
                 <div class="timeline">
-                    <div class="timeline-item"><span class="timeline-time">17:00</span><span class="timeline-desc">Сбор гостей, фуршет</span></div>
-                    <div class="timeline-item"><span class="timeline-time">17:30</span><span class="timeline-desc">Начало вечера</span></div>
-                    <div class="timeline-item"><span class="timeline-time">19:00</span><span class="timeline-desc">Танцы, артисты</span></div>
-                    <div class="timeline-item"><span class="timeline-time">21:30</span><span class="timeline-desc">Разрезание торта</span></div>
-                    <div class="timeline-item"><span class="timeline-time">22:30</span><span class="timeline-desc">DJ, вечеринка</span></div>
-                    <div class="timeline-item"><span class="timeline-time">00:00</span><span class="timeline-desc">Завершение</span></div>
+                    <div class="timeline-item"><span class="timeline-time">15:30</span><span class="timeline-desc">Сбор гостей</span></div>
+                    <div class="timeline-item"><span class="timeline-time">16:00</span><span class="timeline-desc">Выездная регистрация</span></div>
+                    <div class="timeline-item"><span class="timeline-time">17:00</span><span class="timeline-desc">Банкет</span></div>
+                    <div class="timeline-item"><span class="timeline-time">21:00</span><span class="timeline-desc">Торт</span></div>
+                    <div class="timeline-item"><span class="timeline-time">22:00</span><span class="timeline-desc">Дискотека</span></div>
+                    <div class="timeline-item"><span class="timeline-time">23:00</span><span class="timeline-desc">Завершение банкета</span></div>
                 </div>
+
                 <div class="place-title">МЕСТО ТОРЖЕСТВА</div>
                 <div class="place-name">SUNSET SMOLINOPARK</div>
                 <iframe class="map-iframe" 
@@ -406,8 +456,29 @@
                         loading="lazy">
                 </iframe>
                 <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
+
+                <!-- НОВЫЙ БЛОК: Цветы + Дресс-код -->
+                <div class="details-title">ДЕТАЛИ</div>
+                <div class="flowers-text">
+                    Если вы планировали порадовать нас цветами, мы хотим предложить небольшую альтернативу. Вместо традиционных букетов, которые так быстро увядают, нам будет приятно получить цветочную подписку. Это позволит нам ещё долго вспоминать этот день.
+                </div>
+
+                <div class="dresscode-title">DRESS CODE</div>
+                <div class="dresscode-sub">
+                    Мы будем признательны, если вы поддержите в своих нарядах цветовую гамму нашего праздника.
+                </div>
+                <div class="dresscode-images">
+                    <div class="dresscode-item">
+                        <img src="images/dressj.jpg" alt="Для женщин">
+                        <p>ДЛЯ ЖЕНЩИН</p>
+                    </div>
+                    <div class="dresscode-item">
+                        <img src="images/dressm.jpg" alt="Для мужчин">
+                        <p>ДЛЯ МУЖЧИН</p>
+                    </div>
+                </div>
             </div>
-            <!-- Нет правой колонки, оставшиеся 40% — пустота с фоном -->
+            <!-- Нет правой колонки, пустое пространство 40% с фоном -->
         </div>
     </div>
 

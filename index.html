@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Михаил & Полина | Свадебное приглашение</title>
     <style>
-        /* Шрифты */
+        /* ----- ШРИФТЫ ----- */
         @font-face {
             font-family: 'Flores del Sol';
             src: url('fonts/Flores del Sol.otf') format('opentype');
@@ -125,7 +125,7 @@
             opacity: 1;
         }
 
-        /* ----- ЭКРАНЫ ----- */
+        /* ----- ЭКРАНЫ 1-3 (без изменений, стабильная версия) ----- */
         .screen {
             min-height: 100vh;
             width: 100%;
@@ -136,13 +136,8 @@
         .screen-first { background-image: url('images/fon3.jpg'); }
         .screen-second { background-image: url('images/fon4.jpg'); }
         .screen-third { background-image: url('images/fon5.jpg'); }
-        .screen-fourth {
-            background-image: url('images/fon5.jpg'); /* используем тот же фон, что и третий? Можно задать отдельный, но у вас нет fon6 – пусть будет тот же */
-            background-size: cover;
-            background-position: center;
-        }
 
-        .left-column, .right-column, .program-column, .form-column {
+        .left-column, .right-column, .program-column {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -155,24 +150,9 @@
         .screen-second .right-column { width: 60%; margin-left: auto; }
         .screen-second .empty { flex: 1; }
         .screen-third .program-column { width: 60%; }
-        /* 4‑й экран: форма по центру, без деления на колонки? Вы сказали «анкету делаем по середине». Я сделаю центрированный блок внутри flex-контейнера */
-        .screen-fourth {
-            justify-content: center;
-            align-items: center;
-        }
-        .rsvp-card {
-            max-width: 600px;
-            width: 90%;
-            background-color: rgba(255, 255, 255, 0.96);
-            border-radius: 32px;
-            padding: 40px 30px;
-            box-shadow: 0 20px 35px rgba(0,0,0,0.1);
-            text-align: center;
-        }
 
         @media (max-width: 768px) {
-            .left-column, .right-column, .program-column, .form-column { padding: 30px 20px; }
-            .rsvp-card { padding: 30px 20px; width: 95%; }
+            .left-column, .right-column, .program-column { padding: 30px 20px; }
         }
 
         /* ----- АНИМАЦИИ ПОЯВЛЕНИЯ ----- */
@@ -195,7 +175,7 @@
             transform: translateY(0);
         }
 
-        /* Задержки для последовательного появления на 3-м и 4-м экранах */
+        /* Задержки для последовательного появления на 3-м экране */
         .program-title-wrap { transition-delay: 0.1s; }
         .timeline-wrapper { transition-delay: 0.3s; }
         .place-title-wrap { transition-delay: 0.5s; }
@@ -207,18 +187,8 @@
         .dresscode-title-wrap { transition-delay: 1.6s; }
         .dresscode-sub { transition-delay: 1.8s; }
         .dresscode-images { transition-delay: 2.0s; }
-        /* 4-й экран – элементы карточки */
-        .rsvp-card .fade-up { transition-delay: 0.1s; }
-        .rsvp-card .fade-up:nth-child(2) { transition-delay: 0.2s; }
-        .rsvp-card .fade-up:nth-child(3) { transition-delay: 0.3s; }
-        .rsvp-card .fade-up:nth-child(4) { transition-delay: 0.4s; }
-        .rsvp-card .fade-up:nth-child(5) { transition-delay: 0.5s; }
-        .rsvp-card .fade-up:nth-child(6) { transition-delay: 0.6s; }
-        .rsvp-card .fade-up:nth-child(7) { transition-delay: 0.7s; }
-        .rsvp-card .fade-up:nth-child(8) { transition-delay: 0.8s; }
-        .rsvp-card .fade-up:nth-child(9) { transition-delay: 0.9s; }
 
-        /* ----- ДЕКОРАТИВНЫЕ ЛИНИИ (как у предыдущих экранов) ----- */
+        /* ----- ДЕКОРАТИВНЫЕ ЛИНИИ (сердечки только слева, кроме первого экрана) ----- */
         .dotted-line {
             border-top: 3px dashed #000;
             width: 100px;
@@ -252,36 +222,35 @@
             font-size: 16px;
             color: #000 !important;
         }
-        .decor-line::after {
-            content: none;
-        }
+        .decor-line::after { content: none; }
 
-        /* Стили для первого экрана */
-        .initial-large {
+        /* ----- СТИЛИ ПЕРВЫХ ТРЁХ ЭКРАНОВ (Гарнитура, размеры, как в последней рабочей версии) ----- */
+        .initial-large, .names-elegant, .ampersand {
             font-family: 'Flores del Sol', 'Georgia', serif;
+        }
+        .initial-large {
             font-size: 195px;
-            font-weight: normal;
             line-height: 1;
             color: #1a1a1a;
             margin: 20px 0 10px;
             text-align: center;
         }
         .names-elegant {
-            font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 4.55rem;
             margin: 15px 0;
             color: #2c2c2c;
             text-align: center;
         }
         .ampersand {
-            font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 3.25rem;
             margin: 10px 0;
             color: #2c2c2c;
             text-align: center;
         }
 
-        /* Стили для второго экрана */
+        .georgia-text {
+            font-family: 'Georgia', serif;
+        }
         .greeting-title {
             font-size: 2.2rem;
             font-weight: bold;
@@ -297,17 +266,79 @@
             margin-bottom: 40px;
             text-align: center;
         }
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0 20px;
+            color: #2c2c2c;
+        }
+        .place-name {
+            font-size: 1.3rem;
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #5d3a2c;
+        }
+        .map-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #b0a69b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .extra-text, .flowers-text {
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: #2c2c2c;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .flowers-text {
+            margin-bottom: 30px;
+        }
+        .dresscode-sub {
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #5d3a2c;
+        }
+        .timeline-time, .timeline-desc {
+            font-family: 'Georgia', serif;
+            font-size: 1.3rem;
+        }
+        .timeline-time {
+            font-weight: bold;
+            min-width: 70px;
+            color: #5d3a2c;
+        }
+        .timeline-desc {
+            color: #2c2c2c;
+        }
+        .calendar, .weekday, .calendar-day, .month {
+            font-family: 'Georgia', serif;
+        }
+        .month {
+            font-size: 1.4rem;
+        }
+        .weekday {
+            font-size: 0.7rem;
+        }
+        .calendar-day {
+            font-size: 0.8rem;
+        }
+        .dresscode-label-above {
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
         .calendar {
             background: #e0dfdc;
             border-radius: 24px;
             padding: 20px 15px;
-        }
-        .month {
-            font-size: 1.4rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 15px;
-            color: #3a3a3a;
         }
         .calendar-grid {
             display: grid;
@@ -315,31 +346,9 @@
             gap: 6px;
             text-align: center;
         }
-        .weekday {
-            font-weight: bold;
-            font-size: 0.7rem;
-            color: #6a6a6a;
-            padding-bottom: 8px;
-        }
-        .calendar-day {
-            background: #f5f5f5;
-            padding: 8px 0;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #2c2c2c;
-        }
         .calendar-day.highlight {
             background: #9e9e9e;
             color: white;
-        }
-
-        /* Третий экран */
-        .section-title {
-            font-size: 2rem;
-            font-weight: bold;
-            text-align: center;
-            margin: 15px 0 20px;
-            color: #2c2c2c;
         }
         .timeline-wrapper {
             position: relative;
@@ -382,48 +391,6 @@
             margin-bottom: 20px;
             gap: 15px;
         }
-        .timeline-time, .timeline-desc {
-            font-size: 1.3rem;
-        }
-        .timeline-time {
-            font-weight: bold;
-            min-width: 70px;
-            color: #5d3a2c;
-        }
-        .timeline-desc {
-            color: #2c2c2c;
-        }
-        .place-name {
-            font-size: 1.3rem;
-            text-align: center;
-            font-weight: 500;
-            margin-bottom: 20px;
-            color: #5d3a2c;
-        }
-        .map-iframe {
-            width: 100%;
-            height: 400px;
-            border: none;
-            border-radius: 24px;
-            margin-top: 10px;
-            margin-bottom: 40px;
-        }
-        .map-link {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            font-size: 1rem;
-            color: #b0a69b;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .extra-text, .flowers-text {
-            font-size: 1.3rem;
-            line-height: 1.5;
-            color: #2c2c2c;
-            text-align: center;
-            margin-bottom: 20px;
-        }
         .qr-container {
             text-align: center;
             margin: 20px 0 30px;
@@ -439,12 +406,6 @@
             font-size: 0.85rem;
             color: #5d3a2c;
             margin-top: 8px;
-        }
-        .dresscode-sub {
-            font-size: 1.3rem;
-            text-align: center;
-            margin-bottom: 25px;
-            color: #5d3a2c;
         }
         .dresscode-images {
             display: flex;
@@ -464,98 +425,169 @@
             border-radius: 16px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-        .dresscode-label-above {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 10px;
+
+        /* ----- 4-й ЭКРАН: АНКЕТА, ТАЙМЕР, ФИНАЛЬНЫЙ ТЕКСТ (без лишних фонов) ----- */
+        .screen-fourth {
+            background: #fff; /* полностью белый фон экрана */
+            width: 100%;
         }
 
-        /* Форма (анкета) */
-        .form-group {
-            text-align: left;
-            margin-bottom: 20px;
+        .fourth-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
         }
+
+        /* секция анкеты (белый блок, центрированный) */
+        .rsvp-card {
+            background: white;
+            border-radius: 48px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .rsvp-title {
+            font-size: 2.6rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .rsvp-deadline {
+            font-size: 1.1rem;
+            color: #a0816e;
+            margin-bottom: 24px;
+        }
+
+        .rsvp-note {
+            font-size: 1rem;
+            color: #4a4a4a;
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
         .form-group label {
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
             color: #2c2c2c;
         }
+
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border-radius: 24px;
-            border: 1px solid #ccc;
+            padding: 14px 18px;
+            border-radius: 60px;
+            border: 1px solid #ddd;
             background: #fff;
-            font-family: inherit;
+            font-family: 'Georgia', serif;
             font-size: 1rem;
         }
-        .rsvp-btn {
+
+        .form-group textarea {
+            border-radius: 24px;
+            resize: vertical;
+        }
+
+        .submit-btn {
             background: #b8826d;
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
+            padding: 14px 28px;
+            border-radius: 60px;
             font-size: 1.1rem;
             width: 100%;
             cursor: pointer;
             transition: background 0.2s;
         }
-        .rsvp-btn:hover {
+        .submit-btn:hover {
             background: #9e6a58;
         }
-        .notification {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 30px;
-            background: #e9d9d0;
-            text-align: center;
-            display: none;
-        }
-        .notification.show {
-            display: block;
-        }
-        .timer {
+
+        .faq-title {
             font-size: 1.8rem;
             font-weight: bold;
-            margin: 20px 0;
-            color: #5d3a2c;
-        }
-        .timer span {
-            display: inline-block;
-            min-width: 60px;
-        }
-        .contact-info {
-            margin-top: 30px;
-            font-size: 1.1rem;
-        }
-        .final-greeting {
-            margin-top: 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            margin-top: 50px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
         }
 
-        @media (max-width: 550px) {
-            .initial-large { font-size: 104px; }
-            .names-elegant { font-size: 2.34rem; }
-            .ampersand { font-size: 1.95rem; }
-            .greeting-title { font-size: 1.6rem; }
-            .invite-text { font-size: 1.0rem; }
-            .calendar-day { font-size: 0.7rem; padding: 4px 0; }
-            .section-title { font-size: 1.6rem; }
-            .timeline-time, .timeline-desc { font-size: 1rem; }
-            .timeline-time { min-width: 60px; }
-            .place-name { font-size: 1rem; }
-            .extra-text, .flowers-text, .dresscode-sub { font-size: 1rem; }
-            .map-iframe { height: 250px; }
-            .left-column, .right-column, .program-column { padding: 20px 15px; }
-            .dresscode-images { flex-direction: column; align-items: center; gap: 20px; }
-            .qr-image { max-width: 150px; }
-            .timeline-wrapper { padding-right: 15px; }
-            .timeline-vertical-line { right: 0; }
-            .decor-line::before { left: -5px; }
-            .timer { font-size: 1.2rem; }
-            .timer span { min-width: 40px; }
+        .contact-line {
+            font-size: 1.2rem;
+            color: #2c2c2c;
+            margin-bottom: 30px;
+        }
+
+        /* секция таймера (на фоне fon7.jpg) */
+        .timer-section {
+            background-image: url('images/fon7.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 24px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        .timer-label {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .timer-digits {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .timer-block {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            padding: 15px 20px;
+            border-radius: 24px;
+            min-width: 110px;
+        }
+        .timer-number {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .timer-unit {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        /* финальный белый блок */
+        .final-thanks {
+            background: white;
+            padding: 70px 24px;
+            text-align: center;
+        }
+        .final-thanks p {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            line-height: 1.3;
+        }
+        .final-thanks .couple-name {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 16px;
+            color: #b8826d;
+        }
+
+        @media (max-width: 650px) {
+            .timer-digits { gap: 12px; }
+            .timer-block { min-width: 70px; padding: 10px; }
+            .timer-number { font-size: 2rem; }
+            .final-thanks p { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -580,7 +612,7 @@
     </div>
 
     <div class="main-content">
-        <!-- ЭКРАН 1: имена -->
+        <!-- ЭКРАН 1 (имена) -->
         <div class="screen screen-first">
             <div class="left-column first-column-animate">
                 <div class="initial-large">М</div>
@@ -594,13 +626,13 @@
             <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 2: приветствие и календарь -->
+        <!-- ЭКРАН 2 (приветствие, календарь) -->
         <div class="screen screen-second">
             <div class="empty"></div>
             <div class="right-column fade-up">
                 <div class="decor-line"></div>
                 <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
-                <div class="invite-text">
+                <div class="invite-text georgia-text">
                     Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.
                 </div>
                 <div class="calendar">
@@ -619,11 +651,11 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3: программа, место, карта, детали, дресс-код -->
+        <!-- ЭКРАН 3 (программа, место, карта, цветы, QR, дресс-код) -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="decor-line fade-up program-title-wrap"></div>
-                <div class="section-title fade-up program-title-wrap">ПРОГРАММА ДНЯ</div>
+                <div class="section-title georgia-text fade-up program-title-wrap">ПРОГРАММА ДНЯ</div>
 
                 <div class="timeline-wrapper fade-up" id="timelineWrapper">
                     <div class="timeline-vertical-line"></div>
@@ -639,8 +671,8 @@
                 </div>
 
                 <div class="decor-line fade-up place-title-wrap"></div>
-                <div class="section-title fade-up place-title-wrap">МЕСТО ТОРЖЕСТВА</div>
-                <div class="place-name fade-up">SUNSET SMOLINOPARK</div>
+                <div class="section-title georgia-text fade-up place-title-wrap">МЕСТО ТОРЖЕСТВА</div>
+                <div class="place-name georgia-text fade-up">SUNSET SMOLINOPARK</div>
                 <iframe class="map-iframe fade-up" 
                         src="https://yandex.ru/map-widget/v1/?ll=61.405733%2C55.076458&z=17.42" 
                         title="SUNSET SMOLINOPARK на карте" 
@@ -650,11 +682,11 @@
                 <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link fade-up">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
 
                 <div class="decor-line fade-up details-title-wrap"></div>
-                <div class="section-title fade-up details-title-wrap">ДЕТАЛИ</div>
-                <div class="extra-text fade-up">
+                <div class="section-title georgia-text fade-up details-title-wrap">ДЕТАЛИ</div>
+                <div class="extra-text georgia-text fade-up">
                     Мы не будем оригинальными, но будем практичными. Лучший для нас подарок – это Ваша денежная инвестиция в нашу молодую семью.
                 </div>
-                <div class="flowers-text fade-up">
+                <div class="flowers-text georgia-text fade-up">
                     Если вы планировали порадовать нас цветами, мы хотим предложить небольшую альтернативу. Вместо традиционных букетов, которые так быстро увядают, нам будет приятно получить цветочную подписку. Это позволит нам ещё долго вспоминать этот день.
                 </div>
                 <div class="qr-container fade-up">
@@ -663,8 +695,8 @@
                 </div>
 
                 <div class="decor-line fade-up dresscode-title-wrap"></div>
-                <div class="section-title fade-up dresscode-title-wrap">DRESS CODE</div>
-                <div class="dresscode-sub fade-up">
+                <div class="section-title georgia-text fade-up dresscode-title-wrap">DRESS CODE</div>
+                <div class="dresscode-sub georgia-text fade-up">
                     Мы будем признательны, если вы поддержите в своих нарядах цветовую гамму нашего праздника.
                 </div>
                 <div class="dresscode-images fade-up">
@@ -680,33 +712,33 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 4: анкета, таймер, контакты -->
-        <div class="screen screen-fourth">
-            <div class="rsvp-card">
-                <div class="fade-up">
-                    <h2 style="font-size: 2.5rem;">АНКЕТА</h2>
-                    <p style="font-size: 1.2rem; margin-top: 5px;">ДО 09.07.26</p>
-                </div>
-                <div class="fade-up" style="margin: 20px 0;">
-                    <p>Если вы планируете прийти со своей парой или семьей, то заполните анкету на каждого гостя отдельно.<br>Обратите внимание, что формат мероприятия не предполагает детских аниматоров.</p>
-                </div>
+        <!-- ЭКРАН 4: АНКЕТА, ТАЙМЕР, ФИНАЛ -->
+        <div class="screen-fourth">
+            <div class="fourth-container">
+                <!-- Блок анкеты (центр, белый) -->
+                <div class="rsvp-card fade-up">
+                    <div class="rsvp-title">АНКЕТА</div>
+                    <div class="rsvp-deadline">ДО 09.07.26</div>
+                    <div class="rsvp-note">
+                        Если вы планируете прийти со своей парой или семьей, то заполните анкету на каждого гостя отдельно.<br>
+                        Обратите внимание, что формат мероприятия не предполагает детских аниматоров.
+                    </div>
 
-                <div class="fade-up">
                     <form id="rsvpForm">
                         <div class="form-group">
                             <label>ФИО *</label>
-                            <input type="text" id="fullName" required>
+                            <input type="text" id="fullname" required placeholder="Иван Иванов">
                         </div>
                         <div class="form-group">
-                            <label>Вы сможете присутствовать?</label>
-                            <select id="attending">
+                            <label>Сможете присутствовать?</label>
+                            <select id="attendance">
                                 <option value="Да, с удовольствием">Да, с удовольствием</option>
                                 <option value="Нет, не смогу">Нет, не смогу</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Что предпочитаете из напитков?</label>
-                            <select id="drinkPref">
+                            <select id="drink">
                                 <option>Игристое / шампанское</option>
                                 <option>Белое вино</option>
                                 <option>Красное вино</option>
@@ -715,31 +747,33 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Ваши пожелания (необязательно)</label>
-                            <textarea rows="2" id="comment"></textarea>
+                            <label>Дополнительные пожелания</label>
+                            <textarea rows="2" id="comments" placeholder="Аллергии, особые пожелания..."></textarea>
                         </div>
-                        <button type="submit" class="rsvp-btn">Отправить ответ</button>
-                        <div id="formNotification" class="notification"></div>
+                        <button type="button" class="submit-btn" id="submitRSVP">Отправить ответ</button>
+                        <div id="formMessage" style="margin-top: 20px; font-size: 0.9rem; color: #b8826d;"></div>
                     </form>
-                </div>
 
-                <div class="fade-up">
-                    <div class="contact-info">
-                        <p><strong>ОСТАЛИСЬ ВОПРОСЫ ?</strong></p>
-                        <p>Организатор Мария +7 (919) 330-37-51</p>
-                    </div>
+                    <div class="faq-title">ОСТАЛИСЬ ВОПРОСЫ ?</div>
+                    <div class="contact-line">Организатор Мария +7(919)3303751</div>
                 </div>
+            </div>
 
-                <div class="fade-up">
-                    <div class="timer" id="countdown">
-                        <span id="days">00</span> дн <span id="hours">00</span> ч <span id="minutes">00</span> мин <span id="seconds">00</span> сек
-                    </div>
+            <!-- Таймер на фоне fon7.jpg -->
+            <div class="timer-section" id="timerSection">
+                <div class="timer-label">ДО СВАДЬБЫ ОСТАЛОСЬ</div>
+                <div class="timer-digits" id="timerDigits">
+                    <div class="timer-block"><span class="timer-number" id="days">00</span><div class="timer-unit">Дней</div></div>
+                    <div class="timer-block"><span class="timer-number" id="hours">00</span><div class="timer-unit">Часов</div></div>
+                    <div class="timer-block"><span class="timer-number" id="minutes">00</span><div class="timer-unit">Минут</div></div>
+                    <div class="timer-block"><span class="timer-number" id="seconds">00</span><div class="timer-unit">Секунд</div></div>
                 </div>
+            </div>
 
-                <div class="fade-up final-greeting">
-                    <p>Будем рады видеть вас на нашем празднике!</p>
-                    <p style="margin-top: 10px;">Михаил & Полина</p>
-                </div>
+            <!-- Финальный белый блок -->
+            <div class="final-thanks">
+                <p>Будем рады видеть вас на нашем празднике!</p>
+                <div class="couple-name">Михаил & Полина</div>
             </div>
         </div>
     </div>
@@ -761,7 +795,7 @@
         if (hintBox) hintBox.addEventListener('click', unlock);
         lockScreen.addEventListener('click', unlock);
 
-        // Анимация при скролле для fade-up элементов
+        // Анимация при скролле (fade-up)
         const animatedElements = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -773,15 +807,15 @@
         }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
         animatedElements.forEach(el => observer.observe(el));
 
-        // Анимация сердечка на вертикальной линии (третий экран)
+        // Анимация сердечка на таймлайне (один раз, 5 секунд)
         const timelineWrapper = document.getElementById('timelineWrapper');
         const timelineHeart = document.getElementById('timelineHeart');
         if (timelineWrapper && timelineHeart) {
-            let animationPlayed = false;
-            const observerHeart = new IntersectionObserver((entries) => {
+            let played = false;
+            const heartObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && !animationPlayed) {
-                        animationPlayed = true;
+                    if (entry.isIntersecting && !played) {
+                        played = true;
                         const rect = timelineWrapper.getBoundingClientRect();
                         const startTop = -20;
                         const endTop = rect.height - 20;
@@ -792,25 +826,27 @@
                             let t = Math.min(1, elapsed / duration);
                             const topPos = startTop + (endTop - startTop) * t;
                             timelineHeart.style.top = topPos + 'px';
-                            if (t < 1) {
-                                requestAnimationFrame(animateHeart);
-                            } else {
-                                timelineHeart.style.opacity = '0';
-                            }
+                            if (t < 1) requestAnimationFrame(animateHeart);
+                            else timelineHeart.style.opacity = '0';
                         }
                         requestAnimationFrame(animateHeart);
-                        observerHeart.unobserve(timelineWrapper);
+                        heartObserver.unobserve(timelineWrapper);
                     }
                 });
             }, { threshold: 0.5 });
-            observerHeart.observe(timelineWrapper);
+            heartObserver.observe(timelineWrapper);
         }
 
-        // Таймер
+        // ----- ТАЙМЕР до 9 августа 2026, 16:00 -----
+        function getWeddingDate() {
+            return new Date(2026, 7, 9, 16, 0, 0); // месяц 7 = август
+        }
+
         function updateTimer() {
-            const weddingDate = new Date(2026, 7, 9, 16, 0, 0); // 9 августа 2026 16:00
             const now = new Date();
-            const diff = weddingDate - now;
+            const wedding = getWeddingDate();
+            const diff = wedding - now;
+
             if (diff <= 0) {
                 document.getElementById('days').innerText = '00';
                 document.getElementById('hours').innerText = '00';
@@ -818,36 +854,42 @@
                 document.getElementById('seconds').innerText = '00';
                 return;
             }
+
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (86400000)) / (3600000));
             const minutes = Math.floor((diff % 3600000) / 60000);
             const seconds = Math.floor((diff % 60000) / 1000);
+
             document.getElementById('days').innerText = days < 10 ? '0' + days : days;
             document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
             document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
             document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
         }
+
         updateTimer();
         setInterval(updateTimer, 1000);
 
-        // Форма (уведомление)
-        const form = document.getElementById('rsvpForm');
-        const notification = document.getElementById('formNotification');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('fullName').value.trim();
+        // ----- ОБРАБОТКА ФОРМЫ (уведомление) -----
+        const submitBtn = document.getElementById('submitRSVP');
+        const fullnameInp = document.getElementById('fullname');
+        const attendanceSelect = document.getElementById('attendance');
+        const drinkSelect = document.getElementById('drink');
+        const commentsArea = document.getElementById('comments');
+        const formMessage = document.getElementById('formMessage');
+
+        submitBtn.addEventListener('click', () => {
+            const name = fullnameInp.value.trim();
             if (!name) {
-                notification.textContent = 'Пожалуйста, укажите ваше ФИО 💌';
-                notification.classList.add('show');
-                setTimeout(() => notification.classList.remove('show'), 3000);
+                formMessage.textContent = 'Пожалуйста, укажите ваше ФИО 💌';
+                formMessage.style.color = '#b8826d';
                 return;
             }
-            const attending = document.getElementById('attending').value;
-            const drink = document.getElementById('drinkPref').value;
-            notification.innerHTML = `✨ Спасибо, ${name}! Вы ответили: «${attending}», предпочтение: ${drink}. Ждём вас! ✨`;
-            notification.classList.add('show');
-            setTimeout(() => notification.classList.remove('show'), 5000);
-            form.reset(); // очищаем форму (кроме может быть комментария)
+            const attendance = attendanceSelect.value;
+            const drink = drinkSelect.value;
+            const comments = commentsArea.value.trim() ? `Пожелания: ${commentsArea.value.trim()}` : '';
+            formMessage.innerHTML = `✨ Спасибо, ${name}! Вы ответили: «${attendance}», напитки: ${drink}. ${comments} ✨`;
+            formMessage.style.color = '#5d3a2c';
+            setTimeout(() => { formMessage.innerHTML = ''; }, 5000);
         });
     </script>
 </body>

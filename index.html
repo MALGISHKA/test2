@@ -5,16 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Михаил & Полина | Свадебное приглашение</title>
     <style>
+        /* Шрифты */
         @font-face {
             font-family: 'Flores del Sol';
             src: url('fonts/Flores del Sol.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'MDLZ';
-            src: url('fonts/MDLZBITETYPE-REGULAR-A8494C2ADC767C4E1AA9A688436B0A51.TTF') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -32,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- ЗАМОК ----- */
+        /* ----- ЗАМОК (исправленный, белый) ----- */
         .lock-screen {
             position: fixed;
             top: 0;
@@ -86,14 +80,20 @@
             line-height: 1.2;
             font-family: 'Georgia', serif;
         }
-        .lock-circle { display: flex; justify-content: center; margin: 20px 0; }
+        .lock-circle {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
         .lock-white {
             width: 100px;
             cursor: pointer;
             transition: transform 0.2s;
             filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
         }
-        .lock-white:active { transform: scale(0.96); }
+        .lock-white:active {
+            transform: scale(0.96);
+        }
         .unlock-box {
             background: rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.5);
@@ -181,32 +181,15 @@
         .place-title-wrap { transition-delay: 0.5s; }
         .map-iframe { transition-delay: 0.7s; }
         .details-title-wrap { transition-delay: 0.9s; }
-        .flowers-text { transition-delay: 1.1s; }
-        .qr-container { transition-delay: 1.3s; }
-        .dresscode-title-wrap { transition-delay: 1.5s; }
-        .dresscode-sub { transition-delay: 1.7s; }
-        .dresscode-images { transition-delay: 1.9s; }
+        .extra-text { transition-delay: 1.0s; }
+        .flowers-text { transition-delay: 1.2s; }
+        .qr-container { transition-delay: 1.4s; }
+        .dresscode-title-wrap { transition-delay: 1.6s; }
+        .dresscode-sub { transition-delay: 1.8s; }
+        .dresscode-images { transition-delay: 2.0s; }
 
-        /* ----- ДЕКОРАТИВНЫЕ ЛИНИИ (чёрные, на всю ширину, с сердечками) ----- */
-        .decor-line {
-            border-top: 3px dashed #000;
-            width: 100%;
-            margin: 20px 0;
-            position: relative;
-        }
-        .decor-line::before,
-        .decor-line::after {
-            content: "♥";
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 16px;
-            color: #000 !important;
-        }
-        .decor-line::before { left: -10px; }
-        .decor-line::after { right: -10px; }
-
-        /* Первый экран – пунктир с сердечками (тоже чёрный) */
+        /* ----- ДЕКОРАТИВНЫЕ ЛИНИИ (сердечки только слева, кроме первого экрана) ----- */
+        /* Первый экран – два сердечка */
         .dotted-line {
             border-top: 3px dashed #000;
             width: 100px;
@@ -225,9 +208,47 @@
         .dotted-line::before { left: -20px; }
         .dotted-line::after { right: -20px; }
 
-        /* Имена */
-        .initial-large {
+        /* Второй и третий экраны – одно сердечко слева */
+        .decor-line {
+            border-top: 3px dashed #000;
+            width: 100%;
+            margin: 20px 0;
+            position: relative;
+        }
+        .decor-line::before {
+            content: "♥";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-52%);
+            left: -12px;
+            font-size: 16px;
+            color: #000 !important;
+        }
+        .decor-line::after {
+            content: none; /* убираем правое сердечко */
+        }
+
+        /* Стили для имен и основного текста (везде Flores del Sol, кроме замка) */
+        .initial-large,
+        .names-elegant,
+        .ampersand,
+        .greeting-title,
+        .invite-text,
+        .calendar,
+        .section-title,
+        .timeline-time,
+        .timeline-desc,
+        .place-name,
+        .flowers-text,
+        .extra-text,
+        .dresscode-sub,
+        .dresscode-label-above,
+        .qr-caption,
+        .map-link {
             font-family: 'Flores del Sol', 'Georgia', serif;
+        }
+
+        .initial-large {
             font-size: 195px;
             font-weight: normal;
             line-height: 1;
@@ -236,14 +257,12 @@
             text-align: center;
         }
         .names-elegant {
-            font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 4.55rem;
             margin: 15px 0;
             color: #2c2c2c;
             text-align: center;
         }
         .ampersand {
-            font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 3.25rem;
             margin: 10px 0;
             color: #2c2c2c;
@@ -251,9 +270,6 @@
         }
 
         /* Второй экран */
-        .second-font {
-            font-family: 'MDLZ', 'Georgia', serif;
-        }
         .greeting-title {
             font-size: 2.2rem;
             font-weight: bold;
@@ -274,7 +290,6 @@
             background: #e0dfdc;
             border-radius: 24px;
             padding: 20px 15px;
-            font-family: 'MDLZ', 'Georgia', serif;
         }
         .month {
             font-size: 1.4rem;
@@ -308,9 +323,6 @@
         }
 
         /* Третий экран */
-        .third-font {
-            font-family: 'MDLZ', 'Georgia', serif;
-        }
         .section-title {
             font-size: 2rem;
             font-weight: bold;
@@ -393,6 +405,13 @@
             text-decoration: none;
             font-weight: 500;
         }
+        .extra-text {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #2c2c2c;
+            text-align: center;
+            margin-bottom: 20px;
+        }
         .flowers-text {
             font-size: 1rem;
             line-height: 1.5;
@@ -464,7 +483,7 @@
             .timeline-wrapper { padding-right: 15px; }
             .timeline-vertical-line { right: 0; }
             .decor-line::before { left: -5px; }
-            .decor-line::after { right: -5px; }
+            .decor-line::after { content: none; }
         }
     </style>
 </head>
@@ -476,12 +495,12 @@
             <div class="lock-text-top">ВАМ ПРИШЛО</div>
             <div class="lock-text-highlight">ПРИГЛАШЕНИЕ</div>
             <div class="lock-circle">
+                <!-- Правильный замок (белый, чёткий) -->
                 <svg class="lock-white" id="unlockButton" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="40" cy="40" r="36" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-                    <rect x="28" y="32" width="24" height="20" rx="4" fill="#FFFFFF" stroke="#C0C0C0" stroke-width="1.2"/>
-                    <path d="M34 32V28C34 24 36 22 50 22C64 22 70 27 64 34V42" stroke="#FFFFFF" stroke-width="2.2" fill="none"/>
-                    <circle cx="50" cy="47" r="5" fill="#A0A0A0"/>
-                    <rect x="48" y="47" width="4" height="9" fill="#A0A0A0" rx="2"/>
+                    <rect x="28" y="38" width="24" height="20" rx="4" fill="white" stroke="#C0C0C0" stroke-width="1.2"/>
+                    <path d="M34 38V30C34 24 36 22 40 22C44 22 46 24 46 30V38" stroke="white" stroke-width="2.2" fill="none"/>
+                    <circle cx="40" cy="48" r="3" fill="#A0A0A0"/>
+                    <rect x="39" y="48" width="2" height="6" fill="#A0A0A0" rx="1"/>
                 </svg>
             </div>
             <div class="unlock-box" id="hintText">нажми на замок</div>
@@ -506,7 +525,7 @@
         <!-- ЭКРАН 2: правая колонка 60% (приветствие и календарь) -->
         <div class="screen screen-second">
             <div class="empty"></div>
-            <div class="right-column fade-up second-font">
+            <div class="right-column fade-up">
                 <div class="decor-line"></div>
                 <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
                 <div class="invite-text">
@@ -530,7 +549,7 @@
 
         <!-- ЭКРАН 3: левая колонка 60% (программа, место, карта, цветы, QR, дресс-код) -->
         <div class="screen screen-third">
-            <div class="program-column third-font">
+            <div class="program-column">
                 <!-- ПРОГРАММА ДНЯ -->
                 <div class="decor-line fade-up program-title-wrap"></div>
                 <div class="section-title fade-up program-title-wrap">ПРОГРАММА ДНЯ</div>
@@ -563,9 +582,16 @@
                 <!-- ДЕТАЛИ -->
                 <div class="decor-line fade-up details-title-wrap"></div>
                 <div class="section-title fade-up details-title-wrap">ДЕТАЛИ</div>
+
+                <!-- Дополнительный текст про подарок -->
+                <div class="extra-text fade-up">
+                    Мы не будем оригинальными, но будем практичными. Лучший для нас подарок – это Ваша денежная инвестиция в нашу молодую семью.
+                </div>
+
                 <div class="flowers-text fade-up">
                     Если вы планировали порадовать нас цветами, мы хотим предложить небольшую альтернативу. Вместо традиционных букетов, которые так быстро увядают, нам будет приятно получить цветочную подписку. Это позволит нам ещё долго вспоминать этот день.
                 </div>
+
                 <div class="qr-container fade-up">
                     <img src="images/qr.jpg" alt="QR-код для подписки на цветы" class="qr-image">
                     <div class="qr-caption">QR-код для подписки на цветы</div>

@@ -149,7 +149,6 @@
         .screen-second .empty { flex: 1; }
 
         .screen-third .program-column { width: 60%; }
-        /* правой колонки нет, пустое пространство — фон */
 
         /* Адаптив: на узких экранах не меняем ширину, только отступы */
         @media (max-width: 768px) {
@@ -158,10 +157,10 @@
             }
         }
 
-        /* Стили для первого экрана (имена) */
+        /* ----- ПЕРВЫЙ ЭКРАН (увеличенные шрифты) ----- */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 150px;
+            font-size: 195px;  /* было 150, +30% */
             font-weight: normal;
             line-height: 1;
             color: #1a1a1a;
@@ -169,13 +168,25 @@
             text-align: center;
         }
         .dotted-line {
-            border-top: 3px dashed #333;
-            width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             margin: 20px auto;
+            width: 100%;
+        }
+        .dotted-line .line {
+            height: 3px;
+            background: #333;
+            flex: 1;
+        }
+        .dotted-line .heart {
+            font-size: 14px;
+            color: #000;
         }
         .names-elegant {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 3.5rem;
+            font-size: 4.55rem;  /* было 3.5, +30% */
             font-weight: normal;
             margin: 15px 0;
             color: #2c2c2c;
@@ -183,13 +194,30 @@
         }
         .ampersand {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 2.5rem;
+            font-size: 3.25rem;  /* было 2.5, +30% */
             margin: 10px 0;
             color: #2c2c2c;
             text-align: center;
         }
 
-        /* Стили для второго экрана (приветствие + календарь) */
+        /* ----- АНИМАЦИИ ДЛЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ----- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Задержки для поэтапного появления на третьем экране */
+        .program-title { transition-delay: 0.1s; }
+        .timeline { transition-delay: 0.2s; }
+        .place-block { transition-delay: 0.4s; }
+        .map-block { transition-delay: 0.6s; }
+        .details-block { transition-delay: 0.8s; }
+
+        /* Стили для второго экрана */
         .greeting-title {
             font-size: 2.2rem;
             font-weight: bold;
@@ -241,7 +269,7 @@
             color: white;
         }
 
-        /* Стили для третьего экрана (программа, место, карта, цветы, QR, дресс-код) */
+        /* Третий экран (стили) */
         .program-title {
             font-size: 2rem;
             font-weight: bold;
@@ -302,8 +330,6 @@
         .map-link:hover {
             opacity: 0.7;
         }
-
-        /* Блок «Детали» (цветы, QR, дресс-код) */
         .details-title {
             font-size: 1.8rem;
             font-weight: bold;
@@ -378,9 +404,9 @@
 
         /* Адаптация для маленьких экранов */
         @media (max-width: 550px) {
-            .initial-large { font-size: 80px; }
-            .names-elegant { font-size: 1.8rem; }
-            .ampersand { font-size: 1.6rem; }
+            .initial-large { font-size: 130px; }
+            .names-elegant { font-size: 2.5rem; }
+            .ampersand { font-size: 2rem; }
             .greeting-title { font-size: 1.6rem; }
             .invite-text { font-size: 0.85rem; }
             .calendar-day { font-size: 0.7rem; padding: 4px 0; }
@@ -423,11 +449,19 @@
         <div class="screen screen-first">
             <div class="left-column">
                 <div class="initial-large">М</div>
-                <div class="dotted-line"></div>
+                <div class="dotted-line">
+                    <span class="line"></span>
+                    <span class="heart">♥</span>
+                    <span class="line"></span>
+                </div>
                 <div class="names-elegant">Михаил</div>
                 <div class="ampersand">&</div>
                 <div class="names-elegant">Полина</div>
-                <div class="dotted-line"></div>
+                <div class="dotted-line">
+                    <span class="line"></span>
+                    <span class="heart">♥</span>
+                    <span class="line"></span>
+                </div>
                 <div class="initial-large">П</div>
             </div>
             <div class="empty"></div>
@@ -456,11 +490,11 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3: левая колонка 60% (программа дня, место, карта, цветы, QR, дресс-код) -->
+        <!-- ЭКРАН 3: левая колонка 60% (все блоки с анимацией появления) -->
         <div class="screen screen-third">
             <div class="program-column">
-                <div class="program-title">ПРОГРАММА ДНЯ</div>
-                <div class="timeline">
+                <div class="program-title fade-up">ПРОГРАММА ДНЯ</div>
+                <div class="timeline fade-up">
                     <div class="timeline-item"><span class="timeline-time">15:30</span><span class="timeline-desc">Сбор гостей</span></div>
                     <div class="timeline-item"><span class="timeline-time">16:00</span><span class="timeline-desc">Выездная регистрация</span></div>
                     <div class="timeline-item"><span class="timeline-time">17:00</span><span class="timeline-desc">Банкет</span></div>
@@ -469,49 +503,51 @@
                     <div class="timeline-item"><span class="timeline-time">23:00</span><span class="timeline-desc">Завершение банкета</span></div>
                 </div>
 
-                <div class="place-title">МЕСТО ТОРЖЕСТВА</div>
-                <div class="place-name">SUNSET SMOLINOPARK</div>
-                <iframe class="map-iframe" 
-                        src="https://yandex.ru/map-widget/v1/?ll=61.405733%2C55.076458&z=17.42" 
-                        title="SUNSET SMOLINOPARK на карте" 
-                        allowfullscreen=""
-                        loading="lazy">
-                </iframe>
-                <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
-
-                <!-- Блок ДЕТАЛИ -->
-                <div class="details-title">ДЕТАЛИ</div>
-                <div class="flowers-text">
-                    Если вы планировали порадовать нас цветами, мы хотим предложить небольшую альтернативу. Вместо традиционных букетов, которые так быстро увядают, нам будет приятно получить цветочную подписку. Это позволит нам ещё долго вспоминать этот день.
+                <div class="place-block fade-up">
+                    <div class="place-title">МЕСТО ТОРЖЕСТВА</div>
+                    <div class="place-name">SUNSET SMOLINOPARK</div>
                 </div>
 
-                <!-- QR-код -->
-                <div class="qr-container">
-                    <img src="images/qr.jpg" alt="QR-код для подписки на цветы" class="qr-image">
-                    <div class="qr-caption">QR-код для подписки на цветы</div>
+                <div class="map-block fade-up">
+                    <iframe class="map-iframe" 
+                            src="https://yandex.ru/map-widget/v1/?ll=61.405733%2C55.076458&z=17.42" 
+                            title="SUNSET SMOLINOPARK на карте" 
+                            allowfullscreen=""
+                            loading="lazy">
+                    </iframe>
+                    <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
                 </div>
 
-                <!-- DRESS CODE -->
-                <div class="dresscode-title">DRESS CODE</div>
-                <div class="dresscode-sub">
-                    Мы будем признательны, если вы поддержите в своих нарядах цветовую гамму нашего праздника.
-                </div>
-                <div class="dresscode-images">
-                    <div class="dresscode-item">
-                        <div class="dresscode-label-above">ДЛЯ ЖЕНЩИН</div>
-                        <img src="images/dressj.jpg" alt="Для женщин">
+                <div class="details-block fade-up">
+                    <div class="details-title">ДЕТАЛИ</div>
+                    <div class="flowers-text">
+                        Если вы планировали порадовать нас цветами, мы хотим предложить небольшую альтернативу. Вместо традиционных букетов, которые так быстро увядают, нам будет приятно получить цветочную подписку. Это позволит нам ещё долго вспоминать этот день.
                     </div>
-                    <div class="dresscode-item">
-                        <img src="images/dressm.jpg" alt="Для мужчин">
-                        <div class="dresscode-label-below">ДЛЯ МУЖЧИН</div>
+                    <div class="qr-container">
+                        <img src="images/qr.jpg" alt="QR-код для подписки на цветы" class="qr-image">
+                        <div class="qr-caption">QR-код для подписки на цветы</div>
+                    </div>
+                    <div class="dresscode-title">DRESS CODE</div>
+                    <div class="dresscode-sub">
+                        Мы будем признательны, если вы поддержите в своих нарядах цветовую гамму нашего праздника.
+                    </div>
+                    <div class="dresscode-images">
+                        <div class="dresscode-item">
+                            <div class="dresscode-label-above">ДЛЯ ЖЕНЩИН</div>
+                            <img src="images/dressj.jpg" alt="Для женщин">
+                        </div>
+                        <div class="dresscode-item">
+                            <img src="images/dressm.jpg" alt="Для мужчин">
+                            <div class="dresscode-label-below">ДЛЯ МУЖЧИН</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Нет правой колонки, пустое пространство 40% с фоном -->
         </div>
     </div>
 
     <script>
+        // Разблокировка замка
         const lockScreen = document.getElementById('lockScreen');
         const unlockBtn = document.getElementById('unlockButton');
         const hintBox = document.getElementById('hintText');
@@ -523,6 +559,19 @@
         if (unlockBtn) unlockBtn.addEventListener('click', unlock);
         if (hintBox) hintBox.addEventListener('click', unlock);
         lockScreen.addEventListener('click', unlock);
+
+        // Анимация появления при скролле
+        const animatedElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // убираем после появления
+                }
+            });
+        }, { threshold: 0.2 });
+
+        animatedElements.forEach(el => observer.observe(el));
     </script>
 </body>
 </html>

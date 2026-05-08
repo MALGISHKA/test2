@@ -39,7 +39,7 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.4s ease;
             transform: translateY(0);
             opacity: 1;
             visibility: visible;
@@ -102,7 +102,7 @@
             font-family: 'Georgia', serif;
         }
         body.unlocked .lock-screen {
-            transform: translateY(-100%);
+            transform: translateY(-120%);
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
@@ -170,7 +170,7 @@
 
         /* Задержки для последовательного появления на 3-м экране */
         .program-title { transition-delay: 0.1s; }
-        .timeline { transition-delay: 0.3s; }
+        .timeline-wrapper { transition-delay: 0.3s; }
         .place-title { transition-delay: 0.5s; }
         .map-iframe { transition-delay: 0.7s; }
         .details-title { transition-delay: 0.9s; }
@@ -183,7 +183,7 @@
         /* Стили для первого экрана (имена) – увеличенные шрифты + сердечки */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 195px;  /* +30% от 150px */
+            font-size: 195px;
             font-weight: normal;
             line-height: 1;
             color: #1a1a1a;
@@ -214,7 +214,7 @@
         }
         .names-elegant {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 4.55rem;  /* +30% от 3.5rem */
+            font-size: 4.55rem;
             font-weight: normal;
             margin: 15px 0;
             color: #2c2c2c;
@@ -222,7 +222,7 @@
         }
         .ampersand {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 3.25rem;  /* +30% от 2.5rem */
+            font-size: 3.25rem;
             margin: 10px 0;
             color: #2c2c2c;
             text-align: center;
@@ -246,7 +246,7 @@
         }
         .calendar {
             width: 100%;
-            background: #e0dfdc;  /* серый фон вместо желтоватого */
+            background: #e0dfdc;
             border-radius: 24px;
             padding: 20px 15px;
         }
@@ -281,7 +281,7 @@
             color: white;
         }
 
-        /* Стили для третьего экрана (программа, место, карта, цветы, QR, дресс-код) */
+        /* Стили для третьего экрана */
         .program-title {
             font-size: 2rem;
             font-weight: bold;
@@ -289,8 +289,22 @@
             margin-bottom: 30px;
             color: #2c2c2c;
         }
-        .timeline {
+        /* Вертикальная декоративная строчка справа от таймлайна */
+        .timeline-wrapper {
+            position: relative;
             margin-bottom: 40px;
+        }
+        .timeline {
+            margin-bottom: 0;
+        }
+        .timeline-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 10px;
+            right: -20px;
+            width: 2px;
+            height: calc(100% - 20px);
+            background: repeating-linear-gradient(to bottom, #aaa, #aaa 8px, transparent 8px, transparent 16px);
         }
         .timeline-item {
             display: flex;
@@ -410,10 +424,28 @@
             font-weight: 500;
             color: #2c2c2c;
         }
-        .dresscode-label-below {
-            margin-top: 10px;
-            font-weight: 500;
-            color: #2c2c2c;
+
+        /* Декоративные пунктирные линии с сердечками по краям */
+        .decor-dotted {
+            border-top: 2px dashed #aaa;
+            width: 80%;
+            margin: 20px auto;
+            position: relative;
+        }
+        .decor-dotted::before,
+        .decor-dotted::after {
+            content: "♥";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #333;
+        }
+        .decor-dotted::before {
+            left: -16px;
+        }
+        .decor-dotted::after {
+            right: -16px;
         }
 
         /* Адаптация для маленьких экранов */
@@ -435,6 +467,9 @@
             .left-column, .right-column, .program-column { padding: 20px 15px; }
             .dresscode-images { flex-direction: column; align-items: center; gap: 20px; }
             .qr-image { max-width: 150px; }
+            .timeline-wrapper::after {
+                right: -10px;
+            }
         }
     </style>
 </head>
@@ -500,16 +535,21 @@
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="program-title fade-up">ПРОГРАММА ДНЯ</div>
-                <div class="timeline fade-up">
-                    <div class="timeline-item"><span class="timeline-time">15:30</span><span class="timeline-desc">Сбор гостей</span></div>
-                    <div class="timeline-item"><span class="timeline-time">16:00</span><span class="timeline-desc">Выездная регистрация</span></div>
-                    <div class="timeline-item"><span class="timeline-time">17:00</span><span class="timeline-desc">Банкет</span></div>
-                    <div class="timeline-item"><span class="timeline-time">21:00</span><span class="timeline-desc">Торт</span></div>
-                    <div class="timeline-item"><span class="timeline-time">22:00</span><span class="timeline-desc">Дискотека</span></div>
-                    <div class="timeline-item"><span class="timeline-time">23:00</span><span class="timeline-desc">Завершение банкета</span></div>
+                <div class="decor-dotted"></div>
+                <div class="timeline-wrapper fade-up">
+                    <div class="timeline">
+                        <div class="timeline-item"><span class="timeline-time">15:30</span><span class="timeline-desc">Сбор гостей</span></div>
+                        <div class="timeline-item"><span class="timeline-time">16:00</span><span class="timeline-desc">Выездная регистрация</span></div>
+                        <div class="timeline-item"><span class="timeline-time">17:00</span><span class="timeline-desc">Банкет</span></div>
+                        <div class="timeline-item"><span class="timeline-time">21:00</span><span class="timeline-desc">Торт</span></div>
+                        <div class="timeline-item"><span class="timeline-time">22:00</span><span class="timeline-desc">Дискотека</span></div>
+                        <div class="timeline-item"><span class="timeline-time">23:00</span><span class="timeline-desc">Завершение банкета</span></div>
+                    </div>
                 </div>
+                <div class="decor-dotted"></div>
 
                 <div class="place-title fade-up">МЕСТО ТОРЖЕСТВА</div>
+                <div class="decor-dotted"></div>
                 <div class="place-name fade-up">SUNSET SMOLINOPARK</div>
                 <iframe class="map-iframe fade-up" 
                         src="https://yandex.ru/map-widget/v1/?ll=61.405733%2C55.076458&z=17.42" 
@@ -520,6 +560,7 @@
                 <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link fade-up">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
 
                 <div class="details-title fade-up">ДЕТАЛИ</div>
+                <div class="decor-dotted"></div>
                 <div class="flowers-text fade-up">
                     Если вы планировали порадовать нас цветами, мы хотим предложить небольшую альтернативу. Вместо традиционных букетов, которые так быстро увядают, нам будет приятно получить цветочную подписку. Это позволит нам ещё долго вспоминать этот день.
                 </div>
@@ -530,6 +571,7 @@
                 </div>
 
                 <div class="dresscode-title fade-up">DRESS CODE</div>
+                <div class="decor-dotted"></div>
                 <div class="dresscode-sub fade-up">
                     Мы будем признательны, если вы поддержите в своих нарядах цветовую гамму нашего праздника.
                 </div>
@@ -548,7 +590,7 @@
     </div>
 
     <script>
-        // Разблокировка замка
+        // Разблокировка замка с анимацией «улетает вверх»
         const lockScreen = document.getElementById('lockScreen');
         const unlockBtn = document.getElementById('unlockButton');
         const hintBox = document.getElementById('hintText');

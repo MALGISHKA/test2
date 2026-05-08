@@ -189,11 +189,11 @@
         .dresscode-sub { transition-delay: 1.7s; }
         .dresscode-images { transition-delay: 1.9s; }
 
-        /* ----- ДЕКОРАТИВНЫЕ ПУНКТИРЫ С СЕРДЕЧКАМИ (чёрные) ----- */
+        /* ----- ДЕКОРАТИВНЫЕ ПУНКТИРЫ (на всю ширину колонки) ----- */
         .decor-dotted {
+            width: 100%;
             border-bottom: 2px dashed #000;
-            width: 120px;
-            margin: 20px auto;
+            margin: 20px 0;
             position: relative;
         }
         .decor-dotted::before,
@@ -205,8 +205,8 @@
             font-size: 14px;
             color: #000;
         }
-        .decor-dotted::before { left: -20px; }
-        .decor-dotted::after { right: -20px; }
+        .decor-dotted::before { left: 0; }
+        .decor-dotted::after { right: 0; }
 
         /* Стили первого экрана (имена) – шрифт Flores del Sol */
         .initial-large {
@@ -315,10 +315,10 @@
             font-size: 2rem;
             font-weight: bold;
             text-align: center;
-            margin: 15px 0 20px;
+            margin: 10px 0 20px;
             color: #2c2c2c;
         }
-        /* Вертикальная линия с анимированным сердечком (один раз) */
+        /* Вертикальная линия с анимированным сердечком (один раз, замедленно) */
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
@@ -343,7 +343,6 @@
             top: -20px;
             transition: top 0.1s linear;
             pointer-events: none;
-            filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
         }
         .timeline-heart::before {
             content: "♥";
@@ -528,7 +527,7 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3: левая колонка 60% (программа дня, место, карта, цветы, QR, дресс-код) с линиями НАД заголовками -->
+        <!-- ЭКРАН 3: левая колонка 60% (программа, место, карта, детали, дресс-код) -->
         <div class="screen screen-third">
             <div class="program-column third-font">
                 <!-- ПРОГРАММА ДНЯ -->
@@ -620,7 +619,7 @@
         }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
         animatedElements.forEach(el => observer.observe(el));
 
-        // Анимация сердечка на вертикальной линии (один раз, сверху вниз)
+        // Анимация сердечка на вертикальной линии (один раз, сверху вниз, 5 секунд)
         const timelineWrapper = document.getElementById('timelineWrapper');
         const timelineHeart = document.getElementById('timelineHeart');
         if (timelineWrapper && timelineHeart) {
@@ -632,7 +631,7 @@
                         const rect = timelineWrapper.getBoundingClientRect();
                         const startTop = -20;
                         const endTop = rect.height - 20;
-                        const duration = 1500; // 1.5 секунды
+                        const duration = 5000; // 5 секунд (замедлено)
                         const startTime = performance.now();
                         function animateHeart(now) {
                             const elapsed = now - startTime;
@@ -642,7 +641,6 @@
                             if (t < 1) {
                                 requestAnimationFrame(animateHeart);
                             } else {
-                                // после завершения можно скрыть или оставить внизу
                                 timelineHeart.style.opacity = '0';
                             }
                         }

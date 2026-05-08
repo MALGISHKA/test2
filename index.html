@@ -241,7 +241,7 @@
             color: white;
         }
 
-        /* Стили для третьего экрана (программа, место, карта, цветы, дресс-код) */
+        /* Стили для третьего экрана (программа, место, карта, цветы, QR, дресс-код) */
         .program-title {
             font-size: 2rem;
             font-weight: bold;
@@ -303,7 +303,7 @@
             opacity: 0.7;
         }
 
-        /* Блок «Детали» (цветы и дресс-код) */
+        /* Блок «Детали» (цветы, QR, дресс-код) */
         .details-title {
             font-size: 1.8rem;
             font-weight: bold;
@@ -317,6 +317,22 @@
             color: #2c2c2c;
             text-align: center;
             margin-bottom: 30px;
+        }
+        .qr-container {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        .qr-image {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .qr-caption {
+            font-size: 0.85rem;
+            color: #5d3a2c;
+            margin-top: 8px;
         }
         .dresscode-title {
             font-size: 1.6rem;
@@ -349,7 +365,12 @@
             border-radius: 16px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-        .dresscode-item p {
+        .dresscode-label-above {
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #2c2c2c;
+        }
+        .dresscode-label-below {
             margin-top: 10px;
             font-weight: 500;
             color: #2c2c2c;
@@ -373,6 +394,7 @@
             .map-iframe { height: 250px; }
             .left-column, .right-column, .program-column { padding: 20px 15px; }
             .dresscode-images { flex-direction: column; align-items: center; gap: 20px; }
+            .qr-image { max-width: 150px; }
         }
     </style>
 </head>
@@ -434,7 +456,7 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3: левая колонка 60% (программа дня, место, карта, цветы, дресс-код) -->
+        <!-- ЭКРАН 3: левая колонка 60% (программа дня, место, карта, цветы, QR, дресс-код) -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="program-title">ПРОГРАММА ДНЯ</div>
@@ -457,24 +479,31 @@
                 </iframe>
                 <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
 
-                <!-- НОВЫЙ БЛОК: Цветы + Дресс-код -->
+                <!-- Блок ДЕТАЛИ -->
                 <div class="details-title">ДЕТАЛИ</div>
                 <div class="flowers-text">
                     Если вы планировали порадовать нас цветами, мы хотим предложить небольшую альтернативу. Вместо традиционных букетов, которые так быстро увядают, нам будет приятно получить цветочную подписку. Это позволит нам ещё долго вспоминать этот день.
                 </div>
 
+                <!-- QR-код -->
+                <div class="qr-container">
+                    <img src="images/qr.jpg" alt="QR-код для подписки на цветы" class="qr-image">
+                    <div class="qr-caption">QR-код для подписки на цветы</div>
+                </div>
+
+                <!-- DRESS CODE -->
                 <div class="dresscode-title">DRESS CODE</div>
                 <div class="dresscode-sub">
                     Мы будем признательны, если вы поддержите в своих нарядах цветовую гамму нашего праздника.
                 </div>
                 <div class="dresscode-images">
                     <div class="dresscode-item">
+                        <div class="dresscode-label-above">ДЛЯ ЖЕНЩИН</div>
                         <img src="images/dressj.jpg" alt="Для женщин">
-                        <p>ДЛЯ ЖЕНЩИН</p>
                     </div>
                     <div class="dresscode-item">
                         <img src="images/dressm.jpg" alt="Для мужчин">
-                        <p>ДЛЯ МУЖЧИН</p>
+                        <div class="dresscode-label-below">ДЛЯ МУЖЧИН</div>
                     </div>
                 </div>
             </div>

@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Михаил & Полина | Свадебное приглашение</title>
     <style>
+        /* Подключение шрифтов */
         @font-face {
             font-family: 'Flores del Sol';
             src: url('fonts/Flores del Sol.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'MDLZ';
+            src: url('fonts/MDLZBITETYPE-REGULAR-A8494C2ADC767C4E1AA9A688436B0A51.TTF') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -25,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- ЗАМОК (анимация при клике) ----- */
+        /* ----- ЗАМОК (анимация открывания) ----- */
         .lock-screen {
             position: fixed;
             top: 0;
@@ -39,8 +47,8 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.4s ease;
-            transform: translateY(0) scale(1);
+            transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.4s ease;
+            transform: scale(1);
             opacity: 1;
             visibility: visible;
         }
@@ -101,9 +109,9 @@
             cursor: pointer;
             font-family: 'Georgia', serif;
         }
-        /* Анимация клика по замку */
+        /* Анимация открывания – увеличение и растворение */
         body.unlocked .lock-screen {
-            transform: translateY(-30%) scale(0.8);
+            transform: scale(1.2);
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
@@ -112,7 +120,7 @@
         /* ----- ОСНОВНОЙ КОНТЕНТ ----- */
         .main-content {
             opacity: 0;
-            transition: opacity 0.7s ease 0.2s;
+            transition: opacity 0.7s ease 0.3s;
         }
         body.unlocked .main-content {
             opacity: 1;
@@ -126,13 +134,11 @@
             background-size: cover;
             background-position: center;
         }
-
-        /* Фоны для экранов */
         .screen-first { background-image: url('images/fon3.jpg'); }
         .screen-second { background-image: url('images/fon4.jpg'); }
         .screen-third { background-image: url('images/fon5.jpg'); }
 
-        /* Стили для колонок */
+        /* Колонки */
         .left-column, .right-column, .program-column {
             display: flex;
             flex-direction: column;
@@ -141,30 +147,33 @@
             min-height: 100vh;
             background-color: rgba(255, 255, 255, 0.96);
         }
-
-        /* Ширина колонок – единая для всех устройств */
         .screen-first .left-column { width: 40%; }
         .screen-first .empty { flex: 1; }
-
         .screen-second .right-column { width: 60%; margin-left: auto; }
         .screen-second .empty { flex: 1; }
-
         .screen-third .program-column { width: 60%; }
 
-        /* Адаптив: на узких экранах не меняем ширину, только отступы */
         @media (max-width: 768px) {
-            .left-column, .right-column, .program-column {
-                padding: 30px 20px;
-            }
+            .left-column, .right-column, .program-column { padding: 30px 20px; }
         }
 
-        /* ----- АНИМАЦИИ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ (fade-up) ----- */
+        /* ----- АНИМАЦИИ ПОЯВЛЕНИЯ ----- */
         .fade-up {
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
         }
         .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Анимация для первой колонки – запускается сразу после разблокировки (без скролла) */
+        .first-column-animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+        }
+        body.unlocked .first-column-animate {
             opacity: 1;
             transform: translateY(0);
         }
@@ -197,21 +206,17 @@
             font-size: 14px;
             color: #1a1a1a;
         }
-        .decor-dotted::before {
-            left: -20px;
-        }
-        .decor-dotted::after {
-            right: -20px;
-        }
+        .decor-dotted::before { left: -20px; }
+        .decor-dotted::after { right: -20px; }
 
-        /* Стили для первого экрана (имена) – увеличенные шрифты + сердечки */
+        /* Стили первого экрана (имена) – шрифт Flores del Sol */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 195px;  /* +30% от 150px */
+            font-size: 195px;
             font-weight: normal;
             line-height: 1;
             color: #1a1a1a;
-            margin: 20px 0 10px 0;
+            margin: 20px 0 10px;
             text-align: center;
         }
         .dotted-line {
@@ -229,29 +234,27 @@
             font-size: 14px;
             color: #1a1a1a;
         }
-        .dotted-line::before {
-            left: -20px;
-        }
-        .dotted-line::after {
-            right: -20px;
-        }
+        .dotted-line::before { left: -20px; }
+        .dotted-line::after { right: -20px; }
         .names-elegant {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 4.55rem;  /* +30% от 3.5rem */
-            font-weight: normal;
+            font-size: 4.55rem;
             margin: 15px 0;
             color: #2c2c2c;
             text-align: center;
         }
         .ampersand {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 3.25rem;  /* +30% от 2.5rem */
+            font-size: 3.25rem;
             margin: 10px 0;
             color: #2c2c2c;
             text-align: center;
         }
 
-        /* Стили для второго экрана (приветствие + календарь) – календарь серый */
+        /* Стили второго экрана – шрифт MDLZ */
+        .second-font {
+            font-family: 'MDLZ', 'Georgia', serif;
+        }
         .greeting-title {
             font-size: 2.2rem;
             font-weight: bold;
@@ -272,6 +275,7 @@
             background: #e0dfdc;
             border-radius: 24px;
             padding: 20px 15px;
+            font-family: 'MDLZ', 'Georgia', serif;
         }
         .month {
             font-size: 1.4rem;
@@ -304,7 +308,10 @@
             color: white;
         }
 
-        /* Стили для третьего экрана (программа, место, карта, цветы, QR, дресс-код) */
+        /* Стили третьего экрана – шрифт MDLZ */
+        .third-font {
+            font-family: 'MDLZ', 'Georgia', serif;
+        }
         .program-title {
             font-size: 2rem;
             font-weight: bold;
@@ -312,26 +319,41 @@
             margin-bottom: 20px;
             color: #2c2c2c;
         }
-        /* Вертикальная декоративная линия справа от таймлайна */
+        /* Вертикальная линия справа с анимированным сердечком */
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
-            padding-right: 20px;
+            padding-right: 30px;
+        }
+        .timeline-vertical-line {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            width: 2px;
+            height: 100%;
+            background-color: #1a1a1a;
+        }
+        .timeline-heart {
+            position: absolute;
+            right: 2px;
+            width: 18px;
+            height: 18px;
+            font-size: 16px;
+            color: #1a1a1a;
+            transform: translateX(50%);
+            transition: top 0.1s linear;
+            pointer-events: none;
+            filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+        }
+        .timeline-heart::before {
+            content: "♥";
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         .timeline {
             position: relative;
             padding-left: 28px;
-            border-left: 3px solid #c0a090;
-        }
-        .timeline::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: -15px;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(to bottom, #c0a090, #f0e0d0, #c0a090);
-            opacity: 0.6;
         }
         .timeline-item {
             display: flex;
@@ -380,11 +402,6 @@
             text-decoration: none;
             font-weight: 500;
         }
-        .map-link:hover {
-            opacity: 0.7;
-        }
-
-        /* Блок «Детали» (цветы, QR, дресс-код) */
         .details-title {
             font-size: 1.8rem;
             font-weight: bold;
@@ -451,13 +468,8 @@
             font-weight: 500;
             color: #2c2c2c;
         }
-        .dresscode-label-below {
-            margin-top: 10px;
-            font-weight: 500;
-            color: #2c2c2c;
-        }
 
-        /* Адаптация для маленьких экранов */
+        /* Адаптация */
         @media (max-width: 550px) {
             .initial-large { font-size: 104px; }
             .names-elegant { font-size: 2.34rem; }
@@ -471,14 +483,12 @@
             .place-title { font-size: 1.4rem; }
             .place-name { font-size: 1.2rem; }
             .details-title { font-size: 1.4rem; }
-            .dresscode-title { font-size: 1.3rem; }
             .map-iframe { height: 250px; }
             .left-column, .right-column, .program-column { padding: 20px 15px; }
             .dresscode-images { flex-direction: column; align-items: center; gap: 20px; }
             .qr-image { max-width: 150px; }
-            .timeline::after {
-                right: -8px;
-            }
+            .timeline-wrapper { padding-right: 15px; }
+            .timeline-vertical-line { right: 0; }
         }
     </style>
 </head>
@@ -503,9 +513,9 @@
     </div>
 
     <div class="main-content">
-        <!-- ЭКРАН 1: левая колонка 40% (имена) -->
+        <!-- ЭКРАН 1: левая колонка 40% (имена) – анимация сразу после разблокировки -->
         <div class="screen screen-first">
-            <div class="left-column fade-up">
+            <div class="left-column first-column-animate">
                 <div class="initial-large">М</div>
                 <div class="dotted-line"></div>
                 <div class="names-elegant">Михаил</div>
@@ -517,10 +527,11 @@
             <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 2: правая колонка 60% (приветствие и календарь) -->
+        <!-- ЭКРАН 2: правая колонка 60% (приветствие и календарь) с декоративными пунктирами -->
         <div class="screen screen-second">
             <div class="empty"></div>
-            <div class="right-column fade-up">
+            <div class="right-column fade-up second-font">
+                <div class="decor-dotted"></div>
                 <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
                 <div class="invite-text">
                     Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.
@@ -537,16 +548,20 @@
                         <div class="calendar-day">31</div>
                     </div>
                 </div>
+                <div class="decor-dotted"></div>
             </div>
         </div>
 
         <!-- ЭКРАН 3: левая колонка 60% (программа дня, место, карта, цветы, QR, дресс-код) -->
         <div class="screen screen-third">
-            <div class="program-column">
+            <div class="program-column third-font">
                 <div class="program-title fade-up">ПРОГРАММА ДНЯ</div>
                 <div class="decor-dotted"></div>
 
-                <div class="timeline-wrapper fade-up">
+                <!-- Таймлайн с вертикальной линией и анимированным сердечком -->
+                <div class="timeline-wrapper fade-up" id="timelineWrapper">
+                    <div class="timeline-vertical-line"></div>
+                    <div class="timeline-heart" id="timelineHeart">♥</div>
                     <div class="timeline">
                         <div class="timeline-item"><span class="timeline-time">15:30</span><span class="timeline-desc">Сбор гостей</span></div>
                         <div class="timeline-item"><span class="timeline-time">16:00</span><span class="timeline-desc">Выездная регистрация</span></div>
@@ -599,7 +614,7 @@
     </div>
 
     <script>
-        // Разблокировка замка с анимацией (замочек "летит")
+        // Разблокировка замка (анимация открывания)
         const lockScreen = document.getElementById('lockScreen');
         const unlockBtn = document.getElementById('unlockButton');
         const hintBox = document.getElementById('hintText');
@@ -612,9 +627,8 @@
         if (hintBox) hintBox.addEventListener('click', unlock);
         lockScreen.addEventListener('click', unlock);
 
-        // Анимация при скролле (Intersection Observer)
+        // Анимация при скролле для всех fade-up элементов
         const animatedElements = document.querySelectorAll('.fade-up');
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -622,9 +636,32 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
-
+        }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
         animatedElements.forEach(el => observer.observe(el));
+
+        // Анимация сердечка на вертикальной линии (таймлайн)
+        const timelineWrapper = document.getElementById('timelineWrapper');
+        const timelineHeart = document.getElementById('timelineHeart');
+        if (timelineWrapper && timelineHeart) {
+            // Функция обновления позиции сердечка в зависимости от прокрутки внутри wrappera
+            function updateHeartPosition() {
+                const rect = timelineWrapper.getBoundingClientRect();
+                const wrapperTop = rect.top + window.scrollY;
+                const wrapperBottom = rect.bottom + window.scrollY;
+                const scrollY = window.scrollY;
+                // Процент прокрутки относительно высоты wrappera (от 0 до 1)
+                let percent = (scrollY - wrapperTop) / (wrapperBottom - wrapperTop);
+                percent = Math.min(1, Math.max(0, percent));
+                // Вычисляем top для сердечка: от 0 до высоты wrappera минус размер сердечка
+                const maxTop = rect.height - 20; // 20px примерно высота сердечка
+                let newTop = percent * maxTop;
+                timelineHeart.style.top = newTop + 'px';
+            }
+            // При скролле и при изменении размера окна обновляем позицию
+            window.addEventListener('scroll', updateHeartPosition);
+            window.addEventListener('resize', updateHeartPosition);
+            updateHeartPosition(); // начальное положение
+        }
     </script>
 </body>
 </html>

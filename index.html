@@ -26,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- ЗАМОК (исправленный, белый) ----- */
+        /* ----- ЗАМОК (с кружком) ----- */
         .lock-screen {
             position: fixed;
             top: 0;
@@ -225,29 +225,16 @@
             color: #000 !important;
         }
         .decor-line::after {
-            content: none; /* убираем правое сердечко */
+            content: none;
         }
 
-        /* Стили для имен и основного текста (везде Flores del Sol, кроме замка) */
+        /* ----- Основные стили шрифтов ----- */
+        /* Имена на первом экране – Flores del Sol */
         .initial-large,
         .names-elegant,
-        .ampersand,
-        .greeting-title,
-        .invite-text,
-        .calendar,
-        .section-title,
-        .timeline-time,
-        .timeline-desc,
-        .place-name,
-        .flowers-text,
-        .extra-text,
-        .dresscode-sub,
-        .dresscode-label-above,
-        .qr-caption,
-        .map-link {
+        .ampersand {
             font-family: 'Flores del Sol', 'Georgia', serif;
         }
-
         .initial-large {
             font-size: 195px;
             font-weight: normal;
@@ -269,7 +256,10 @@
             text-align: center;
         }
 
-        /* Второй экран */
+        /* Заголовки и их тексты – Georgia (обычный), размер увеличен для текстов после заголовков */
+        .georgia-text {
+            font-family: 'Georgia', serif;
+        }
         .greeting-title {
             font-size: 2.2rem;
             font-weight: bold;
@@ -279,50 +269,12 @@
             text-align: center;
         }
         .invite-text {
-            font-size: 1rem;
+            font-size: 1.3rem;      /* +30% от 1rem */
             line-height: 1.4;
             color: #2c2c2c;
             margin-bottom: 40px;
             text-align: center;
         }
-        .calendar {
-            width: 100%;
-            background: #e0dfdc;
-            border-radius: 24px;
-            padding: 20px 15px;
-        }
-        .month {
-            font-size: 1.4rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 15px;
-            color: #3a3a3a;
-        }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 6px;
-            text-align: center;
-        }
-        .weekday {
-            font-weight: bold;
-            font-size: 0.7rem;
-            color: #6a6a6a;
-            padding-bottom: 8px;
-        }
-        .calendar-day {
-            background: #f5f5f5;
-            padding: 8px 0;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #2c2c2c;
-        }
-        .calendar-day.highlight {
-            background: #9e9e9e;
-            color: white;
-        }
-
-        /* Третий экран */
         .section-title {
             font-size: 2rem;
             font-weight: bold;
@@ -330,6 +282,92 @@
             margin: 15px 0 20px;
             color: #2c2c2c;
         }
+        .place-name {
+            font-size: 1.3rem;      /* +30% от 1rem */
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #5d3a2c;
+        }
+        .map-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #b0a69b;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Georgia', serif;
+        }
+        .extra-text, .flowers-text {
+            font-size: 1.3rem;      /* +30% */
+            line-height: 1.5;
+            color: #2c2c2c;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .flowers-text {
+            margin-bottom: 30px;
+        }
+        .dresscode-sub {
+            font-size: 1.3rem;      /* +30% */
+            text-align: center;
+            margin-bottom: 25px;
+            color: #5d3a2c;
+        }
+
+        /* Таймлайн – увеличиваем и время, и описание */
+        .timeline-time, .timeline-desc {
+            font-family: 'Georgia', serif;
+            font-size: 1.3rem;      /* +30% от 1rem */
+        }
+        .timeline-time {
+            font-weight: bold;
+            min-width: 70px;
+            color: #5d3a2c;
+        }
+        .timeline-desc {
+            color: #2c2c2c;
+        }
+
+        /* Календарь и подписи для женщин/мужчин остаются без изменений */
+        .calendar, .weekday, .calendar-day, .month {
+            font-family: 'Georgia', serif;
+        }
+        .month {
+            font-size: 1.4rem;
+        }
+        .weekday {
+            font-size: 0.7rem;
+        }
+        .calendar-day {
+            font-size: 0.8rem;
+        }
+        .dresscode-label-above {
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        /* Остальные элементы */
+        .calendar {
+            background: #e0dfdc;
+            border-radius: 24px;
+            padding: 20px 15px;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            text-align: center;
+        }
+        .calendar-day.highlight {
+            background: #9e9e9e;
+            color: white;
+        }
+
+        /* Таймлайн и вертикальная линия */
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
@@ -371,54 +409,6 @@
             margin-bottom: 20px;
             gap: 15px;
         }
-        .timeline-time {
-            font-weight: bold;
-            font-size: 1.2rem;
-            min-width: 70px;
-            color: #5d3a2c;
-        }
-        .timeline-desc {
-            font-size: 1rem;
-            color: #2c2c2c;
-        }
-        .place-name {
-            font-size: 1.4rem;
-            text-align: center;
-            font-weight: 500;
-            margin-bottom: 20px;
-            color: #5d3a2c;
-        }
-        .map-iframe {
-            width: 100%;
-            height: 400px;
-            border: none;
-            border-radius: 24px;
-            margin-top: 10px;
-            margin-bottom: 40px;
-        }
-        .map-link {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            font-size: 1rem;
-            color: #b0a69b;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .extra-text {
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #2c2c2c;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .flowers-text {
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #2c2c2c;
-            text-align: center;
-            margin-bottom: 30px;
-        }
         .qr-container {
             text-align: center;
             margin: 20px 0 30px;
@@ -434,12 +424,7 @@
             font-size: 0.85rem;
             color: #5d3a2c;
             margin-top: 8px;
-        }
-        .dresscode-sub {
-            font-size: 1rem;
-            text-align: center;
-            margin-bottom: 25px;
-            color: #5d3a2c;
+            font-family: 'Georgia', serif;
         }
         .dresscode-images {
             display: flex;
@@ -459,23 +444,19 @@
             border-radius: 16px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-        .dresscode-label-above {
-            margin-bottom: 10px;
-            font-weight: 500;
-            color: #2c2c2c;
-        }
 
         @media (max-width: 550px) {
             .initial-large { font-size: 104px; }
             .names-elegant { font-size: 2.34rem; }
             .ampersand { font-size: 1.95rem; }
             .greeting-title { font-size: 1.6rem; }
-            .invite-text { font-size: 0.85rem; }
+            .invite-text { font-size: 1.0rem; }
             .calendar-day { font-size: 0.7rem; padding: 4px 0; }
             .section-title { font-size: 1.6rem; }
-            .timeline-time { font-size: 1rem; min-width: 60px; }
-            .timeline-desc { font-size: 0.85rem; }
-            .place-name { font-size: 1.2rem; }
+            .timeline-time, .timeline-desc { font-size: 1rem; }
+            .timeline-time { min-width: 60px; }
+            .place-name { font-size: 1rem; }
+            .extra-text, .flowers-text, .dresscode-sub { font-size: 1rem; }
             .map-iframe { height: 250px; }
             .left-column, .right-column, .program-column { padding: 20px 15px; }
             .dresscode-images { flex-direction: column; align-items: center; gap: 20px; }
@@ -483,7 +464,6 @@
             .timeline-wrapper { padding-right: 15px; }
             .timeline-vertical-line { right: 0; }
             .decor-line::before { left: -5px; }
-            .decor-line::after { content: none; }
         }
     </style>
 </head>
@@ -495,8 +475,9 @@
             <div class="lock-text-top">ВАМ ПРИШЛО</div>
             <div class="lock-text-highlight">ПРИГЛАШЕНИЕ</div>
             <div class="lock-circle">
-                <!-- Правильный замок (белый, чёткий) -->
+                <!-- Замок с кружком (окружность) -->
                 <svg class="lock-white" id="unlockButton" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="40" cy="40" r="36" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
                     <rect x="28" y="38" width="24" height="20" rx="4" fill="white" stroke="#C0C0C0" stroke-width="1.2"/>
                     <path d="M34 38V30C34 24 36 22 40 22C44 22 46 24 46 30V38" stroke="white" stroke-width="2.2" fill="none"/>
                     <circle cx="40" cy="48" r="3" fill="#A0A0A0"/>
@@ -508,7 +489,7 @@
     </div>
 
     <div class="main-content">
-        <!-- ЭКРАН 1: левая колонка 40% (имена) -->
+        <!-- ЭКРАН 1 -->
         <div class="screen screen-first">
             <div class="left-column first-column-animate">
                 <div class="initial-large">М</div>
@@ -522,13 +503,13 @@
             <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 2: правая колонка 60% (приветствие и календарь) -->
+        <!-- ЭКРАН 2 -->
         <div class="screen screen-second">
             <div class="empty"></div>
             <div class="right-column fade-up">
                 <div class="decor-line"></div>
                 <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
-                <div class="invite-text">
+                <div class="invite-text georgia-text">
                     Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.
                 </div>
                 <div class="calendar">
@@ -547,12 +528,11 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3: левая колонка 60% (программа, место, карта, цветы, QR, дресс-код) -->
+        <!-- ЭКРАН 3 -->
         <div class="screen screen-third">
             <div class="program-column">
-                <!-- ПРОГРАММА ДНЯ -->
                 <div class="decor-line fade-up program-title-wrap"></div>
-                <div class="section-title fade-up program-title-wrap">ПРОГРАММА ДНЯ</div>
+                <div class="section-title georgia-text fade-up program-title-wrap">ПРОГРАММА ДНЯ</div>
 
                 <div class="timeline-wrapper fade-up" id="timelineWrapper">
                     <div class="timeline-vertical-line"></div>
@@ -567,10 +547,9 @@
                     </div>
                 </div>
 
-                <!-- МЕСТО ТОРЖЕСТВА -->
                 <div class="decor-line fade-up place-title-wrap"></div>
-                <div class="section-title fade-up place-title-wrap">МЕСТО ТОРЖЕСТВА</div>
-                <div class="place-name fade-up">SUNSET SMOLINOPARK</div>
+                <div class="section-title georgia-text fade-up place-title-wrap">МЕСТО ТОРЖЕСТВА</div>
+                <div class="place-name georgia-text fade-up">SUNSET SMOLINOPARK</div>
                 <iframe class="map-iframe fade-up" 
                         src="https://yandex.ru/map-widget/v1/?ll=61.405733%2C55.076458&z=17.42" 
                         title="SUNSET SMOLINOPARK на карте" 
@@ -579,28 +558,22 @@
                 </iframe>
                 <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link fade-up">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
 
-                <!-- ДЕТАЛИ -->
                 <div class="decor-line fade-up details-title-wrap"></div>
-                <div class="section-title fade-up details-title-wrap">ДЕТАЛИ</div>
-
-                <!-- Дополнительный текст про подарок -->
-                <div class="extra-text fade-up">
+                <div class="section-title georgia-text fade-up details-title-wrap">ДЕТАЛИ</div>
+                <div class="extra-text georgia-text fade-up">
                     Мы не будем оригинальными, но будем практичными. Лучший для нас подарок – это Ваша денежная инвестиция в нашу молодую семью.
                 </div>
-
-                <div class="flowers-text fade-up">
+                <div class="flowers-text georgia-text fade-up">
                     Если вы планировали порадовать нас цветами, мы хотим предложить небольшую альтернативу. Вместо традиционных букетов, которые так быстро увядают, нам будет приятно получить цветочную подписку. Это позволит нам ещё долго вспоминать этот день.
                 </div>
-
                 <div class="qr-container fade-up">
                     <img src="images/qr.jpg" alt="QR-код для подписки на цветы" class="qr-image">
                     <div class="qr-caption">QR-код для подписки на цветы</div>
                 </div>
 
-                <!-- DRESS CODE -->
                 <div class="decor-line fade-up dresscode-title-wrap"></div>
-                <div class="section-title fade-up dresscode-title-wrap">DRESS CODE</div>
-                <div class="dresscode-sub fade-up">
+                <div class="section-title georgia-text fade-up dresscode-title-wrap">DRESS CODE</div>
+                <div class="dresscode-sub georgia-text fade-up">
                     Мы будем признательны, если вы поддержите в своих нарядах цветовую гамму нашего праздника.
                 </div>
                 <div class="dresscode-images fade-up">
@@ -658,7 +631,7 @@
                         const rect = timelineWrapper.getBoundingClientRect();
                         const startTop = -20;
                         const endTop = rect.height - 20;
-                        const duration = 5000; // 5 секунд
+                        const duration = 5000;
                         const startTime = performance.now();
                         function animateHeart(now) {
                             const elapsed = now - startTime;

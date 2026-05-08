@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- ЗАМОК ----- */
+        /* ----- ЗАМОК (анимация при клике) ----- */
         .lock-screen {
             position: fixed;
             top: 0;
@@ -39,8 +39,8 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.4s ease;
-            transform: translateY(0);
+            transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.4s ease;
+            transform: translateY(0) scale(1);
             opacity: 1;
             visibility: visible;
         }
@@ -101,8 +101,9 @@
             cursor: pointer;
             font-family: 'Georgia', serif;
         }
+        /* Анимация клика по замку */
         body.unlocked .lock-screen {
-            transform: translateY(-120%);
+            transform: translateY(-30%) scale(0.8);
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
@@ -111,7 +112,7 @@
         /* ----- ОСНОВНОЙ КОНТЕНТ ----- */
         .main-content {
             opacity: 0;
-            transition: opacity 0.9s ease 0.2s;
+            transition: opacity 0.7s ease 0.2s;
         }
         body.unlocked .main-content {
             opacity: 1;
@@ -157,7 +158,7 @@
             }
         }
 
-        /* ----- АНИМАЦИИ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ----- */
+        /* ----- АНИМАЦИИ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ (fade-up) ----- */
         .fade-up {
             opacity: 0;
             transform: translateY(40px);
@@ -180,10 +181,33 @@
         .dresscode-sub { transition-delay: 1.7s; }
         .dresscode-images { transition-delay: 1.9s; }
 
+        /* ----- ДЕКОРАТИВНЫЕ ПУНКТИРЫ С СЕРДЕЧКАМИ ----- */
+        .decor-dotted {
+            border-bottom: 2px dashed #333;
+            width: 120px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .decor-dotted::before,
+        .decor-dotted::after {
+            content: "♥";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: #1a1a1a;
+        }
+        .decor-dotted::before {
+            left: -20px;
+        }
+        .decor-dotted::after {
+            right: -20px;
+        }
+
         /* Стили для первого экрана (имена) – увеличенные шрифты + сердечки */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 195px;
+            font-size: 195px;  /* +30% от 150px */
             font-weight: normal;
             line-height: 1;
             color: #1a1a1a;
@@ -196,7 +220,6 @@
             margin: 20px auto;
             position: relative;
         }
-        /* сердечки по краям пунктира */
         .dotted-line::before,
         .dotted-line::after {
             content: "♥";
@@ -214,7 +237,7 @@
         }
         .names-elegant {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 4.55rem;
+            font-size: 4.55rem;  /* +30% от 3.5rem */
             font-weight: normal;
             margin: 15px 0;
             color: #2c2c2c;
@@ -222,7 +245,7 @@
         }
         .ampersand {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 3.25rem;
+            font-size: 3.25rem;  /* +30% от 2.5rem */
             margin: 10px 0;
             color: #2c2c2c;
             text-align: center;
@@ -281,30 +304,34 @@
             color: white;
         }
 
-        /* Стили для третьего экрана */
+        /* Стили для третьего экрана (программа, место, карта, цветы, QR, дресс-код) */
         .program-title {
             font-size: 2rem;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             color: #2c2c2c;
         }
-        /* Вертикальная декоративная строчка справа от таймлайна */
+        /* Вертикальная декоративная линия справа от таймлайна */
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
+            padding-right: 20px;
         }
         .timeline {
-            margin-bottom: 0;
+            position: relative;
+            padding-left: 28px;
+            border-left: 3px solid #c0a090;
         }
-        .timeline-wrapper::after {
+        .timeline::after {
             content: "";
             position: absolute;
-            top: 10px;
-            right: -20px;
+            top: 0;
+            right: -15px;
             width: 2px;
-            height: calc(100% - 20px);
-            background: repeating-linear-gradient(to bottom, #aaa, #aaa 8px, transparent 8px, transparent 16px);
+            height: 100%;
+            background: linear-gradient(to bottom, #c0a090, #f0e0d0, #c0a090);
+            opacity: 0.6;
         }
         .timeline-item {
             display: flex;
@@ -424,28 +451,10 @@
             font-weight: 500;
             color: #2c2c2c;
         }
-
-        /* Декоративные пунктирные линии с сердечками по краям */
-        .decor-dotted {
-            border-top: 2px dashed #aaa;
-            width: 80%;
-            margin: 20px auto;
-            position: relative;
-        }
-        .decor-dotted::before,
-        .decor-dotted::after {
-            content: "♥";
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 12px;
-            color: #333;
-        }
-        .decor-dotted::before {
-            left: -16px;
-        }
-        .decor-dotted::after {
-            right: -16px;
+        .dresscode-label-below {
+            margin-top: 10px;
+            font-weight: 500;
+            color: #2c2c2c;
         }
 
         /* Адаптация для маленьких экранов */
@@ -467,8 +476,8 @@
             .left-column, .right-column, .program-column { padding: 20px 15px; }
             .dresscode-images { flex-direction: column; align-items: center; gap: 20px; }
             .qr-image { max-width: 150px; }
-            .timeline-wrapper::after {
-                right: -10px;
+            .timeline::after {
+                right: -8px;
             }
         }
     </style>
@@ -536,6 +545,7 @@
             <div class="program-column">
                 <div class="program-title fade-up">ПРОГРАММА ДНЯ</div>
                 <div class="decor-dotted"></div>
+
                 <div class="timeline-wrapper fade-up">
                     <div class="timeline">
                         <div class="timeline-item"><span class="timeline-time">15:30</span><span class="timeline-desc">Сбор гостей</span></div>
@@ -546,7 +556,6 @@
                         <div class="timeline-item"><span class="timeline-time">23:00</span><span class="timeline-desc">Завершение банкета</span></div>
                     </div>
                 </div>
-                <div class="decor-dotted"></div>
 
                 <div class="place-title fade-up">МЕСТО ТОРЖЕСТВА</div>
                 <div class="decor-dotted"></div>
@@ -590,7 +599,7 @@
     </div>
 
     <script>
-        // Разблокировка замка с анимацией «улетает вверх»
+        // Разблокировка замка с анимацией (замочек "летит")
         const lockScreen = document.getElementById('lockScreen');
         const unlockBtn = document.getElementById('unlockButton');
         const hintBox = document.getElementById('hintText');
@@ -613,7 +622,7 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+        }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
 
         animatedElements.forEach(el => observer.observe(el));
     </script>

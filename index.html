@@ -107,7 +107,6 @@
             cursor: pointer;
             font-family: 'Georgia', serif;
         }
-        /* Анимация взрыва замка */
         .lock-screen.animate-out {
             animation: explode 0.5s forwards cubic-bezier(0.4, 0.0, 0.2, 1);
             pointer-events: none;
@@ -166,7 +165,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Анимация для первой колонки – замедленная */
         .first-column-animate {
             opacity: 0;
             transform: translateY(40px);
@@ -189,35 +187,30 @@
         .dresscode-sub { transition-delay: 1.7s; }
         .dresscode-images { transition-delay: 1.9s; }
 
-        /* ----- ДЕКОРАТИВНЫЕ ПУНКТИРЫ (на всю ширину колонки) ----- */
-        .decor-dotted {
-            width: 100%;
-            border-bottom: 2px dashed #000;
+        /* ----- ДЕКОРАТИВНЫЕ ЛИНИИ (чёрные, на всю ширину, с сердечками) ----- */
+        .decor-line {
+            border-top: 3px dashed #000;
+            width: 100%;             /* на всю ширину колонки */
             margin: 20px 0;
             position: relative;
         }
-        .decor-dotted::before,
-        .decor-dotted::after {
+        .decor-line::before,
+        .decor-line::after {
             content: "♥";
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 14px;
+            font-size: 16px;
             color: #000;
         }
-        .decor-dotted::before { left: 0; }
-        .decor-dotted::after { right: 0; }
-
-        /* Стили первого экрана (имена) – шрифт Flores del Sol */
-        .initial-large {
-            font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 195px;
-            font-weight: normal;
-            line-height: 1;
-            color: #1a1a1a;
-            margin: 20px 0 10px;
-            text-align: center;
+        .decor-line::before {
+            left: -10px;
         }
+        .decor-line::after {
+            right: -10px;
+        }
+
+        /* Стили первого экрана (имена) – используем ту же логику, но с фиксированными сердечками */
         .dotted-line {
             border-top: 3px dashed #000;
             width: 100px;
@@ -230,11 +223,21 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 14px;
+            font-size: 16px;
             color: #000;
         }
         .dotted-line::before { left: -20px; }
         .dotted-line::after { right: -20px; }
+
+        .initial-large {
+            font-family: 'Flores del Sol', 'Georgia', serif;
+            font-size: 195px;
+            font-weight: normal;
+            line-height: 1;
+            color: #1a1a1a;
+            margin: 20px 0 10px;
+            text-align: center;
+        }
         .names-elegant {
             font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 4.55rem;
@@ -315,10 +318,10 @@
             font-size: 2rem;
             font-weight: bold;
             text-align: center;
-            margin: 10px 0 20px;
+            margin: 15px 0 20px;
             color: #2c2c2c;
         }
-        /* Вертикальная линия с анимированным сердечком (один раз, замедленно) */
+        /* Вертикальная линия с анимированным сердечком (один раз, медленно) */
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
@@ -343,6 +346,7 @@
             top: -20px;
             transition: top 0.1s linear;
             pointer-events: none;
+            filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
         }
         .timeline-heart::before {
             content: "♥";
@@ -464,6 +468,8 @@
             .qr-image { max-width: 150px; }
             .timeline-wrapper { padding-right: 15px; }
             .timeline-vertical-line { right: 0; }
+            .decor-line::before { left: -5px; }
+            .decor-line::after { right: -5px; }
         }
     </style>
 </head>
@@ -506,7 +512,8 @@
         <div class="screen screen-second">
             <div class="empty"></div>
             <div class="right-column fade-up second-font">
-                <div class="decor-dotted"></div>
+                <!-- линия над заголовком, на всю ширину -->
+                <div class="decor-line"></div>
                 <div class="greeting-title">ДОРОГИЕ<br> ГОСТИ!</div>
                 <div class="invite-text">
                     Приглашаем вас разделить с нами радость особенного для нас события и стать частью нашей семейной истории.
@@ -523,15 +530,16 @@
                         <div class="calendar-day">31</div>
                     </div>
                 </div>
-                <div class="decor-dotted"></div>
+                <!-- линия под календарём, на всю ширину -->
+                <div class="decor-line"></div>
             </div>
         </div>
 
-        <!-- ЭКРАН 3: левая колонка 60% (программа, место, карта, детали, дресс-код) -->
+        <!-- ЭКРАН 3: левая колонка 60% (программа, место, карта, цветы, QR, дресс-код) -->
         <div class="screen screen-third">
             <div class="program-column third-font">
                 <!-- ПРОГРАММА ДНЯ -->
-                <div class="decor-dotted fade-up program-title-wrap"></div>
+                <div class="decor-line fade-up program-title-wrap"></div>
                 <div class="section-title fade-up program-title-wrap">ПРОГРАММА ДНЯ</div>
 
                 <div class="timeline-wrapper fade-up" id="timelineWrapper">
@@ -548,7 +556,7 @@
                 </div>
 
                 <!-- МЕСТО ТОРЖЕСТВА -->
-                <div class="decor-dotted fade-up place-title-wrap"></div>
+                <div class="decor-line fade-up place-title-wrap"></div>
                 <div class="section-title fade-up place-title-wrap">МЕСТО ТОРЖЕСТВА</div>
                 <div class="place-name fade-up">SUNSET SMOLINOPARK</div>
                 <iframe class="map-iframe fade-up" 
@@ -560,7 +568,7 @@
                 <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link fade-up">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
 
                 <!-- ДЕТАЛИ -->
-                <div class="decor-dotted fade-up details-title-wrap"></div>
+                <div class="decor-line fade-up details-title-wrap"></div>
                 <div class="section-title fade-up details-title-wrap">ДЕТАЛИ</div>
                 <div class="flowers-text fade-up">
                     Если вы планировали порадовать нас цветами, мы хотим предложить небольшую альтернативу. Вместо традиционных букетов, которые так быстро увядают, нам будет приятно получить цветочную подписку. Это позволит нам ещё долго вспоминать этот день.
@@ -571,7 +579,7 @@
                 </div>
 
                 <!-- DRESS CODE -->
-                <div class="decor-dotted fade-up dresscode-title-wrap"></div>
+                <div class="decor-line fade-up dresscode-title-wrap"></div>
                 <div class="section-title fade-up dresscode-title-wrap">DRESS CODE</div>
                 <div class="dresscode-sub fade-up">
                     Мы будем признательны, если вы поддержите в своих нарядах цветовую гамму нашего праздника.
@@ -619,7 +627,7 @@
         }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
         animatedElements.forEach(el => observer.observe(el));
 
-        // Анимация сердечка на вертикальной линии (один раз, сверху вниз, 5 секунд)
+        // Анимация сердечка на вертикальной линии (один раз, медленно – 5 секунд)
         const timelineWrapper = document.getElementById('timelineWrapper');
         const timelineHeart = document.getElementById('timelineHeart');
         if (timelineWrapper && timelineHeart) {
@@ -631,7 +639,7 @@
                         const rect = timelineWrapper.getBoundingClientRect();
                         const startTop = -20;
                         const endTop = rect.height - 20;
-                        const duration = 5000; // 5 секунд (замедлено)
+                        const duration = 5000; // 5 секунд
                         const startTime = performance.now();
                         function animateHeart(now) {
                             const elapsed = now - startTime;

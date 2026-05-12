@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Михаил & Полина | Свадебное приглашение</title>
     <style>
-        /* Шрифты */
         @font-face {
             font-family: 'Flores del Sol';
             src: url('fonts/Flores del Sol.otf') format('opentype');
@@ -80,20 +79,14 @@
             line-height: 1.2;
             font-family: 'Georgia', serif;
         }
-        .lock-circle {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
+        .lock-circle { display: flex; justify-content: center; margin: 20px 0; }
         .lock-white {
             width: 100px;
             cursor: pointer;
             transition: transform 0.2s;
             filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
         }
-        .lock-white:active {
-            transform: scale(0.96);
-        }
+        .lock-white:active { transform: scale(0.96); }
         .unlock-box {
             background: rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.5);
@@ -175,7 +168,7 @@
             transform: translateY(0);
         }
 
-        /* Задержки третьего экрана */
+        /* Задержки третьего экрана — DRESS CODE ускорен */
         .program-title-wrap { transition-delay: 0.1s; }
         .timeline-wrapper { transition-delay: 0.3s; }
         .place-title-wrap { transition-delay: 0.5s; }
@@ -184,9 +177,9 @@
         .extra-text { transition-delay: 1.0s; }
         .flowers-text { transition-delay: 1.2s; }
         .qr-container { transition-delay: 1.4s; }
-        .dresscode-title-wrap { transition-delay: 1.6s; }
-        .dresscode-sub { transition-delay: 1.8s; }
-        .dresscode-images { transition-delay: 2.0s; }
+        .dresscode-title-wrap { transition-delay: 0.8s; }
+        .dresscode-sub { transition-delay: 1.0s; }
+        .dresscode-images { transition-delay: 1.2s; }
 
         /* ----- ДЕКОРАТИВНЫЕ ЛИНИИ (ЧЁРНЫЕ сердечки) ----- */
         .dotted-line {
@@ -224,10 +217,10 @@
         }
         .decor-line::after { content: none; }
 
-        /* ----- ПЕРВЫЙ ЭКРАН (увеличен на 20% и 30%) ----- */
+        /* ----- ПЕРВЫЙ ЭКРАН ----- */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 187px;   /* было 156, +20% */
+            font-size: 187px;
             font-weight: normal;
             line-height: 1;
             color: #1a1a1a;
@@ -236,14 +229,14 @@
         }
         .names-elegant {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 4.73rem;  /* было 3.64rem, +30% */
+            font-size: 4.73rem;
             margin: 15px 0;
             color: #2c2c2c;
             text-align: center;
         }
         .ampersand {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 3.38rem;   /* было 2.6rem, +30% */
+            font-size: 3.38rem;
             margin: 10px 0;
             color: #2c2c2c;
             text-align: center;
@@ -261,7 +254,7 @@
         }
         .invite-text {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1.43rem;   /* было 1.1rem, +30% */
+            font-size: 1.86rem;
             line-height: 1.4;
             color: #2c2c2c;
             margin-bottom: 40px;
@@ -335,10 +328,9 @@
             text-decoration: none;
             font-weight: 500;
         }
-        /* Блок Детали — увеличиваем шрифт после заголовка до QR-кода */
         .extra-text, .flowers-text {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1.3rem;      /* было 1rem, +30% */
+            font-size: 1.69rem;
             line-height: 1.5;
             color: #2c2c2c;
             text-align: center;
@@ -347,15 +339,13 @@
         .flowers-text {
             margin-bottom: 30px;
         }
-        /* Dress code — увеличиваем текст после заголовка до картинок */
         .dresscode-sub {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1.3rem;      /* было 1rem, +30% */
+            font-size: 1.69rem;
             text-align: center;
             margin-bottom: 25px;
             color: #5d3a2c;
         }
-        /* Таймлайн смещаем левее */
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
@@ -389,7 +379,7 @@
         }
         .timeline {
             position: relative;
-            padding-left: 12px;    /* было 28px, сместили левее */
+            padding-left: 12px;
         }
         .timeline-item {
             display: flex;
@@ -451,7 +441,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        /* ----- 4-й ЭКРАН ----- */
+        /* ----- 4-й ЭКРАН (Анкета) ----- */
         .screen-fourth {
             background: #fff;
             width: 100%;
@@ -477,7 +467,7 @@
         }
         .rsvp-deadline {
             font-size: 1.1rem;
-            color: #000000;  /* чёрный */
+            color: #000000;
             margin-bottom: 24px;
         }
         .rsvp-note {
@@ -511,7 +501,7 @@
             resize: vertical;
         }
         .submit-btn {
-            background: #9e9e9e;  /* серая кнопка */
+            background: #9e9e9e;
             color: white;
             border: none;
             padding: 14px 28px;
@@ -591,7 +581,7 @@
             font-size: 2rem;
             font-weight: bold;
             margin-top: 16px;
-            color: #000000; /* чёрный */
+            color: #000000;
         }
 
         @media (max-width: 650px) {
@@ -602,8 +592,8 @@
             .initial-large { font-size: 120px; }
             .names-elegant { font-size: 2.5rem; }
             .ampersand { font-size: 2rem; }
-            .invite-text { font-size: 1.1rem; }
-            .extra-text, .flowers-text, .dresscode-sub { font-size: 1rem; }
+            .invite-text { font-size: 1.2rem; }
+            .extra-text, .flowers-text, .dresscode-sub { font-size: 1.2rem; }
             .timeline { padding-left: 8px; }
             .timeline-time { font-size: 0.9rem; min-width: 55px; }
             .timeline-desc { font-size: 0.9rem; }
@@ -630,7 +620,7 @@
     </div>
 
     <div class="main-content">
-        <!-- ЭКРАН 1 (имена) -->
+        <!-- ЭКРАН 1 -->
         <div class="screen screen-first">
             <div class="left-column first-column-animate">
                 <div class="initial-large">М</div>
@@ -644,7 +634,7 @@
             <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 2 (приветствие, календарь) -->
+        <!-- ЭКРАН 2 -->
         <div class="screen screen-second">
             <div class="empty"></div>
             <div class="right-column fade-up">
@@ -669,12 +659,11 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3 (программа, место, карта, цветы, QR, дресс-код) -->
+        <!-- ЭКРАН 3 (программа, детали, дресс-код) -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="decor-line fade-up program-title-wrap"></div>
                 <div class="section-title fade-up program-title-wrap">ПРОГРАММА ДНЯ</div>
-
                 <div class="timeline-wrapper fade-up" id="timelineWrapper">
                     <div class="timeline-vertical-line"></div>
                     <div class="timeline-heart" id="timelineHeart">♥</div>
@@ -730,7 +719,7 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 4: АНКЕТА, ТАЙМЕР, ФИНАЛ -->
+        <!-- ЭКРАН 4 (анкета, таймер, итог) -->
         <div class="screen-fourth">
             <div class="fourth-container">
                 <div class="rsvp-card fade-up">
@@ -759,7 +748,9 @@
                                 <option>Белое вино</option>
                                 <option>Красное вино</option>
                                 <option>Безалкогольные напитки</option>
-                                <!-- коктейль убран -->
+                                <option>Водка</option>
+                                <option>Виски</option>
+                                <option>Коньяк</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -773,7 +764,6 @@
                     <div class="contact-line">Организатор Мария +7(919)3303751</div>
                 </div>
             </div>
-
             <div class="timer-section" id="timerSection">
                 <div class="timer-label">ДО СВАДЬБЫ ОСТАЛОСЬ</div>
                 <div class="timer-digits" id="timerDigits">
@@ -783,7 +773,6 @@
                     <div class="timer-block"><span class="timer-number" id="seconds">00</span><div class="timer-unit">Секунд</div></div>
                 </div>
             </div>
-
             <div class="final-thanks">
                 <p>Будем рады видеть вас на нашем празднике!</p>
                 <div class="couple-name">Михаил & Полина</div>
@@ -792,7 +781,7 @@
     </div>
 
     <script>
-        // Разблокировка замка
+        // Разблокировка
         const lockScreen = document.getElementById('lockScreen');
         const unlockBtn = document.getElementById('unlockButton');
         const hintBox = document.getElementById('hintText');
@@ -808,7 +797,7 @@
         if (hintBox) hintBox.addEventListener('click', unlock);
         lockScreen.addEventListener('click', unlock);
 
-        // Плавное появление (fade-up)
+        // Fade-up анимация
         const animatedElements = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -850,16 +839,14 @@
             heartObserver.observe(timelineWrapper);
         }
 
-        // Таймер до 9 августа 2026, 16:00
+        // Таймер
         function getWeddingDate() {
             return new Date(2026, 7, 9, 16, 0, 0);
         }
-
         function updateTimer() {
             const now = new Date();
             const wedding = getWeddingDate();
             const diff = wedding - now;
-
             if (diff <= 0) {
                 document.getElementById('days').innerText = '00';
                 document.getElementById('hours').innerText = '00';
@@ -867,22 +854,19 @@
                 document.getElementById('seconds').innerText = '00';
                 return;
             }
-
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (86400000)) / (3600000));
             const minutes = Math.floor((diff % 3600000) / 60000);
             const seconds = Math.floor((diff % 60000) / 1000);
-
             document.getElementById('days').innerText = days < 10 ? '0' + days : days;
             document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
             document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
             document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
         }
-
         updateTimer();
         setInterval(updateTimer, 1000);
 
-        // Обработка формы RSVP
+        // Обработка формы (уведомление)
         const submitBtn = document.getElementById('submitRSVP');
         const fullnameInp = document.getElementById('fullname');
         const attendanceSelect = document.getElementById('attendance');

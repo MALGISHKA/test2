@@ -224,10 +224,10 @@
         }
         .decor-line::after { content: none; }
 
-        /* ----- ПЕРВЫЙ ЭКРАН (уменьшен на 20%) ----- */
+        /* ----- ПЕРВЫЙ ЭКРАН (увеличен на 20% и 30%) ----- */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 156px;   /* было 195, уменьшено на 20% */
+            font-size: 187px;   /* было 156, +20% */
             font-weight: normal;
             line-height: 1;
             color: #1a1a1a;
@@ -236,23 +236,23 @@
         }
         .names-elegant {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 3.64rem;  /* было 4.55rem */
+            font-size: 4.73rem;  /* было 3.64rem, +30% */
             margin: 15px 0;
             color: #2c2c2c;
             text-align: center;
         }
         .ampersand {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 2.6rem;   /* было 3.25rem */
+            font-size: 3.38rem;   /* было 2.6rem, +30% */
             margin: 10px 0;
             color: #2c2c2c;
             text-align: center;
         }
 
-        /* ----- ВТОРОЙ ЭКРАН (заголовок Georgia, текст Flores del Sol) ----- */
+        /* ----- ВТОРОЙ ЭКРАН ----- */
         .greeting-title {
             font-family: 'Georgia', serif;
-            font-size: 2rem;     /* уменьшен */
+            font-size: 2rem;
             font-weight: bold;
             line-height: 1.1;
             color: #2c2c2c;
@@ -261,14 +261,14 @@
         }
         .invite-text {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1.1rem;   /* уменьшен */
+            font-size: 1.43rem;   /* было 1.1rem, +30% */
             line-height: 1.4;
             color: #2c2c2c;
             margin-bottom: 40px;
             text-align: center;
         }
 
-        /* Календарь (восстанавливаем структуру) */
+        /* Календарь */
         .calendar {
             background: #e0dfdc;
             border-radius: 24px;
@@ -312,7 +312,7 @@
         /* ----- ТРЕТИЙ ЭКРАН ----- */
         .section-title {
             font-family: 'Georgia', serif;
-            font-size: 1.6rem;      /* уменьшен */
+            font-size: 1.6rem;
             font-weight: bold;
             text-align: center;
             margin: 15px 0 20px;
@@ -320,7 +320,7 @@
         }
         .place-name {
             font-family: 'Georgia', serif;
-            font-size: 1.2rem;      /* уменьшен */
+            font-size: 1.2rem;
             text-align: center;
             font-weight: 500;
             margin-bottom: 20px;
@@ -335,9 +335,10 @@
             text-decoration: none;
             font-weight: 500;
         }
+        /* Блок Детали — увеличиваем шрифт после заголовка до QR-кода */
         .extra-text, .flowers-text {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1rem;        /* уменьшен */
+            font-size: 1.3rem;      /* было 1rem, +30% */
             line-height: 1.5;
             color: #2c2c2c;
             text-align: center;
@@ -346,31 +347,15 @@
         .flowers-text {
             margin-bottom: 30px;
         }
+        /* Dress code — увеличиваем текст после заголовка до картинок */
         .dresscode-sub {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1rem;
+            font-size: 1.3rem;      /* было 1rem, +30% */
             text-align: center;
             margin-bottom: 25px;
             color: #5d3a2c;
         }
-        .timeline-time, .timeline-desc {
-            font-family: 'Georgia', serif;
-            font-size: 1.05rem;     /* уменьшен */
-        }
-        .timeline-time {
-            font-weight: bold;
-            min-width: 70px;
-            color: #5d3a2c;
-        }
-        .timeline-desc {
-            color: #2c2c2c;
-        }
-        .dresscode-label-above {
-            font-family: 'Georgia', serif;
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
+        /* Таймлайн смещаем левее */
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
@@ -404,13 +389,31 @@
         }
         .timeline {
             position: relative;
-            padding-left: 28px;
+            padding-left: 12px;    /* было 28px, сместили левее */
         }
         .timeline-item {
             display: flex;
             align-items: baseline;
             margin-bottom: 20px;
             gap: 15px;
+        }
+        .timeline-time {
+            font-family: 'Georgia', serif;
+            font-size: 1.05rem;
+            font-weight: bold;
+            min-width: 70px;
+            color: #5d3a2c;
+        }
+        .timeline-desc {
+            font-family: 'Georgia', serif;
+            font-size: 1.05rem;
+            color: #2c2c2c;
+        }
+        .dresscode-label-above {
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 10px;
         }
         .qr-container {
             text-align: center;
@@ -448,7 +451,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        /* ----- 4-й ЭКРАН (без изменений) ----- */
+        /* ----- 4-й ЭКРАН ----- */
         .screen-fourth {
             background: #fff;
             width: 100%;
@@ -474,7 +477,7 @@
         }
         .rsvp-deadline {
             font-size: 1.1rem;
-            color: #a0816e;
+            color: #000000;  /* чёрный */
             margin-bottom: 24px;
         }
         .rsvp-note {
@@ -508,7 +511,7 @@
             resize: vertical;
         }
         .submit-btn {
-            background: #b8826d;
+            background: #9e9e9e;  /* серая кнопка */
             color: white;
             border: none;
             padding: 14px 28px;
@@ -519,7 +522,7 @@
             transition: background 0.2s;
         }
         .submit-btn:hover {
-            background: #9e6a58;
+            background: #7a7a7a;
         }
         .faq-title {
             font-size: 1.8rem;
@@ -588,7 +591,7 @@
             font-size: 2rem;
             font-weight: bold;
             margin-top: 16px;
-            color: #b8826d;
+            color: #000000; /* чёрный */
         }
 
         @media (max-width: 650px) {
@@ -596,9 +599,14 @@
             .timer-block { min-width: 70px; padding: 10px; }
             .timer-number { font-size: 2rem; }
             .final-thanks p { font-size: 1.4rem; }
-            .initial-large { font-size: 100px; }
-            .names-elegant { font-size: 2rem; }
-            .ampersand { font-size: 1.6rem; }
+            .initial-large { font-size: 120px; }
+            .names-elegant { font-size: 2.5rem; }
+            .ampersand { font-size: 2rem; }
+            .invite-text { font-size: 1.1rem; }
+            .extra-text, .flowers-text, .dresscode-sub { font-size: 1rem; }
+            .timeline { padding-left: 8px; }
+            .timeline-time { font-size: 0.9rem; min-width: 55px; }
+            .timeline-desc { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -751,7 +759,7 @@
                                 <option>Белое вино</option>
                                 <option>Красное вино</option>
                                 <option>Безалкогольные напитки</option>
-                                <option>Коктейль</option>
+                                <!-- коктейль убран -->
                             </select>
                         </div>
                         <div class="form-group">
@@ -784,6 +792,7 @@
     </div>
 
     <script>
+        // Разблокировка замка
         const lockScreen = document.getElementById('lockScreen');
         const unlockBtn = document.getElementById('unlockButton');
         const hintBox = document.getElementById('hintText');
@@ -799,7 +808,7 @@
         if (hintBox) hintBox.addEventListener('click', unlock);
         lockScreen.addEventListener('click', unlock);
 
-        // Анимация fade-up
+        // Плавное появление (fade-up)
         const animatedElements = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -811,7 +820,7 @@
         }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
         animatedElements.forEach(el => observer.observe(el));
 
-        // Сердечко на таймлайне
+        // Анимация сердечка на таймлайне
         const timelineWrapper = document.getElementById('timelineWrapper');
         const timelineHeart = document.getElementById('timelineHeart');
         if (timelineWrapper && timelineHeart) {
@@ -841,7 +850,7 @@
             heartObserver.observe(timelineWrapper);
         }
 
-        // Таймер до 9 августа 2026 16:00
+        // Таймер до 9 августа 2026, 16:00
         function getWeddingDate() {
             return new Date(2026, 7, 9, 16, 0, 0);
         }
@@ -873,7 +882,7 @@
         updateTimer();
         setInterval(updateTimer, 1000);
 
-        // Обработка формы
+        // Обработка формы RSVP
         const submitBtn = document.getElementById('submitRSVP');
         const fullnameInp = document.getElementById('fullname');
         const attendanceSelect = document.getElementById('attendance');

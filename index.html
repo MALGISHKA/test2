@@ -13,6 +13,13 @@
             font-style: normal;
             font-display: swap;
         }
+        @font-face {
+            font-family: 'Better Land RUS';
+            src: url('fonts/Better Land RUS.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
         * {
             margin: 0;
@@ -217,10 +224,10 @@
         }
         .decor-line::after { content: none; }
 
-        /* ----- ПЕРВЫЙ ЭКРАН (шрифт Flores del Sol увеличен на 20% от предыдущей версии) ----- */
+        /* ----- ПЕРВЫЙ ЭКРАН (шрифт Flores del Sol увеличен) ----- */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 224px;   /* было 187, +20% */
+            font-size: 224px;
             font-weight: normal;
             line-height: 1;
             color: #1a1a1a;
@@ -229,14 +236,14 @@
         }
         .names-elegant {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 5.68rem;  /* было 4.73rem, +20% */
+            font-size: 5.68rem;
             margin: 15px 0;
             color: #2c2c2c;
             text-align: center;
         }
         .ampersand {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 4.06rem;  /* было 3.38rem, +20% */
+            font-size: 4.06rem;
             margin: 10px 0;
             color: #2c2c2c;
             text-align: center;
@@ -254,7 +261,7 @@
         }
         .invite-text {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 2.23rem;  /* было 1.86rem, +20% */
+            font-size: 2.23rem;
             line-height: 1.4;
             color: #2c2c2c;
             margin-bottom: 40px;
@@ -336,7 +343,7 @@
             text-decoration: none;
             font-weight: 500;
         }
-        /* Таймлайн с подробными описаниями (все буквы заглавные) */
+        /* Таймлайн с подробными описаниями */
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
@@ -384,14 +391,14 @@
             margin-bottom: 4px;
         }
         .timeline-desc {
-            font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1.2rem;      /* было 1rem, +20% */
+            font-family: 'Better Land RUS', 'Georgia', serif; /* изменён шрифт */
+            font-size: 1.2rem;
             line-height: 1.4;
             color: #2c2c2c;
-            text-transform: uppercase; /* ВСЕ БУКВЫ ЗАГЛАВНЫЕ */
+            text-transform: uppercase;
         }
 
-        /* ----- ЧЕТВЁРТЫЙ ЭКРАН (горизонтальный всегда, 40% фон, 60% колонка) ----- */
+        /* ----- ЧЕТВЁРТЫЙ ЭКРАН (горизонтальный, 40% фон, 60% колонка) ----- */
         .screen-fourth {
             display: flex;
             flex-direction: row;
@@ -412,7 +419,7 @@
             flex-direction: column;
             justify-content: center;
         }
-        /* Контент правой колонки (шрифт Flores del Sol увеличен на 20%) */
+        /* Контент правой колонки */
         .details-title {
             font-family: 'Georgia', serif;
             font-size: 1.8rem;
@@ -422,8 +429,8 @@
             color: #2c2c2c;
         }
         .extra-text, .flowers-text {
-            font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1.56rem;  /* было 1.3rem, +20% */
+            font-family: 'Better Land RUS', 'Georgia', serif; /* изменён шрифт */
+            font-size: 1.87rem;   /* увеличен на 20% от 1.56rem */
             line-height: 1.5;
             color: #2c2c2c;
             text-align: center;
@@ -447,8 +454,8 @@
             margin-top: 8px;
         }
         .dresscode-sub {
-            font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1.56rem;  /* было 1.3rem, +20% */
+            font-family: 'Better Land RUS', 'Georgia', serif; /* изменён шрифт */
+            font-size: 1.87rem;   /* увеличен на 20% */
             text-align: center;
             margin-bottom: 25px;
             color: #5d3a2c;
@@ -495,7 +502,7 @@
                 font-size: 1.4rem;
             }
             .extra-text, .flowers-text, .dresscode-sub {
-                font-size: 1rem;
+                font-size: 1rem;   /* на телефоне уменьшаем для читаемости */
             }
             .qr-image {
                 max-width: 120px;
@@ -657,7 +664,6 @@
             .ampersand { font-size: 2rem; }
             .invite-text { font-size: 1.4rem; }
             .timeline-desc { font-size: 0.9rem; }
-            .extra-text, .flowers-text, .dresscode-sub { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -768,10 +774,10 @@
                 </iframe>
                 <a href="https://yandex.ru/maps/56/chelyabinsk/house/ulitsa_chapayeva_114/YkgYcgdkT0QGQFtvfXx2d3lhZA==/?azimuth=0.350146549626107&ll=61.405733%2C55.076458&z=17.42" target="_blank" rel="noopener noreferrer" class="map-link fade-up">ОТКРЫТЬ КАРТУ В НОВОМ ОКНЕ →</a>
             </div>
-            <div class="empty"></div> <!-- правая пустая колонка, фон fon5.jpg -->
+            <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 4: детали, QR, dress code (горизонтальный, 40% фон, 60% колонка) -->
+        <!-- ЭКРАН 4: детали, QR, dress code (горизонтальный) -->
         <div class="screen-fourth">
             <div class="fourth-left"></div>
             <div class="fourth-right">

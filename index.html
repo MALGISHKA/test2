@@ -13,13 +13,6 @@
             font-style: normal;
             font-display: swap;
         }
-        @font-face {
-            font-family: 'Better Land RUS';
-            src: url('fonts/Better Land RUS.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
 
         * {
             margin: 0;
@@ -224,7 +217,7 @@
         }
         .decor-line::after { content: none; }
 
-        /* ----- ПЕРВЫЙ ЭКРАН (шрифт Flores del Sol увеличен) ----- */
+        /* ----- ПЕРВЫЙ ЭКРАН (Flores del Sol) ----- */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 224px;
@@ -343,7 +336,7 @@
             text-decoration: none;
             font-weight: 500;
         }
-        /* Таймлайн с подробными описаниями */
+        /* Таймлайн с подробными описаниями (Flores del Sol, капс) */
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
@@ -391,7 +384,7 @@
             margin-bottom: 4px;
         }
         .timeline-desc {
-            font-family: 'Better Land RUS', 'Georgia', serif; /* изменён шрифт */
+            font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 1.2rem;
             line-height: 1.4;
             color: #2c2c2c;
@@ -419,7 +412,6 @@
             flex-direction: column;
             justify-content: center;
         }
-        /* Контент правой колонки */
         .details-title {
             font-family: 'Georgia', serif;
             font-size: 1.8rem;
@@ -428,8 +420,9 @@
             margin-bottom: 20px;
             color: #2c2c2c;
         }
+        /* Увеличенные тексты деталей и дресс-кода (шрифт Flores del Sol) */
         .extra-text, .flowers-text {
-            font-family: 'Better Land RUS', 'Georgia', serif; /* изменён шрифт */
+            font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 1.87rem;   /* увеличен на 20% от 1.56rem */
             line-height: 1.5;
             color: #2c2c2c;
@@ -454,7 +447,7 @@
             margin-top: 8px;
         }
         .dresscode-sub {
-            font-family: 'Better Land RUS', 'Georgia', serif; /* изменён шрифт */
+            font-family: 'Flores del Sol', 'Georgia', serif;
             font-size: 1.87rem;   /* увеличен на 20% */
             text-align: center;
             margin-bottom: 25px;
@@ -502,7 +495,7 @@
                 font-size: 1.4rem;
             }
             .extra-text, .flowers-text, .dresscode-sub {
-                font-size: 1rem;   /* на телефоне уменьшаем для читаемости */
+                font-size: 1.1rem;
             }
             .qr-image {
                 max-width: 120px;
@@ -664,6 +657,7 @@
             .ampersand { font-size: 2rem; }
             .invite-text { font-size: 1.4rem; }
             .timeline-desc { font-size: 0.9rem; }
+            .extra-text, .flowers-text, .dresscode-sub { font-size: 1rem; }
         }
     </style>
 </head>
@@ -738,27 +732,27 @@
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-time">15:30</div>
-                            <div class="timeline-desc">СБОР ГОСТЕЙ НА WELCOME ZONE<br><em>Собираясь на торжество, возьмите с собой улыбки и хорошее настроение.</em></div>
+                            <div class="timeline-desc">СБОР ГОСТЕЙ НА WELCOME ZONE<br><span style="font-size:0.9em;">Собираясь на торжество, возьмите с собой улыбки и хорошее настроение.</span></div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-time">16:00</div>
-                            <div class="timeline-desc">ТОРЖЕСТВЕННАЯ РЕГИСТРАЦИЯ<br><em>Приготовьте платочки для трогательного момента. Вы станете свидетелями нашего трепетного события.</em></div>
+                            <div class="timeline-desc">ТОРЖЕСТВЕННАЯ РЕГИСТРАЦИЯ<br><span style="font-size:0.9em;">Приготовьте платочки для трогательного момента. Вы станете свидетелями нашего трепетного события.</span></div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-time">17:00</div>
-                            <div class="timeline-desc">НАЧАЛО СВАДЕБНОГО ВЕЧЕРА<br><em>Время вкусной еды, танцев, развлечений и интерактивов от ведущего.</em></div>
+                            <div class="timeline-desc">НАЧАЛО СВАДЕБНОГО ВЕЧЕРА<br><span style="font-size:0.9em;">Время вкусной еды, танцев, развлечений и интерактивов от ведущего.</span></div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-time">21:00</div>
-                            <div class="timeline-desc">РАЗРЕЗАНИЕ СВАДЕБНОГО ТОРТА<br><em>Сладкая традиция, которую мы не можем пропустить.</em></div>
+                            <div class="timeline-desc">РАЗРЕЗАНИЕ СВАДЕБНОГО ТОРТА<br><span style="font-size:0.9em;">Сладкая традиция, которую мы не можем пропустить.</span></div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-time">22:00</div>
-                            <div class="timeline-desc">ДИСКОТЕКА<br><em>Время для безудержной вечеринки под треки DJ.</em></div>
+                            <div class="timeline-desc">ДИСКОТЕКА<br><span style="font-size:0.9em;">Время для безудержной вечеринки под треки DJ.</span></div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-time">23:00</div>
-                            <div class="timeline-desc">ЗАВЕРШЕНИЕ БАНКЕТА<br><em>К сожалению, даже такой волшебный вечер может закончиться. Мы очень благодарны, что Вы провели его с нами!</em></div>
+                            <div class="timeline-desc">ЗАВЕРШЕНИЕ БАНКЕТА<br><span style="font-size:0.9em;">К сожалению, даже такой волшебный вечер может закончиться. Мы очень благодарны, что Вы провели его с нами!</span></div>
                         </div>
                     </div>
                 </div>
@@ -777,7 +771,7 @@
             <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 4: детали, QR, dress code (горизонтальный) -->
+        <!-- ЭКРАН 4: детали, QR, dress code (горизонтальный, 40% фон, 60% колонка) -->
         <div class="screen-fourth">
             <div class="fourth-left"></div>
             <div class="fourth-right">

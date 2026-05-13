@@ -175,7 +175,7 @@
             transform: translateY(0);
         }
 
-        /* Задержки для третьего экрана (оставим для плавности) */
+        /* Задержки для третьего экрана */
         .program-title-wrap { transition-delay: 0.1s; }
         .timeline-wrapper { transition-delay: 0.3s; }
         .place-title-wrap { transition-delay: 0.5s; }
@@ -217,10 +217,10 @@
         }
         .decor-line::after { content: none; }
 
-        /* ----- ПЕРВЫЙ ЭКРАН ----- */
+        /* ----- ПЕРВЫЙ ЭКРАН (шрифт Flores del Sol увеличен на 20% от предыдущей версии) ----- */
         .initial-large {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 187px;
+            font-size: 224px;   /* было 187, +20% */
             font-weight: normal;
             line-height: 1;
             color: #1a1a1a;
@@ -229,14 +229,14 @@
         }
         .names-elegant {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 4.73rem;
+            font-size: 5.68rem;  /* было 4.73rem, +20% */
             margin: 15px 0;
             color: #2c2c2c;
             text-align: center;
         }
         .ampersand {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 3.38rem;
+            font-size: 4.06rem;  /* было 3.38rem, +20% */
             margin: 10px 0;
             color: #2c2c2c;
             text-align: center;
@@ -254,7 +254,7 @@
         }
         .invite-text {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1.86rem;
+            font-size: 2.23rem;  /* было 1.86rem, +20% */
             line-height: 1.4;
             color: #2c2c2c;
             margin-bottom: 40px;
@@ -336,7 +336,7 @@
             text-decoration: none;
             font-weight: 500;
         }
-        /* Новый таймлайн с подробными описаниями */
+        /* Таймлайн с подробными описаниями (все буквы заглавные) */
         .timeline-wrapper {
             position: relative;
             margin-bottom: 40px;
@@ -385,18 +385,16 @@
         }
         .timeline-desc {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1rem;
-            color: #2c2c2c;
+            font-size: 1.2rem;      /* было 1rem, +20% */
             line-height: 1.4;
-        }
-        /* Убираем старый линейный дизайн */
-        .timeline .timeline-dot {
-            display: none;
+            color: #2c2c2c;
+            text-transform: uppercase; /* ВСЕ БУКВЫ ЗАГЛАВНЫЕ */
         }
 
-        /* ----- ЧЕТВЁРТЫЙ ЭКРАН (детали, QR, dress code) ----- */
+        /* ----- ЧЕТВЁРТЫЙ ЭКРАН (горизонтальный всегда, 40% фон, 60% колонка) ----- */
         .screen-fourth {
             display: flex;
+            flex-direction: row;
             min-height: 100vh;
             background-image: url('images/fon8.jpg');
             background-size: cover;
@@ -404,7 +402,7 @@
         }
         .fourth-left {
             width: 40%;
-            /* пусто, только фон */
+            min-height: 100vh;
         }
         .fourth-right {
             width: 60%;
@@ -414,7 +412,7 @@
             flex-direction: column;
             justify-content: center;
         }
-        /* Контент правой колонки */
+        /* Контент правой колонки (шрифт Flores del Sol увеличен на 20%) */
         .details-title {
             font-family: 'Georgia', serif;
             font-size: 1.8rem;
@@ -425,7 +423,7 @@
         }
         .extra-text, .flowers-text {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1.3rem;
+            font-size: 1.56rem;  /* было 1.3rem, +20% */
             line-height: 1.5;
             color: #2c2c2c;
             text-align: center;
@@ -450,7 +448,7 @@
         }
         .dresscode-sub {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 1.3rem;
+            font-size: 1.56rem;  /* было 1.3rem, +20% */
             text-align: center;
             margin-bottom: 25px;
             color: #5d3a2c;
@@ -478,6 +476,36 @@
             font-size: 1rem;
             font-weight: 500;
             margin-bottom: 10px;
+        }
+
+        /* Адаптация для телефонов (горизонтальное расположение сохраняется) */
+        @media (max-width: 768px) {
+            .screen-fourth {
+                flex-direction: row;
+            }
+            .fourth-left {
+                width: 40%;
+                min-height: 100vh;
+            }
+            .fourth-right {
+                width: 60%;
+                padding: 20px 15px;
+            }
+            .details-title {
+                font-size: 1.4rem;
+            }
+            .extra-text, .flowers-text, .dresscode-sub {
+                font-size: 1rem;
+            }
+            .qr-image {
+                max-width: 120px;
+            }
+            .dresscode-images {
+                gap: 15px;
+            }
+            .dresscode-item img {
+                max-width: 120px;
+            }
         }
 
         /* ----- ПЯТЫЙ ЭКРАН (анкета, таймер, финал) ----- */
@@ -619,31 +647,17 @@
             color: #000000;
         }
 
-        @media (max-width: 768px) {
-            .screen-fourth {
-                flex-direction: column;
-            }
-            .fourth-left, .fourth-right {
-                width: 100%;
-                min-height: auto;
-                padding: 30px 20px;
-            }
-            .fourth-left {
-                min-height: 200px;
-            }
-        }
         @media (max-width: 650px) {
             .timer-digits { gap: 12px; }
             .timer-block { min-width: 70px; padding: 10px; }
             .timer-number { font-size: 2rem; }
             .final-thanks p { font-size: 1.4rem; }
-            .initial-large { font-size: 120px; }
-            .names-elegant { font-size: 2.5rem; }
+            .initial-large { font-size: 140px; }
+            .names-elegant { font-size: 2.8rem; }
             .ampersand { font-size: 2rem; }
-            .invite-text { font-size: 1.2rem; }
-            .extra-text, .flowers-text, .dresscode-sub { font-size: 1rem; }
-            .timeline-time { font-size: 1rem; }
+            .invite-text { font-size: 1.4rem; }
             .timeline-desc { font-size: 0.9rem; }
+            .extra-text, .flowers-text, .dresscode-sub { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -718,27 +732,27 @@
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-time">15:30</div>
-                            <div class="timeline-desc">сбор гостей на welcome zone<br><em>Собираясь на торжество, возьмите с собой улыбки и хорошее настроение.</em></div>
+                            <div class="timeline-desc">СБОР ГОСТЕЙ НА WELCOME ZONE<br><em>Собираясь на торжество, возьмите с собой улыбки и хорошее настроение.</em></div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-time">16:00</div>
-                            <div class="timeline-desc">торжественная регистрация<br><em>Приготовьте платочки для трогательного момента. Вы станете свидетелями нашего трепетного события.</em></div>
+                            <div class="timeline-desc">ТОРЖЕСТВЕННАЯ РЕГИСТРАЦИЯ<br><em>Приготовьте платочки для трогательного момента. Вы станете свидетелями нашего трепетного события.</em></div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-time">17:00</div>
-                            <div class="timeline-desc">начало свадебного вечера<br><em>Время вкусной еды, танцев, развлечений и интерактивов от ведущего.</em></div>
+                            <div class="timeline-desc">НАЧАЛО СВАДЕБНОГО ВЕЧЕРА<br><em>Время вкусной еды, танцев, развлечений и интерактивов от ведущего.</em></div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-time">21:00</div>
-                            <div class="timeline-desc">разрезание свадебного торта<br><em>Сладкая традиция, которую мы не можем пропустить.</em></div>
+                            <div class="timeline-desc">РАЗРЕЗАНИЕ СВАДЕБНОГО ТОРТА<br><em>Сладкая традиция, которую мы не можем пропустить.</em></div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-time">22:00</div>
-                            <div class="timeline-desc">дискотека<br><em>Время для безудержной вечеринки под треки dj.</em></div>
+                            <div class="timeline-desc">ДИСКОТЕКА<br><em>Время для безудержной вечеринки под треки DJ.</em></div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-time">23:00</div>
-                            <div class="timeline-desc">завершение банкета<br><em>К сожалению, даже такой волшебный вечер может закончиться. Мы очень благодарны, что Вы провели его с нами!</em></div>
+                            <div class="timeline-desc">ЗАВЕРШЕНИЕ БАНКЕТА<br><em>К сожалению, даже такой волшебный вечер может закончиться. Мы очень благодарны, что Вы провели его с нами!</em></div>
                         </div>
                     </div>
                 </div>
@@ -757,7 +771,7 @@
             <div class="empty"></div> <!-- правая пустая колонка, фон fon5.jpg -->
         </div>
 
-        <!-- ЭКРАН 4: детали, QR, dress code (слева фон fon8.jpg, справа белая колонка) -->
+        <!-- ЭКРАН 4: детали, QR, dress code (горизонтальный, 40% фон, 60% колонка) -->
         <div class="screen-fourth">
             <div class="fourth-left"></div>
             <div class="fourth-right">

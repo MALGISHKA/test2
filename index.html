@@ -934,18 +934,18 @@
         }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
         animatedElements.forEach(el => observer.observe(el));
 
-        const verticalLineContainer = document.getElementById('verticalLineContainer');
-        if (verticalLineContainer) {
-            const lineObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        verticalLineContainer.classList.add('visible');
-                        lineObserver.unobserve(verticalLineContainer);
-                    }
-                });
-            }, { threshold: 0.5 });
-            lineObserver.observe(verticalLineContainer);
-        }
+       const verticalLineContainer = document.getElementById('verticalLineContainer');
+if (verticalLineContainer) {
+    const lineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                verticalLineContainer.classList.add('visible');
+                lineObserver.unobserve(verticalLineContainer);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px' }); // порог 0.1, без отрицательного отступа
+    lineObserver.observe(verticalLineContainer);
+}
 
         function getWeddingDate() {
             return new Date(2026, 7, 9, 16, 0, 0);

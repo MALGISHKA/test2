@@ -176,42 +176,11 @@
             transform: translateY(0);
         }
 
-        /* Задержки для третьего экрана (без анимации линии) */
+        /* Задержки для третьего экрана */
         .program-title-wrap { transition-delay: 0.1s; }
         .timeline-wrapper { transition-delay: 0.3s; }
         .place-title-wrap { transition-delay: 0.5s; }
         .map-iframe { transition-delay: 0.7s; }
-
-        /* Вертикальная линия с сердечками (анимация убрана, просто отображается) */
-        .timeline-vertical-container {
-            position: relative;
-            margin-bottom: 40px;
-            padding-right: 30px;
-        }
-        .timeline-vertical-line {
-            position: absolute;
-            top: 0;
-            right: 10px;
-            width: 2px;
-            height: 100%;
-            background-color: #000;
-        }
-        .timeline-heart-top {
-            position: absolute;
-            top: -22px;
-            right: -6px;
-            font-size: 32px;
-            color: #000;
-            transform: translateX(50%);
-        }
-        .timeline-heart-bottom {
-            position: absolute;
-            bottom: -22px;
-            right: -6px;
-            font-size: 32px;
-            color: #000;
-            transform: translateX(50%);
-        }
 
         /* Таймлайн (сдвинут левее) */
         .timeline {
@@ -514,88 +483,43 @@
             .details-underline { width: 120px; }
         }
 
-        /* ----- ПЯТЫЙ ЭКРАН ----- */
+        /* ----- ПЯТЫЙ ЭКРАН (Google Форма) ----- */
         .screen-fifth {
             background: #fff;
             width: 100%;
         }
         .fifth-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 60px 24px;
         }
-        .rsvp-card {
+        .google-form-card {
             background: white;
             border-radius: 48px;
             padding: 40px 30px;
             box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
             text-align: center;
         }
-        .rsvp-title {
+        .google-form-title {
             font-size: 2.6rem;
             font-weight: bold;
             margin-bottom: 12px;
             color: #1a1a1a;
             font-family: 'Georgia', serif;
         }
-        .rsvp-deadline {
+        .google-form-deadline {
             font-size: 1.1rem;
             color: #000;
             margin-bottom: 24px;
         }
-        .rsvp-note {
+        .google-form-note {
             font-size: 1rem;
             color: #4a4a4a;
             margin-bottom: 32px;
             line-height: 1.4;
         }
-        .form-group {
-            margin-bottom: 24px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #2c2c2c;
-            font-family: 'Georgia', serif;
-        }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border-radius: 60px;
-            border: 1px solid #ddd;
-            background: #fff;
-            font-family: 'Georgia', serif;
-            font-size: 1rem;
-        }
-        .form-group textarea {
-            border-radius: 24px;
-            resize: vertical;
-        }
-        .submit-btn {
-            background: #9e9e9e;
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 60px;
-            font-size: 1.1rem;
-            width: 100%;
-            cursor: pointer;
-        }
-        .faq-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-top: 50px;
-            margin-bottom: 15px;
-            color: #1a1a1a;
-            font-family: 'Georgia', serif;
-        }
-        .contact-line {
-            font-size: 1.2rem;
-            color: #2c2c2c;
-            margin-bottom: 30px;
-        }
+
+        /* Таймер и финальный блок (без изменений) */
         .timer-section {
             background-image: url('images/fon7.jpg');
             background-size: cover;
@@ -691,7 +615,7 @@
     </audio>
 
     <div class="main-content">
-        <!-- ЭКРАН 1 -->
+        <!-- ЭКРАН 1: имена -->
         <div class="screen screen-first">
             <div class="left-column first-column-animate">
                 <div class="initial-large">М</div>
@@ -705,7 +629,7 @@
             <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 2 -->
+        <!-- ЭКРАН 2: приветствие, календарь -->
         <div class="screen screen-second">
             <div class="empty"></div>
             <div class="right-column fade-up">
@@ -731,7 +655,7 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3 (линия без анимации) -->
+        <!-- ЭКРАН 3: программа дня, место торжества, карта -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="decor-line fade-up program-title-wrap"></div>
@@ -779,13 +703,6 @@
                     </div>
                 </div>
 
-                <!-- Вертикальная линия с сердечками (просто отображается, без анимации) -->
-                <div class="timeline-vertical-container">
-                    <div class="timeline-vertical-line"></div>
-                    <div class="timeline-heart-top">♥</div>
-                    <div class="timeline-heart-bottom">♥</div>
-                </div>
-
                 <div class="decor-line fade-up place-title-wrap"></div>
                 <div class="section-title fade-up place-title-wrap">МЕСТО ТОРЖЕСТВА</div>
                 <div class="section-underline"></div>
@@ -801,7 +718,7 @@
             <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 4 -->
+        <!-- ЭКРАН 4: детали, QR, dress code -->
         <div class="screen-fourth">
             <div class="fourth-left"></div>
             <div class="fourth-right">
@@ -835,49 +752,22 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 5 -->
+        <!-- ЭКРАН 5: Google Форма, таймер, финал -->
         <div class="screen-fifth">
             <div class="fifth-container">
-                <div class="rsvp-card fade-up">
-                    <div class="rsvp-title">АНКЕТА</div>
-                    <div class="rsvp-deadline">ДО 09.07.26</div>
-                    <div class="rsvp-note">
+                <div class="google-form-card fade-up">
+                    <div class="google-form-title">АНКЕТА</div>
+                    <div class="google-form-deadline">ДО 09.07.26</div>
+                    <div class="google-form-note">
                         Если вы планируете прийти со своей парой или семьей, то заполните анкету на каждого гостя отдельно.<br>
                         Обратите внимание, что формат мероприятия не предполагает детских аниматоров.
                     </div>
-                    <form id="rsvpForm">
-                        <div class="form-group">
-                            <label>ФИО *</label>
-                            <input type="text" id="fullname" required placeholder="Иван Иванов">
-                        </div>
-                        <div class="form-group">
-                            <label>Сможете присутствовать?</label>
-                            <select id="attendance">
-                                <option value="Да, с удовольствием">Да, с удовольствием</option>
-                                <option value="Нет, не смогу">Нет, не смогу</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Что предпочитаете из напитков?</label>
-                            <select id="drink">
-                                <option>Игристое / шампанское</option>
-                                <option>Белое вино</option>
-                                <option>Красное вино</option>
-                                <option>Безалкогольные напитки</option>
-                                <option>Водка</option>
-                                <option>Виски</option>
-                                <option>Коньяк</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Дополнительные пожелания</label>
-                            <textarea rows="2" id="comments" placeholder="Аллергии, особые пожелания..."></textarea>
-                        </div>
-                        <button type="button" class="submit-btn" id="submitRSVP">Отправить ответ</button>
-                        <div id="formMessage" style="margin-top: 20px; font-size: 0.9rem; color: #b8826d;"></div>
-                    </form>
-                    <div class="faq-title">ОСТАЛИСЬ ВОПРОСЫ ?</div>
-                    <div class="contact-line">Организатор Мария +7(919)3303751</div>
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfThcWBnTOhjhde96XCDqFx1QkN4WydM36N9043M-sbf_T93w/viewform?embedded=true" 
+                            width="100%" 
+                            height="800" 
+                            frameborder="0" 
+                            marginheight="0" 
+                            marginwidth="0">Загрузка…</iframe>
                 </div>
             </div>
 
@@ -956,29 +846,6 @@
         }
         updateTimer();
         setInterval(updateTimer, 1000);
-
-        // Форма RSVP
-        const submitBtn = document.getElementById('submitRSVP');
-        const fullnameInp = document.getElementById('fullname');
-        const attendanceSelect = document.getElementById('attendance');
-        const drinkSelect = document.getElementById('drink');
-        const commentsArea = document.getElementById('comments');
-        const formMessage = document.getElementById('formMessage');
-
-        submitBtn.addEventListener('click', () => {
-            const name = fullnameInp.value.trim();
-            if (!name) {
-                formMessage.textContent = 'Пожалуйста, укажите ваше ФИО 💌';
-                formMessage.style.color = '#b8826d';
-                return;
-            }
-            const attendance = attendanceSelect.value;
-            const drink = drinkSelect.value;
-            const comments = commentsArea.value.trim() ? `Пожелания: ${commentsArea.value.trim()}` : '';
-            formMessage.innerHTML = `✨ Спасибо, ${name}! Вы ответили: «${attendance}», напитки: ${drink}. ${comments} ✨`;
-            formMessage.style.color = '#5d3a2c';
-            setTimeout(() => { formMessage.innerHTML = ''; }, 5000);
-        });
     </script>
 </body>
 </html>

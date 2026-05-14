@@ -176,25 +176,17 @@
             transform: translateY(0);
         }
 
-        /* Задержки */
+        /* Задержки для третьего экрана (без анимации линии) */
         .program-title-wrap { transition-delay: 0.1s; }
         .timeline-wrapper { transition-delay: 0.3s; }
         .place-title-wrap { transition-delay: 0.5s; }
         .map-iframe { transition-delay: 0.7s; }
 
-        /* Вертикальная линия с сердечками (выезжает снизу с задержкой) */
+        /* Вертикальная линия с сердечками (анимация убрана, просто отображается) */
         .timeline-vertical-container {
             position: relative;
             margin-bottom: 40px;
             padding-right: 30px;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            transition-delay: 1.2s;
-        }
-        .timeline-vertical-container.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
         .timeline-vertical-line {
             position: absolute;
@@ -224,7 +216,7 @@
         /* Таймлайн (сдвинут левее) */
         .timeline {
             position: relative;
-            padding-left: 8px;   /* смещение левее */
+            padding-left: 8px;
         }
         .timeline-item {
             margin-bottom: 30px;
@@ -233,7 +225,7 @@
             font-family: 'Georgia', serif;
             font-weight: bold;
             font-size: 1.2rem;
-            color: #000;         /* чёрный цвет */
+            color: #000;
             margin-bottom: 4px;
         }
         .timeline-dotted {
@@ -292,7 +284,7 @@
         }
         .decor-line::after { content: none; }
 
-        /* ----- ЛИНИИ ПОД ЗАГОЛОВКАМИ (РАСТЯНУТЫ ДО 160px) ----- */
+        /* ----- ЛИНИИ ПОД ЗАГОЛОВКАМИ (160px) ----- */
         .greeting-underline,
         .section-underline,
         .details-underline {
@@ -497,7 +489,7 @@
         }
         .dresscode-item img {
             width: 100%;
-            max-width: 100%;    /* на всю ширину колонки */
+            max-width: 100%;
             border-radius: 16px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
@@ -739,7 +731,7 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3 -->
+        <!-- ЭКРАН 3 (линия без анимации) -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="decor-line fade-up program-title-wrap"></div>
@@ -787,7 +779,8 @@
                     </div>
                 </div>
 
-                <div class="timeline-vertical-container" id="verticalLineContainer">
+                <!-- Вертикальная линия с сердечками (просто отображается, без анимации) -->
+                <div class="timeline-vertical-container">
                     <div class="timeline-vertical-line"></div>
                     <div class="timeline-heart-top">♥</div>
                     <div class="timeline-heart-bottom">♥</div>
@@ -935,20 +928,6 @@
             });
         }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
         animatedElements.forEach(el => observer.observe(el));
-
-        // ВЕРТИКАЛЬНАЯ ЛИНИЯ (более надёжный наблюдатель)
-        const verticalLineContainer = document.getElementById('verticalLineContainer');
-        if (verticalLineContainer) {
-            const lineObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        verticalLineContainer.classList.add('visible');
-                        lineObserver.unobserve(verticalLineContainer);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '0px 0px 0px 0px' }); // меньший порог и без отрицательного отступа
-            lineObserver.observe(verticalLineContainer);
-        }
 
         // Таймер
         function getWeddingDate() {

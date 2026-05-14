@@ -176,42 +176,11 @@
             transform: translateY(0);
         }
 
-        /* Задержки для третьего экрана (без анимации линии) */
+        /* Задержки для третьего экрана */
         .program-title-wrap { transition-delay: 0.1s; }
         .timeline-wrapper { transition-delay: 0.3s; }
         .place-title-wrap { transition-delay: 0.5s; }
         .map-iframe { transition-delay: 0.7s; }
-
-        /* Вертикальная линия с сердечками (анимация убрана, просто отображается) */
-        .timeline-vertical-container {
-            position: relative;
-            margin-bottom: 40px;
-            padding-right: 30px;
-        }
-        .timeline-vertical-line {
-            position: absolute;
-            top: 0;
-            right: 10px;
-            width: 2px;
-            height: 100%;
-            background-color: #000;
-        }
-        .timeline-heart-top {
-            position: absolute;
-            top: -22px;
-            right: -6px;
-            font-size: 32px;
-            color: #000;
-            transform: translateX(50%);
-        }
-        .timeline-heart-bottom {
-            position: absolute;
-            bottom: -22px;
-            right: -6px;
-            font-size: 32px;
-            color: #000;
-            transform: translateX(50%);
-        }
 
         /* Таймлайн (сдвинут левее) */
         .timeline {
@@ -243,7 +212,7 @@
         }
         .timeline-desc {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 2.23rem;
+            font-size: 2.35rem;
             line-height: 1.4;
             color: #2c2c2c;
         }
@@ -445,7 +414,7 @@
         }
         .extra-text, .flowers-text {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 2.23rem;
+            font-size: 2.35rem;
             line-height: 1.5;
             color: #2c2c2c;
             text-align: center;
@@ -470,7 +439,7 @@
         }
         .dresscode-sub {
             font-family: 'Flores del Sol', 'Georgia', serif;
-            font-size: 2.23rem;
+            font-size: 2.35rem;
             text-align: center;
             margin-bottom: 25px;
             color: #5d3a2c;
@@ -514,7 +483,7 @@
             .details-underline { width: 120px; }
         }
 
-        /* ----- ПЯТЫЙ ЭКРАН ----- */
+        /* ----- ПЯТЫЙ ЭКРАН (анкета с отправкой на почту) ----- */
         .screen-fifth {
             background: #fff;
             width: 100%;
@@ -583,19 +552,23 @@
             width: 100%;
             cursor: pointer;
         }
-        .faq-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-top: 50px;
-            margin-bottom: 15px;
-            color: #1a1a1a;
-            font-family: 'Georgia', serif;
+        .form-message {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            padding: 10px;
+            border-radius: 30px;
+            text-align: center;
         }
-        .contact-line {
-            font-size: 1.2rem;
-            color: #2c2c2c;
-            margin-bottom: 30px;
+        .success {
+            background: #d4edda;
+            color: #155724;
         }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Таймер и финальный блок */
         .timer-section {
             background-image: url('images/fon7.jpg');
             background-size: cover;
@@ -691,7 +664,7 @@
     </audio>
 
     <div class="main-content">
-        <!-- ЭКРАН 1 -->
+        <!-- ЭКРАН 1: имена -->
         <div class="screen screen-first">
             <div class="left-column first-column-animate">
                 <div class="initial-large">М</div>
@@ -705,7 +678,7 @@
             <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 2 -->
+        <!-- ЭКРАН 2: приветствие, календарь -->
         <div class="screen screen-second">
             <div class="empty"></div>
             <div class="right-column fade-up">
@@ -731,7 +704,7 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 3 (линия без анимации) -->
+        <!-- ЭКРАН 3: программа дня, место торжества, карта -->
         <div class="screen screen-third">
             <div class="program-column">
                 <div class="decor-line fade-up program-title-wrap"></div>
@@ -779,13 +752,6 @@
                     </div>
                 </div>
 
-                <!-- Вертикальная линия с сердечками (просто отображается, без анимации) -->
-                <div class="timeline-vertical-container">
-                    <div class="timeline-vertical-line"></div>
-                    <div class="timeline-heart-top">♥</div>
-                    <div class="timeline-heart-bottom">♥</div>
-                </div>
-
                 <div class="decor-line fade-up place-title-wrap"></div>
                 <div class="section-title fade-up place-title-wrap">МЕСТО ТОРЖЕСТВА</div>
                 <div class="section-underline"></div>
@@ -801,7 +767,7 @@
             <div class="empty"></div>
         </div>
 
-        <!-- ЭКРАН 4 -->
+        <!-- ЭКРАН 4: детали, QR, dress code -->
         <div class="screen-fourth">
             <div class="fourth-left"></div>
             <div class="fourth-right">
@@ -835,7 +801,7 @@
             </div>
         </div>
 
-        <!-- ЭКРАН 5 -->
+        <!-- ЭКРАН 5: АНКЕТА (отправка через PHP) -->
         <div class="screen-fifth">
             <div class="fifth-container">
                 <div class="rsvp-card fade-up">
@@ -845,21 +811,21 @@
                         Если вы планируете прийти со своей парой или семьей, то заполните анкету на каждого гостя отдельно.<br>
                         Обратите внимание, что формат мероприятия не предполагает детских аниматоров.
                     </div>
-                    <form id="rsvpForm">
+                    <form id="rsvpForm" action="sendmail.php" method="POST">
                         <div class="form-group">
                             <label>ФИО *</label>
-                            <input type="text" id="fullname" required placeholder="Иван Иванов">
+                            <input type="text" name="fullname" id="fullname" required placeholder="Иван Иванов">
                         </div>
                         <div class="form-group">
                             <label>Сможете присутствовать?</label>
-                            <select id="attendance">
+                            <select name="attendance" id="attendance">
                                 <option value="Да, с удовольствием">Да, с удовольствием</option>
                                 <option value="Нет, не смогу">Нет, не смогу</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Что предпочитаете из напитков?</label>
-                            <select id="drink">
+                            <select name="drink" id="drink">
                                 <option>Игристое / шампанское</option>
                                 <option>Белое вино</option>
                                 <option>Красное вино</option>
@@ -871,13 +837,11 @@
                         </div>
                         <div class="form-group">
                             <label>Дополнительные пожелания</label>
-                            <textarea rows="2" id="comments" placeholder="Аллергии, особые пожелания..."></textarea>
+                            <textarea name="comments" id="comments" rows="2" placeholder="Аллергии, особые пожелания..."></textarea>
                         </div>
-                        <button type="button" class="submit-btn" id="submitRSVP">Отправить ответ</button>
-                        <div id="formMessage" style="margin-top: 20px; font-size: 0.9rem; color: #b8826d;"></div>
+                        <button type="submit" class="submit-btn">Отправить ответ</button>
                     </form>
-                    <div class="faq-title">ОСТАЛИСЬ ВОПРОСЫ ?</div>
-                    <div class="contact-line">Организатор Мария +7(919)3303751</div>
+                    <div id="formMessage" class="form-message"></div>
                 </div>
             </div>
 
@@ -957,27 +921,40 @@
         updateTimer();
         setInterval(updateTimer, 1000);
 
-        // Форма RSVP
-        const submitBtn = document.getElementById('submitRSVP');
-        const fullnameInp = document.getElementById('fullname');
-        const attendanceSelect = document.getElementById('attendance');
-        const drinkSelect = document.getElementById('drink');
-        const commentsArea = document.getElementById('comments');
-        const formMessage = document.getElementById('formMessage');
+        // Обработка отправки формы через AJAX без перезагрузки страницы
+        const form = document.getElementById('rsvpForm');
+        const messageDiv = document.getElementById('formMessage');
 
-        submitBtn.addEventListener('click', () => {
-            const name = fullnameInp.value.trim();
-            if (!name) {
-                formMessage.textContent = 'Пожалуйста, укажите ваше ФИО 💌';
-                formMessage.style.color = '#b8826d';
-                return;
-            }
-            const attendance = attendanceSelect.value;
-            const drink = drinkSelect.value;
-            const comments = commentsArea.value.trim() ? `Пожелания: ${commentsArea.value.trim()}` : '';
-            formMessage.innerHTML = `✨ Спасибо, ${name}! Вы ответили: «${attendance}», напитки: ${drink}. ${comments} ✨`;
-            formMessage.style.color = '#5d3a2c';
-            setTimeout(() => { formMessage.innerHTML = ''; }, 5000);
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            fetch('sendmail.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'success') {
+                    messageDiv.textContent = '✨ Спасибо! Ваш ответ отправлен. ✨';
+                    messageDiv.className = 'form-message success';
+                    form.reset();
+                } else {
+                    messageDiv.textContent = '❌ Ошибка отправки. Пожалуйста, попробуйте позже.';
+                    messageDiv.className = 'form-message error';
+                }
+                setTimeout(() => {
+                    messageDiv.textContent = '';
+                    messageDiv.className = 'form-message';
+                }, 5000);
+            })
+            .catch(error => {
+                messageDiv.textContent = '❌ Ошибка сети. Попробуйте ещё раз.';
+                messageDiv.className = 'form-message error';
+                setTimeout(() => {
+                    messageDiv.textContent = '';
+                    messageDiv.className = 'form-message';
+                }, 5000);
+            });
         });
     </script>
 </body>
